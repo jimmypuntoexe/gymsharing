@@ -11,4 +11,9 @@ public class MyController {
     return "index";
   }
 
+  @RequestMapping("/insertGym")
+  public String gym() {
+    return "insertGym";
+  }
+
 }
