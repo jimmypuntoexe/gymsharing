@@ -68,6 +68,24 @@ public class Gym {
 		this.email = email;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
+	public String getCivicNumber() {
+		return civicNumber;
+	}
+
+	public void setCivicNumber(String civicNumber) {
+		this.civicNumber = civicNumber;
+	}
+
+
 	public List<Gym> getAffialiateGym() {
 		return affiliateGym;
 	}
@@ -75,14 +93,5 @@ public class Gym {
 	public void setAffialiteGym(List<Gym> affiliateGym) {
 		this.affiliateGym = affiliateGym;
 	}
-
-	// public boolean hasSkill(Skill skill) {
-	// 	for (Skill containedSkill: getSkills()) {
-	// 		if (containedSkill.getId() == skill.getId()) {
-	// 			return true;
-	// 		}
-	// 	}
-	// 	return false;
-	// }
 
 }
