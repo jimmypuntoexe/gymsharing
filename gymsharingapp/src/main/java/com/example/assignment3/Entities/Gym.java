@@ -1,6 +1,7 @@
 package com.example.assignment3.Entities;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,17 +27,17 @@ public class Gym {
 	private String email;
 	private String phoneNumber;
 
-	@ManyToOne
-	//da capire cos'è referencedColumnName
-	@JoinColumn(referencedColumnName = "id")
-	@JsonBackReference
-	private List<Gym> affiliateGym;
+	// @ManyToOne
+	// //da capire cos'è referencedColumnName
+	// @JoinColumn(referencedColumnName = "id")
+	// @JsonBackReference
+	// private List<Gym> affiliateGym;
 
 	@ManyToMany
-	private PersonalTrainer personalTrainer;
+	private Set<PersonalTrainer> personalTrainer;
 
 	@OneToMany
-	private Subscription subscription;
+	private Set<Subscription> subscription;
 
 	public Gym() {
 		super();

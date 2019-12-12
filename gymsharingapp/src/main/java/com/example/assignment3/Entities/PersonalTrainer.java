@@ -1,6 +1,7 @@
 package com.example.assignment3.Entities;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,10 +28,10 @@ public class PersonalTrainer {
     private String phoneNumber;
 
     @OneToMany
-    private User user;
+    private Set<User> user;
 
-    @ManyToMany
-    private Gym gym;
+    @ManyToMany(targetEntity = Gym.class)
+    private Set<Gym> gym;
 
 
 	public PersonalTrainer() {
