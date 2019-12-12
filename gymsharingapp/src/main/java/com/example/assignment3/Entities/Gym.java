@@ -111,12 +111,12 @@ public class Gym {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Gym> getAffialiateGym() {
-		return affiliateGym;
-	}
+	// public List<Gym> getAffialiateGym() {
+	// 	return affiliateGym;
+	// }
 
-	public void setAffialiteGym(List<Gym> affiliateGym) {
-		this.affiliateGym = affiliateGym;
-	}
+	// public void setAffialiteGym(List<Gym> affiliateGym) {
+	// 	this.affiliateGym = affiliateGym;
+	// }
 
 }
