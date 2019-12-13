@@ -51,7 +51,6 @@ public class Gym {
 		this.address = address;
 		this.civicNumber = civicNumber;
 		this.city = city;
-		this.city = city;
         this.email = email;
         this.phoneNumber = phoneNumber;
 	}
