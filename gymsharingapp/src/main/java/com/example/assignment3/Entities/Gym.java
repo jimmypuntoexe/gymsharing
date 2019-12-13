@@ -41,10 +41,7 @@ public class Gym {
 
 	public Gym() {
 		super();
-<<<<<<< HEAD
 		
-=======
->>>>>>> ed2dcb6779fcc6a0d78e436095594999e0bee4f6
 	}
 
 	public Gym(String name, String address, String civicNumber, String city,
@@ -55,12 +52,7 @@ public class Gym {
 		this.civicNumber = civicNumber;
 		this.city = city;
         this.email = email;
-<<<<<<< HEAD
-		this.phoneNumber = phoneNumber;
-		this.phoneNumber = phoneNumber;
-=======
         this.phoneNumber = phoneNumber;
->>>>>>> ed2dcb6779fcc6a0d78e436095594999e0bee4f6
 	}
 
 	
