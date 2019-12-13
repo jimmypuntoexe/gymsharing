@@ -9,5 +9,15 @@ public class BasicController {
     public String home() {
       return "index";
     }
+
+    @RequestMapping("/gymPage")
+    public String gymPage() {
+      return "gymPage";
+    }
+
+    @RequestMapping("/userPage")
+    public String userPage() {
+      return "userPage";
+    }
 }
 
