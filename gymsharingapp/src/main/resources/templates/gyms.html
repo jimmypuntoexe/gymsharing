@@ -16,16 +16,19 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Skills</th>
+                                    <th>Basic Info</th>
+                                    <th>Info</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="gym : ${gyms}">
-                                    <td th:text="${gym.Name + ' ' + gym.Address + ' ' + gym.CivicNumber + ' ' + gym.City + ' ' + gym.Email + ' ' + gym.PhoneNumber}"></td>
+                                    <td th:text="${gym.Name}"></td>
                                     <td>
-                                        <a th:href="@{/gym/{id}(id=${gym.id})}">view</a>
+                                        <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/deleteGym/{id}(id=${gym.id})}" method="post">Remove gym</a>
                                     </td>
                                 </tr>
                             </tbody>
