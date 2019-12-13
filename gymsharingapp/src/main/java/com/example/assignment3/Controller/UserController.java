@@ -20,10 +20,6 @@ public class UserController {
   @Autowired
   UserRepository repository;
 
-  @RequestMapping("/")
-  public String home() {
-    return "index";
-  }
 
   @RequestMapping("/insertUser")
   public String insertUser() {
