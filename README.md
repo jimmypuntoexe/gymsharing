@@ -4,7 +4,7 @@
 *  Gianmaria Balducci 807141
 
 ## Link repository
-*  Gitlab : https://gitlab.com/jiimmy.exe/2019_assignment3_gym_sharing
+*  Gitlab : `https://gitlab.com/jiimmy.exe/2019_assignment3_gym_sharing`
 
 ## Overview dell'applicazione
 Lo scopo dell’applicazione è quello di permettere agli utenti di cercare nella propria zona le palestre disponibili,
