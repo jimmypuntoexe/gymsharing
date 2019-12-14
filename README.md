@@ -12,11 +12,11 @@
 + Sistema operativo: `Mac OS Catalina 10.15` e `Linux Ubuntu`
 + Maven Version: `3.6.3`
 
-##Requisiti
+## Requisiti
 + Java
 + Maven
 
-##Avviare la web app
+## Avviare la web app
 + Clonare la repository localmente con:
     + `https://gitlab.com/jiimmy.exe/2019_assignment3_gym_sharing.git`
 + Andare nella directory corretta: 
