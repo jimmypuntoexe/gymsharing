@@ -4,10 +4,10 @@ package com.example.assignment3.Entities;
 import javax.persistence.Entity;
 
 @Entity
-public class TestSubscription extends Subscription{
+public class TrialSubscription extends Subscription{
     private static final int lifeSubscription = 1;
 
-    public TestSubscription(long id) {
+    public TrialSubscription(long id) {
         super(id);
     }
 }

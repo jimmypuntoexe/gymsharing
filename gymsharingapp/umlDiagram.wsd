@@ -1,0 +1,73 @@
+@startuml umlDiagram
+class PersonalTrainer {
+    - id: long
+    - name: String
+    - surname: String
+    - birthDate: Date
+    - age: String
+    - patent: String
+    - level: String
+    - CF: String
+    - email: String
+    - phoneNumber: String
+    + PersonalTrainer()
+    + Getters()
+    + Setters()
+}
+
+class Gym {
+    - id: long
+    - name: String
+	- address: String
+    - civicNumber: String
+    - city: String
+    - email: String
+    - phoneNumber: String
+    + Gym()
+    + Getters()
+    + Setters()
+}
+
+class User {
+    - id: long
+    - name: String
+    - surname: String
+    - birthDate: Date
+    - age: String
+    - CF: String
+	- address: String
+    - civicNumber: String
+    - city: String
+    - email: String
+    - phoneNumber: String
+    + User()
+    + Getters()
+    + Setters()
+}
+
+class Subscription {
+    - id: long
+    + Subscription() 
+}
+
+class AnnualSubscription extends Subscription {
+        - lifeSubscription: final int
+        + AnnualSubscription(id)
+}
+
+class MonthSubscription extends Subscription {
+        - lifeSubscription: final int
+        + MonthSubscription(id)
+}
+
+class TrialSubscription extends Subscription {
+        - lifeSubscription: final int
+        + TrialSubscription(id)
+}
+
+PersonalTrainer "1" --> "*" User : follow
+PersonalTrainer "*" --> "*" Gym : work
+Gym "*" <--> "*" Gym : branch of
+Gym "1" --> "*" Subscription : deliver
+User "1" --> "*" Subscription : have
+@enduml
