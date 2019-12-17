@@ -18,7 +18,9 @@
                                 <tr>
                                     <th>Basic Info</th>
                                     <th>Info</th>
-                                    <th></th>
+                                    <th>Subscription</th>
+                                    <th>Add subscription</th>
+                                    <th>Remove gym</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,6 +28,11 @@
                                     <td th:text="${gym.Name}"></td>
                                     <td>
                                         <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option th:each="sub : ${gym.subscriptions}" th:text="${sub.getType() + ' ' + sub.getPrice()}"></option>
+                                        </select>
                                     </td>
                                     <td>
                                         <a th:href="@{/gym/{id}/insertSubscriptions(id=${gym.id})}" method="post">Add subscription</a>
