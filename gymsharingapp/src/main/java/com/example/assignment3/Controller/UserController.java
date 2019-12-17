@@ -26,6 +26,12 @@ public class UserController {
     return "insertUser";
   }
 
+  @RequestMapping(value="/deleteUser/{id}", method=RequestMethod.GET)
+	public String userDelete(@PathVariable Long id) {
+    repository.delete(id);
+       return "redirect:/users/";
+  }
+
   @RequestMapping("/user/{id}")
  public String user(@PathVariable Long id, Model model) {
         model.addAttribute("user", repository.findOne(id));
@@ -36,7 +42,7 @@ public class UserController {
 	public String userList(Model model) {
         model.addAttribute("users", repository.findAll());
         return "users";
-	}
+  }
 
   @RequestMapping(value="/insertUser", method=RequestMethod.POST)
 	public String UserAdd(

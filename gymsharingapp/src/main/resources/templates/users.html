@@ -17,7 +17,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Skills</th>
+                                    <th>Info</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -26,6 +26,9 @@
                                <td th:text="${user.Name + ' ' + user.Surname + ' ' + user.BirthDate + ' ' + user.Age + ' ' + user.CF + ' ' + user.Address + ' ' + user.CivicNumber + ' ' + user.City + ' ' + user.Email + ' ' + user.PhoneNumber}"></td>
                                     <td>
                                         <a th:href="@{/user/{id}(id=${user.id})}">view</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/deleteUser/{id}(id=${user.id})}" method="post">Remove user</a>
                                     </td>
                                 </tr>
                             </tbody>
