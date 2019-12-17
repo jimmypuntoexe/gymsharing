@@ -28,6 +28,9 @@
                                         <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
                                     </td>
                                     <td>
+                                        <a th:href="@{/gym/{id}/insertSubscriptions(id=${gym.id})}" method="post">Add subscription</a>
+                                    </td>
+                                    <td>
                                         <a th:href="@{/deleteGym/{id}(id=${gym.id})}" method="post">Remove gym</a>
                                     </td>
                                 </tr>

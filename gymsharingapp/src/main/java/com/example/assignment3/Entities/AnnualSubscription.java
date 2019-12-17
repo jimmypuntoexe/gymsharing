@@ -6,8 +6,27 @@ import javax.persistence.Entity;
 @Entity
 public class AnnualSubscription extends Subscription{
     private static final int lifeSubscription = 365;
+    private String price;
 
-    public AnnualSubscription(long id) {
-        super(id);
+    public AnnualSubscription(){
+        super();
     }
+
+    public AnnualSubscription(long id, String annualPrice) {
+        super(id);
+        this.price = annualPrice;
+    }
+
+    public static int getLifesubscription() {
+        return lifeSubscription;
+    }
+
+    public String getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+    
 }
