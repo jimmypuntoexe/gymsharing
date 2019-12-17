@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="container">
+    <h1>Inserisci Palestra</h1>
     <form class="form-horizontal" th:action="@{/insertGym}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="col-lg-2 control-label">Name</label>
@@ -38,8 +39,7 @@
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="phoneNumber"/>
             </div>
-        </div>       
-
+        </div>     
         <span>
             <button type="submit" class="btn btn-primary">Crea palestra</button>
         </span>

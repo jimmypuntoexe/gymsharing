@@ -37,7 +37,7 @@ public class Gym {
 	private Set<PersonalTrainer> personalTrainer;
 
 	@OneToMany
-	private Set<Subscription> subscription;
+	private List<Subscription> subscriptions;
 
 	public Gym() {
 		super();
@@ -110,6 +110,14 @@ public class Gym {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public List<Subscription> getSubscriptions() {
+		return subscriptions;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscriptions.add(subscription);
 	}
 
 	// public List<Gym> getAffialiateGym() {

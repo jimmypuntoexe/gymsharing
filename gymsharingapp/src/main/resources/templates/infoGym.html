@@ -12,7 +12,6 @@
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
             <h1>Info gym</h1>
-            
             <form class="form-horizontal" th:action="@{/gym/{id}/}" method="post" enctype="multipart/form-data" >
             	<fieldset>
             		<div class="form-group">
@@ -56,13 +55,17 @@
 	                    	<input type="text" class="form-control" disabled="disabled" 
 	                    		th:value="${gym.PhoneNumber}"/>
 	                    </div>
-	                </div>
+					</div>
+					<div>
+						<tr th:each="sub : ${gym.subscriptions}">
+							<td th:text="${sub.price}"></td>
+						</tr>
+					</div>			
             	</fieldset>
             </form>
           </div>
         </div>
-      </div>
+	  </div>
 	</div>
-
 </body>
 </html>
