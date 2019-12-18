@@ -5,7 +5,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class AnnualSubscription extends Subscription{
-    private static final int lifeSubscription = 365;
+    private static final String lifeSubscription = "365";
+    private static final String type = "Annual";
     private String price;
 
     public AnnualSubscription(){
@@ -17,7 +18,7 @@ public class AnnualSubscription extends Subscription{
         this.price = annualPrice;
     }
 
-    public static int getLifesubscription() {
+    public static String getLifeSubscription() {
         return lifeSubscription;
     }
 
@@ -27,6 +28,10 @@ public class AnnualSubscription extends Subscription{
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public static String getType() {
+        return type;
     }
     
 }

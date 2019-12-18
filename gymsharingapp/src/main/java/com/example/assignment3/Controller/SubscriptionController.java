@@ -4,7 +4,9 @@ import javax.websocket.server.PathParam;
 
 import com.example.assignment3.Entities.AnnualSubscription;
 import com.example.assignment3.Entities.Gym;
+import com.example.assignment3.Entities.MonthSubscription;
 import com.example.assignment3.Entities.Subscription;
+import com.example.assignment3.Entities.TrialSubscription;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
 import com.example.assignment3.Repository.UserRepository;
@@ -36,26 +38,30 @@ public class SubscriptionController {
     }
 
     @RequestMapping(value="/gym/{id}/insertSubscriptions", method=RequestMethod.POST)
-	public String gymAddSubscription(@PathVariable Long id, Model model, String annualPrice) {
+    public String gymAddSubscription(@PathVariable Long id, Model model, 
+    @RequestParam(required = false) String annualPrice,
+    @RequestParam(required = false) String monthPrice,
+    @RequestParam(required = false) String trialPrice) {
         Gym gym = gymRepository.findOne(id);
-        if(annualPrice != null){
+        if(!(annualPrice.isEmpty())){
             Subscription newAnnualSubscription = new AnnualSubscription(id, annualPrice);
             gym.getSubscriptions().add(newAnnualSubscription);
             subRepository.save(newAnnualSubscription);
-            System.out.println(((AnnualSubscription)(gym.getSubscriptions().get(0))).getPrice());
-        }  
+        }
+        if(!(monthPrice.isEmpty())){
+            Subscription newMonthSubscription = new MonthSubscription(id, monthPrice);
+            gym.getSubscriptions().add(newMonthSubscription);
+            subRepository.save(newMonthSubscription);
+        }
+        if(!(trialPrice.isEmpty())){
+            Subscription newTrialSubscription = new TrialSubscription(id, trialPrice);
+            gym.getSubscriptions().add(newTrialSubscription);
+            subRepository.save(newTrialSubscription);
+        }
+        
+        model.addAttribute("subscriptions", subRepository.findAll());
         model.addAttribute("gym", subRepository.findAll());
-    	// if (gym != null) {
-    	// 	if (!gym.hasSkill(skill)) {
-    	// 		developer.getSkills().add(skill);
-    	// 	}
-    	// 	repository.save(developer);
-        //     model.addAttribute("developer", repository.findOne(id));
-        //     model.addAttribute("skills", skillRepository.findAll());
-        //     return "redirect:/developer/" + developer.getId();
-    	// }
 
-        // model.addAttribute("developers", repository.findAll());
         return "redirect:/gym/" + gym.getId();
     }
 
