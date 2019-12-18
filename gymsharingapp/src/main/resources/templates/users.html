@@ -28,7 +28,10 @@
                                         <a th:href="@{/user/{id}(id=${user.id})}">view</a>
                                     </td>
                                     <td>
-                                        <a th:href="@{/deleteUser/{id}(id=${user.id})}" method="post">Remove user</a>
+                                        <a th:href="@{/deleteUser/{id}(id=${user.id})}" method="post">remove user</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/modifyUser/{id}(id=${user.id})}" method="post">modify user</a>
                                     </td>
                                 </tr>
                             </tbody>

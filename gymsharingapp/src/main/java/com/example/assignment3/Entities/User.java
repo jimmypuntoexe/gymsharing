@@ -141,5 +141,12 @@ public class User {
     public void setAge(String age) {
         this.age = age;
     }
+    public Subscription getSubscriptions() {
+		return subscription;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+	}
 
 }

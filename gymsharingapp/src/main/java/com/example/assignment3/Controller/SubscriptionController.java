@@ -7,6 +7,7 @@ import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.Subscription;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
+import com.example.assignment3.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class SubscriptionController {
 
     @Autowired
     GymRepository gymRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @RequestMapping("/gym/{id}/insertSubscriptions")
     public String subscriptionsGym(@PathVariable Long id, Model model) {

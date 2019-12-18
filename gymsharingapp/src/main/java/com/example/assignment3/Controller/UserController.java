@@ -66,6 +66,39 @@ public class UserController {
         //da sistemare qui sotto
         model.addAttribute("user", newUser);
         return "redirect:/users/";
-	}
+  }
+  
+
+  @RequestMapping(value="/modifyUser/{id}", method=RequestMethod.GET)
+  public String updateUser( @PathVariable Long id, Model model) {
+          User user = repository.findOne(id);
+          model.addAttribute("user", user);
+          return "updateUser";
+  }
+  
+
+  @RequestMapping(value="/updateUser/{id}", method=RequestMethod.GET)
+	public String UserUpdate(@PathVariable Long id,
+            @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
+            @RequestParam String CF, @RequestParam String address, @RequestParam String civicNumber,
+            @RequestParam String city, @RequestParam String email, @RequestParam String phoneNumber, 
+            Model model) {
+        User user = repository.findOne(id);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setBirthDate(birthDate);
+        user.setAge(age);
+        user.setCF(CF);
+        user.setAddress(address);
+        user.setCivicNumber(civicNumber);
+        user.setCity(city);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        repository.save(user);
+
+        //da sistemare qui sotto
+        model.addAttribute("user", user);
+        return "redirect:/users/";
+  }
 
 }

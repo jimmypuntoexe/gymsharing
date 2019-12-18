@@ -11,82 +11,85 @@
       <div class="page-header" id="banner">
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>Info User</h1>
+            <h1>Update Info User</h1>
             
-			<form class="form-horizontal" th:action="@{/user/{id}/}" method="post" enctype="multipart/form-data" >
+			<form class="form-horizontal" th:action="@{/updateUser/{id}(id=${user.id})}" method="get" enctype="multipart/form-data" >
 
             	<fieldset>
             		<div class="form-group">
 	                    <label class="col-lg-2 control-label">Name</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Name}"/>
+	                    	<input type="text" class="form-control"
+	                    		th:value="${user.Name}" name="name"/>
 	                    </div>
                     </div>
                     <div class="form-group">
 	                    <label class="col-lg-2 control-label">Surname</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Surname}"/>
+	                    	<input type="text" class="form-control"  
+	                    		th:value="${user.Surname}" name="surname"/>
 	                    </div>
                     </div>
                     <div class="form-group">
 	                    <label class="col-lg-2 control-label">Age</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Age}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.Age}" name="age"/>
 	                    </div>
                     </div>
                     <div class="form-group">
 	                    <label class="col-lg-2 control-label">Birth Date</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.BirthDate}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.BirthDate}" name="birthDate"/>
 	                    </div>
                     </div>
             		<div class="form-group">
 	                    <label class="col-lg-2 control-label">Email</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Email}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.Email}" name="email"/>
 	                    </div>
                     </div>
                     <div class="form-group">
 	                    <label class="col-lg-2 control-label">Codice Fiscale</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.CF}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.CF}" name="CF"/>
 	                    </div>
                 	</div>
             		<div class="form-group">
 	                    <label class="col-lg-2 control-label">Address</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Address}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.Address}" name="address"/>
 	                    </div>
 	                </div>
             		<div class="form-group">
 	                    <label class="col-lg-2 control-label">Civic Number</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.CivicNumber}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.CivicNumber}" name="civicNumber"/>
 	                    </div>
 	                </div>
             		<div class="form-group">
 	                    <label class="col-lg-2 control-label">City</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.City}"/>
+	                    	<input type="text" class="form-control" 
+	                    		th:value="${user.City}" name="city"/>
 	                    </div>
 	                </div>
             		<div class="form-group">
 	                    <label class="col-lg-2 control-label">Phone Number</label>
 	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.PhoneNumber}"/>
+	                    	<input type="text" class="form-control"  
+	                    		th:value="${user.PhoneNumber}" name="phoneNumber"/>
 	                    </div>
 	                </div>
-            	</fieldset>
+                </fieldset>
+                <span>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </span>
 			</form>
           </div>
         </div>
