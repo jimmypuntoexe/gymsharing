@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PersonalTrainerRepository extends CrudRepository<PersonalTrainer, Long> {
 
+
 }

@@ -1,7 +1,5 @@
 package com.example.assignment3.Controller;
 
-import javax.websocket.server.PathParam;
-
 import com.example.assignment3.Entities.AnnualSubscription;
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.MonthSubscription;
@@ -34,7 +32,7 @@ public class SubscriptionController {
     @RequestMapping("/gym/{id}/insertSubscriptions")
     public String subscriptionsGym(@PathVariable Long id, Model model) {
         model.addAttribute("gym", gymRepository.findOne(id));
-      return "insertSubscriptions";
+        return "insertSubscriptions";
     }
 
     @RequestMapping(value="/gym/{id}/insertSubscriptions", method=RequestMethod.POST)
@@ -59,8 +57,8 @@ public class SubscriptionController {
             subRepository.save(newTrialSubscription);
         }
         
-        model.addAttribute("subscriptions", subRepository.findAll());
-        model.addAttribute("gym", subRepository.findAll());
+        //model.addAttribute("subscriptions", subRepository.findAll());
+        //model.addAttribute("gym", subRepository.findAll());
 
         return "redirect:/gym/" + gym.getId();
     }
