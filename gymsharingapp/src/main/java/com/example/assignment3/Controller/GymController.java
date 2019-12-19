@@ -4,6 +4,7 @@ import com.example.assignment3.Entities.Gym;
 
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
+import com.example.assignment3.Repository.SubscriptionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class GymController {
   @Autowired
   PersonalTrainerRepository PTRepository;
 
+  @Autowired
+  SubscriptionRepository subRepository;
+
   // @RequestMapping("/")
   // public String home() {
   //   return "index";
@@ -35,13 +39,42 @@ public class GymController {
 
   @RequestMapping(value="/deleteGym/{id}", method=RequestMethod.GET)
 	public String gymDelete(@PathVariable Long id) {
-    Gymrepository.delete(id);
-       return "redirect:/gyms/";
+      Gymrepository.delete(id);
+      return "redirect:/gyms/";
   }
+
+  @RequestMapping(value="/modifyGym/{id}", method=RequestMethod.GET)
+  public String updateUser( @PathVariable Long id, Model model) {
+          Gym gym = Gymrepository.findOne(id);
+          model.addAttribute("gym", gym);
+          return "insertGym";
+  }
+
+  @RequestMapping(value="/updateGym/{id}", method=RequestMethod.GET)
+	public String GymUpdate(@PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam String address, @RequestParam String civicNumber,
+            @RequestParam String city, @RequestParam String email, @RequestParam String phoneNumber, 
+            Model model) {
+        Gym gym = Gymrepository.findOne(id);
+        gym.setName(name);
+        gym.setAddress(address);
+        gym.setCivicNumber(civicNumber);
+        gym.setCity(city);
+        gym.setEmail(email);
+        gym.setPhoneNumber(phoneNumber);
+        Gymrepository.save(gym);
+
+        //da sistemare qui sotto
+        model.addAttribute("gym", gym);
+        return "redirect:/gyms/";
+  }
+
   
   @RequestMapping("/gym/{id}")
 	public String gym(@PathVariable Long id, Model model) {
         model.addAttribute("gym", Gymrepository.findOne(id));
+        model.addAttribute("sub", subRepository.findAll());
         return "infoGym";
 	}
 

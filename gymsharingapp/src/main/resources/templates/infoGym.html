@@ -69,12 +69,16 @@
 								<th scope="col">Subscription Type</th>
 								<th scope="col">Price</th>
 								<th scope="col">Life subscription</th>
+								<th scope="col">Remove</th>
 							</tr>
 						</thead>
 						<tr th:each="sub : ${gym.getSubscriptions()}">
 							<td th:text="${sub.getType()}"></td>
 							<td th:text="${sub.getPrice()}"></td>
 							<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
+							<td>
+								<a th:href="@{/gym/{idGym}/{idSub}/deleteSubscription(idGym=${gym.id}, idSub=${sub.id})}" method="post">Remove subscriptions</a>
+							</td>
 						</tr>
 					</table>
 					<br />

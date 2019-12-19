@@ -21,6 +21,7 @@
                                     <th>Subscription</th>
                                     <th>Add subscription</th>
                                     <th>Remove gym</th>
+                                    <th>Modify gym</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,9 +44,17 @@
                                     <td>
                                         <a th:href="@{/deleteGym/{id}(id=${gym.id})}" method="post">Remove gym</a>
                                     </td>
+                                    <td>
+                                        <a th:href="@{/modifyGym/{id}(id=${gym.id})}" method="post">Modify gym</a>
+                                    </td>
+
+                        
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="row" style="display: flex;">
+                            <a th:href="@{/insertGym}">Inserisci palestra</a>
+                        </div>	
                     </div>
                 </div>
             </div>

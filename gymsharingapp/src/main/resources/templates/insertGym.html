@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 </head>
 <body>
-<div class="container">
+<div class="container" th:if="${#httpServletRequest.requestURI == '/insertGym'}">
     <h1>Inserisci Palestra</h1>
     <form class="form-horizontal" th:action="@{/insertGym}" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -45,8 +45,64 @@
         </span>
     </form>
 </div>
-
-
+<div class="container" th:unless="${#httpServletRequest.requestURI == '/insertGym'}">
+    <div class="page-header" id="banner">
+      <div class="row" style="display: flex;">
+          <div class="column" style="flex:50%;"> 
+              <h1>Info gym</h1>
+              <form class="form-horizontal" th:action="@{/updateGym/{id}(id=${gym.id})}" method="get" enctype="multipart/form-data" >
+                  <!-- <fieldset style="margin:auto;"> -->
+                      <div class="form-group">
+                          <label class="col-lg-2 control-label">Name</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control"
+                                  th:value="${gym.Name}" name="name"/>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 control-label">Email</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" 
+                                  th:value="${gym.Email}" name ="email"/>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 control-label">Address</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" 
+                                  th:value="${gym.Address}" name="address"/>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 control-label">Civic Number</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control"
+                                  th:value="${gym.CivicNumber}" name="civicNumber"/>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 control-label">City</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" 
+                                  th:value="${gym.City}" name="city"/>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 control-label">Phone Number</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control"
+                                  th:value="${gym.PhoneNumber}" name="phoneNumber" />
+                          </div>
+                      </div>
+                  <!-- </fieldset> -->
+                  <span>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </span>
+              </form>
+          </div>
+          </div>
+      </div>
+    </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

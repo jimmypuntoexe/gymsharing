@@ -1,5 +1,6 @@
 package com.example.assignment3.Controller;
 
+
 import com.example.assignment3.Entities.AnnualSubscription;
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.MonthSubscription;
@@ -35,6 +36,7 @@ public class SubscriptionController {
         return "insertSubscriptions";
     }
 
+
     @RequestMapping(value="/gym/{id}/insertSubscriptions", method=RequestMethod.POST)
     public String gymAddSubscription(@PathVariable Long id, Model model, 
     @RequestParam(required = false) String annualPrice,
@@ -60,6 +62,15 @@ public class SubscriptionController {
         //model.addAttribute("subscriptions", subRepository.findAll());
         //model.addAttribute("gym", subRepository.findAll());
 
+        return "redirect:/gym/" + gym.getId();
+    }
+
+    @RequestMapping(value="/gym/{idGym}/{idSub}/deleteSubscription", method=RequestMethod.GET)
+	public String subDelete(@PathVariable Long idGym, @PathVariable Long idSub) {
+        Gym gym = gymRepository.findOne(idGym);
+        Subscription sub = subRepository.findOne(idSub);
+        gym.getSubscriptions().remove(sub);
+        subRepository.delete(sub.getId());
         return "redirect:/gym/" + gym.getId();
     }
 
