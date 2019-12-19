@@ -73,7 +73,7 @@ public class UserController {
   public String updateUser( @PathVariable Long id, Model model) {
           User user = repository.findOne(id);
           model.addAttribute("user", user);
-          return "updateUser";
+          return "insertUser";
   }
   
 
