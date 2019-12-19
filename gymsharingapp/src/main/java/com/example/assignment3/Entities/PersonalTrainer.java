@@ -1,14 +1,13 @@
 package com.example.assignment3.Entities;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,6 +16,7 @@ public class PersonalTrainer {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    private long idGym;
     private String name;
     private String surname;
     private Date birthDate;
@@ -28,18 +28,17 @@ public class PersonalTrainer {
     private String phoneNumber;
 
     @OneToMany
-    private Set<User> user;
+    private List<User> user;
 
-    @ManyToMany(targetEntity = Gym.class)
-    private Set<Gym> gym;
-
+    @ManyToMany
+    private List<Gym> gyms;
 
 	public PersonalTrainer() {
 		super();
 	}
 
     public PersonalTrainer(String name, String surname, Date birthDate, String age, String CF, 
-            String patent, String level, String email, String phoneNumber) {
+            String patent, String level, String email, String phoneNumber, Long idGym) {
 		super();
         this.name = name;
         this.surname = surname;
@@ -50,6 +49,7 @@ public class PersonalTrainer {
         this.level = level;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.idGym = idGym;
 	}
 
 	public long getId() {
@@ -130,6 +130,22 @@ public class PersonalTrainer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Gym> getGyms() {
+		return gyms;
+    }
+
+    public void setGyms(List<Gym> gyms) {
+        this.gyms = gyms;
+    }
+    
+    public long getIdGym() {
+        return this.idGym;
+    }
+
+    public void setIdGym(Long idGym) {
+         this.idGym = idGym;
     }
 
 }

@@ -1,11 +1,9 @@
 package com.example.assignment3.Controller;
 
-import com.example.assignment3.Entities.AnnualSubscription;
 import com.example.assignment3.Entities.Gym;
-import com.example.assignment3.Entities.MonthSubscription;
-import com.example.assignment3.Entities.Subscription;
-import com.example.assignment3.Entities.TrialSubscription;
+
 import com.example.assignment3.Repository.GymRepository;
+import com.example.assignment3.Repository.PersonalTrainerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +19,9 @@ public class GymController {
 
   @Autowired
   GymRepository Gymrepository;
+
+  @Autowired
+  PersonalTrainerRepository PTRepository;
 
   // @RequestMapping("/")
   // public String home() {
@@ -48,6 +49,13 @@ public class GymController {
 	public String gymList(Model model) {
         model.addAttribute("gyms", Gymrepository.findAll());
         return "gyms";
+  }
+  
+  @RequestMapping(value="/gymsForSubscriber/{id}", method=RequestMethod.GET)
+	public String gymList(@PathVariable Long id, Model model) {
+        model.addAttribute("personalTrainer", PTRepository.findOne(id));
+        model.addAttribute("gyms", Gymrepository.findAll());
+        return "gymsForSubscriber";
 	}
 
   @RequestMapping(value="/insertGym", method=RequestMethod.POST)

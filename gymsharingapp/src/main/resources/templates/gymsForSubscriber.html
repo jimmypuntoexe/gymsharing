@@ -18,9 +18,7 @@
                                 <tr>
                                     <th>Basic Info</th>
                                     <th>Info</th>
-                                    <th>Subscription</th>
-                                    <th>Add subscription</th>
-                                    <th>Remove gym</th>
+                                    <th>Subscribe</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,18 +28,7 @@
                                         <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
                                     </td>
                                     <td>
-                                        <select>
-                                            <option th:each="sub : ${gym.subscriptions}" th:text="${sub.getType() + ' ' + sub.getPrice()}"></option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <a th:href="@{/gym/{id}/insertSubscriptions(id=${gym.id})}" method="post">Add subscription</a>
-                                    </td>
-                                    <!-- <td>
-                                        <a th:href="@{/gym/{id}/insertPersonalTrainer(id=${gym.id})}" method="post">Add personal trainer</a>
-                                    </td> -->
-                                    <td>
-                                        <a th:href="@{/deleteGym/{id}(id=${gym.id})}" method="post">Remove gym</a>
+                                        <a th:href="@{/subscribePersonalTrainer/{idGym}/{idPT} (idGym=${gym.id} , idPT=${personalTrainer.id})}" method="post">Subscribe to this gym</a>
                                     </td>
                                 </tr>
                             </tbody>

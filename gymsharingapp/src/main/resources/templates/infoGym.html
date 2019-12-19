@@ -71,10 +71,26 @@
 								<th scope="col">Life subscription</th>
 							</tr>
 						</thead>
-						<tr th:each="sub : ${gym.subscriptions}">
+						<tr th:each="sub : ${gym.getSubscriptions()}">
 							<td th:text="${sub.getType()}"></td>
 							<td th:text="${sub.getPrice()}"></td>
 							<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
+						</tr>
+					</table>
+					<br />
+					<h1>Personal Trainers</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Level</th>
+								<th scope="col">Patent</th>
+							</tr>
+						</thead>
+						<tr th:each="personalTrainer : ${gym.getPersonalTrainers()}">
+							<td th:text="${personalTrainer.getName()}"></td>
+							<td th:text="${personalTrainer.getLevel()}"></td>
+							<td th:text="${personalTrainer.getPatent()}"></td>
 						</tr>
 					</table>
 				</div>	

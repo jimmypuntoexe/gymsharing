@@ -1,18 +1,14 @@
 package com.example.assignment3.Entities;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Gym {
@@ -34,7 +30,7 @@ public class Gym {
 	// private List<Gym> affiliateGym;
 
 	@ManyToMany
-	private Set<PersonalTrainer> personalTrainer;
+	private List<PersonalTrainer> personalTrainers;
 
 	@OneToMany
 	private List<Subscription> subscriptions;
@@ -114,6 +110,10 @@ public class Gym {
 
 	public List<Subscription> getSubscriptions() {
 		return subscriptions;
+	}
+
+	public List<PersonalTrainer> getPersonalTrainers() {
+		return personalTrainers;
 	}
 
 	public void setSubscription(Subscription subscription) {
