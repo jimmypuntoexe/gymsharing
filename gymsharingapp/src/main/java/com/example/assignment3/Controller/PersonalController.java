@@ -51,9 +51,44 @@ public class PersonalController {
 
 
   @RequestMapping("/insertPersonalTrainer")
-  public String insertPersonalTrainer() {
+  public String insertPersonalTrainer(Model model) {
+    model.addAttribute("action", "insert");
     return "insertPersonalTrainer";
   }
+
+  @RequestMapping("/editPersonalTrainer/{id}")
+  public String editPersonalTrainer(@PathVariable Long id, Model model) {
+    model.addAttribute("action", "edit");
+    model.addAttribute("personal", PTRepository.findOne(id));
+    return "insertPersonalTrainer";
+  }
+  @RequestMapping(value="/updatePersonalTrainer/{id}", method=RequestMethod.GET)
+	public String PersonalTrainerUpdate(@PathVariable Long id,
+            @RequestParam (required = false) String name, @RequestParam (required = false) String surname, 
+            @RequestParam (required = false) Date birthDate, @RequestParam (required = false) String age,
+            @RequestParam (required = false) String CF, 
+            @RequestParam (required = false) String patent, @RequestParam (required = false) String level, 
+            @RequestParam (required = false) String email, @RequestParam (required = false) String phoneNumber, 
+            Model model) {
+
+        PersonalTrainer personalTrainer = PTRepository.findOne(id);
+        personalTrainer.setName(name);
+        personalTrainer.setSurname(surname);
+        personalTrainer.setBirthDate(birthDate);
+        personalTrainer.setAge(age);
+        personalTrainer.setCF(CF);
+        personalTrainer.setPatent(patent);
+        personalTrainer.setLevel(level);
+        personalTrainer.setEmail(email);
+        personalTrainer.setPhoneNumber(phoneNumber);
+        
+        PTRepository.save(personalTrainer);
+        model.addAttribute("personal", personalTrainer);
+
+        return "redirect:/personalTrainers/";
+  }
+
+
 
   @RequestMapping(value="/insertPersonalTrainer", method=RequestMethod.POST)
 	public String PersonalTrainerAdd(

@@ -19,6 +19,7 @@
                                     <th>Basic Info</th>
                                     <th>Info</th>
                                     <th>Subscribe to a gym</th>
+                                    <th>Edit info</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,6 +30,9 @@
                                     </td>
                                     <td>
                                         <a th:href="@{/gymsForSubscriber/{id}(id=${personalTrainer.id})}">Subscribe to a gym</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/editPersonalTrainer/{id}(id=${personalTrainer.id})}">Edit info</a>
                                     </td>
                                 </tr>
                             </tbody>
