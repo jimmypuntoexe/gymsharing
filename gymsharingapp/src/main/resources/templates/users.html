@@ -20,11 +20,13 @@
                                     <th>Info</th>
                                     <th>Remove user</th>
                                     <th>Modify user</th>
+                                    <th>Contact personal trainer</th>
+                                    <th>Buy subscription</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="user : ${users}">
-                               <td th:text="${user.Name + ' ' + user.Surname + ' ' + user.BirthDate + ' ' + user.Age + ' ' + user.CF + ' ' + user.Address + ' ' + user.CivicNumber + ' ' + user.City + ' ' + user.Email + ' ' + user.PhoneNumber}"></td>
+                               <td th:text="${user.Name + ' ' + user.Surname + ' ' + user.BirthDate + ' ' + user.Email + ' ' + user.PhoneNumber}"></td>
                                     <td>
                                         <a th:href="@{/user/{id}(id=${user.id})}">view</a>
                                     </td>
@@ -33,6 +35,12 @@
                                     </td>
                                     <td>
                                         <a th:href="@{/modifyUser/{id}(id=${user.id})}" method="post">modify user</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/personalTrainersContact/{id}(id=${user.id})}" method="post">contact personal trainer</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/gymsForSubscription/{id}(id=${user.id})}" method="post">buy subscription</a>
                                     </td>
                                 </tr>
                             </tbody>

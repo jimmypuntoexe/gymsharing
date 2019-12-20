@@ -99,7 +99,26 @@
 						</tr>
 					</table>
 					<br />
-				</div>	
+                </div>
+                <div>
+					<br />
+					<h1>Users</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Address</th>
+								<!-- <th scope="col">Life subscription</th> -->
+							</tr>
+						</thead>
+						<tr th:each="user: ${personalTrainer.getUsers()}">
+							<td th:text="${user.getName()}"></td>
+							<td th:text="${user.getAddress()}"></td>
+							<!-- <td th:text="${sub.getLifeSubscription()} + ' days'"></td> -->
+						</tr>
+					</table>
+					<br />
+				</div>		
 			</div>
         </div>
       </div>

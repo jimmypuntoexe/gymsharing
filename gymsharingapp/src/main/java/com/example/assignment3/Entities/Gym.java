@@ -2,6 +2,7 @@ package com.example.assignment3.Entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class Gym {
 	// @JsonBackReference
 	// private List<Gym> affiliateGym;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<PersonalTrainer> personalTrainers;
 
 	@OneToMany
