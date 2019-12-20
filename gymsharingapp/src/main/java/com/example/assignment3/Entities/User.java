@@ -145,6 +145,14 @@ public class User {
 
 	public void setSubscription(Subscription subscription) {
 		this.subscription = subscription;
-	}
+    }
+
+	public PersonalTrainer getPersonalTrainer() {
+		return personalTrainer;
+    }
+    
+    public void setPersonalTrainer(PersonalTrainer personalTrainer) {
+        this.personalTrainer = personalTrainer;
+    }
 
 }

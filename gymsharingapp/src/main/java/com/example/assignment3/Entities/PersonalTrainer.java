@@ -28,7 +28,7 @@ public class PersonalTrainer {
     private String phoneNumber;
 
     @OneToMany
-    private List<User> user;
+    private List<User> users;
 
     @ManyToMany
     private List<Gym> gyms;
@@ -147,5 +147,9 @@ public class PersonalTrainer {
     public void setIdGym(Long idGym) {
          this.idGym = idGym;
     }
+
+	public List<User> getUsers() {
+		return users;
+	}
 
 }

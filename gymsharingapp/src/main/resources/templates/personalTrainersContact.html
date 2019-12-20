@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Personal Trainers</title> 
+    <title>Contact personal trainer</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
@@ -18,7 +18,7 @@
                                 <tr>
                                     <th>Basic Info</th>
                                     <th>Info</th>
-                                    <th>Subscribe to a gym</th>
+                                    <th>Subscribe</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,7 +28,7 @@
                                         <a th:href="@{/personalTrainer/{id}(id=${personalTrainer.id})}">Show more info</a>
                                     </td>
                                     <td>
-                                        <a th:href="@{/gymsForSubscriber/{id}(id=${personalTrainer.id})}">Subscribe to a gym</a>
+                                        <a th:href="@{/contactPt/{idUser}/{idPT} (idUser=${user.id} , idPT=${personalTrainer.id})}" method="post">Contact this personal trainer</a>
                                     </td>
                                 </tr>
                             </tbody>

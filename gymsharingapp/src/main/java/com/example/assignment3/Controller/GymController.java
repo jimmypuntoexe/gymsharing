@@ -5,6 +5,7 @@ import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
+import com.example.assignment3.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,8 @@ public class GymController {
   @Autowired
   SubscriptionRepository subRepository;
 
-  // @RequestMapping("/")
-  // public String home() {
-  //   return "index";
-  // }
+  @Autowired
+  UserRepository userRepository;
 
   @RequestMapping("/insertGym")
   public String insertGym() {
@@ -40,6 +39,7 @@ public class GymController {
   @RequestMapping(value="/deleteGym/{id}", method=RequestMethod.GET)
 	public String gymDelete(@PathVariable Long id) {
       Gymrepository.delete(id);
+      
       return "redirect:/gyms/";
   }
 
@@ -89,7 +89,22 @@ public class GymController {
         model.addAttribute("personalTrainer", PTRepository.findOne(id));
         model.addAttribute("gyms", Gymrepository.findAll());
         return "gymsForSubscriber";
-	}
+  }
+
+  
+  @RequestMapping(value="/gymsForSubscription/{id}", method=RequestMethod.GET)
+	public String gymListForSubscription(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userRepository.findOne(id));
+        model.addAttribute("gyms", Gymrepository.findAll());
+        return "gymsForSubscription";
+  }
+
+  @RequestMapping(value="/gymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
+	public String gymListForSubscription(@PathVariable Long idUser, @PathVariable Long idGym, Model model) {
+        model.addAttribute("users", userRepository.findOne(idUser));
+        model.addAttribute("gyms", Gymrepository.findOne(idGym));
+        return "redirect:/infoGymForSubscription/" + idGym + "/" + idUser;
+  }
 
   @RequestMapping(value="/insertGym", method=RequestMethod.POST)
 	public String GymAdd(

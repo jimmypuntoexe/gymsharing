@@ -2,14 +2,12 @@ package com.example.assignment3.Controller;
 
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.PersonalTrainer;
+import com.example.assignment3.Entities.User;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
+import com.example.assignment3.Repository.UserRepository;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +27,20 @@ public class PersonalController {
   @Autowired
   GymRepository gymRepository;
 
+  @Autowired
+  UserRepository userRepository;
+
   @RequestMapping(value="/personalTrainers", method=RequestMethod.GET)
 	public String userList(Model model) {
         model.addAttribute("personalTrainers", PTRepository.findAll());
         return "personalTrainers";
+  }
+
+  @RequestMapping(value="/personalTrainersContact/{id}", method=RequestMethod.GET)
+	public String personalTrainerListForUserContact(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userRepository.findOne(id));
+        model.addAttribute("personalTrainers", PTRepository.findAll());
+        return "personalTrainersContact";
   }
 
   @RequestMapping("/personalTrainer/{id}")
@@ -41,15 +49,9 @@ public class PersonalController {
          return "infoPersonalTrainer";
   }
 
-  // @RequestMapping("/gym/{id}/insertPersonalTrainer")
-  // public String insertPersonalTrainer(@PathVariable Long id, Model model) {
-  //   model.addAttribute("gym", gymRepository.findOne(id));
-  //   return "insertPersonalTrainer";
-  // }
 
   @RequestMapping("/insertPersonalTrainer")
   public String insertPersonalTrainer() {
-    //model.addAttribute("gym", gymRepository.findOne(id));
     return "insertPersonalTrainer";
   }
 
@@ -59,7 +61,6 @@ public class PersonalController {
             @RequestParam String CF, @RequestParam String patent, @RequestParam String level, @RequestParam String email, @RequestParam String phoneNumber, 
             Model model) {
 
-        //Gym gym = gymRepository.findOne(id);
         PersonalTrainer newPersonalTrainer = new PersonalTrainer();
         newPersonalTrainer.setName(name);
         newPersonalTrainer.setSurname(surname);
@@ -70,25 +71,8 @@ public class PersonalController {
         newPersonalTrainer.setLevel(level);
         newPersonalTrainer.setEmail(email);
         newPersonalTrainer.setPhoneNumber(phoneNumber);
-        //newPersonalTrainer.setIdGym(id);
-
-        // gym.getPersonalTrainers().add(newPersonalTrainer);
-              
-        // List<Gym> list = new ArrayList<>();
-        // if (newPersonalTrainer.getGyms() == null){
-        //   list.add(gym);
-        // }
-        // else {
-        //   list = newPersonalTrainer.getGyms();
-        //   list.add(gym);
-        // }
-
-        // newPersonalTrainer.setGyms(list);
+        
         PTRepository.save(newPersonalTrainer);
-        //PTRepository.findOne(newPersonalTrainer.getId()).getGyms().add(gym);
-
-        //model.addAttribute("personalTrainer", gym);
-        //model.addAttribute("gym", PTRepository.findAll());
 
         return "redirect:/personalTrainers/";
   }
@@ -99,54 +83,33 @@ public class PersonalController {
       Gym gym = gymRepository.findOne(idGym);
       PersonalTrainer pt = PTRepository.findOne(idPT);
 
-      gym.getPersonalTrainers().add(pt);
-      pt.getGyms().add(gym);
+      //a personal trainer can't subscribe to the same gym more than one time
+      if(!gym.getPersonalTrainers().contains(pt)){
+        gym.getPersonalTrainers().add(pt);
+        pt.getGyms().add(gym);
+      };
 
       PTRepository.save(pt);
       gymRepository.save(gym);
 
-      //model.addAttribute("personalTrainer", PTRepository.findOne(id));
       return "redirect:/personalTrainers";
     }
 
-  // @RequestMapping(value="/gym/{id}/insertPersonalTrainer", method=RequestMethod.POST)
-	// public String PersonalTrainerAdd(@PathVariable Long id,
-  //           @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
-  //           @RequestParam String CF, @RequestParam String patent, @RequestParam String level, @RequestParam String email, @RequestParam String phoneNumber, 
-  //           Model model) {
+    @RequestMapping("/contactPt/{idUser}/{idPT}")
+    public String connectPtToUser(@PathVariable Long idUser, @PathVariable Long idPT, Model model) {
+      User user = userRepository.findOne(idUser);
+      PersonalTrainer pt = PTRepository.findOne(idPT);
 
-  //       Gym gym = gymRepository.findOne(id);
-  //       PersonalTrainer newPersonalTrainer = new PersonalTrainer();
-  //       newPersonalTrainer.setName(name);
-  //       newPersonalTrainer.setSurname(surname);
-  //       newPersonalTrainer.setBirthDate(birthDate);
-  //       newPersonalTrainer.setAge(age);
-  //       newPersonalTrainer.setCF(CF);
-  //       newPersonalTrainer.setPatent(patent);
-  //       newPersonalTrainer.setLevel(level);
-  //       newPersonalTrainer.setEmail(email);
-  //       newPersonalTrainer.setPhoneNumber(phoneNumber);
-  //       newPersonalTrainer.setIdGym(id);
+      //a personal trainer can't subscribe to the same gym more than one time
+      if(user.getPersonalTrainer() == null ){
+        user.setPersonalTrainer(pt);
+        pt.getUsers().add(user);
+      };
 
-  //       gym.getPersonalTrainers().add(newPersonalTrainer);
-              
-  //       List<Gym> list = new ArrayList<>();
-  //       if (newPersonalTrainer.getGyms() == null){
-  //         list.add(gym);
-  //       }
-  //       else {
-  //         list = newPersonalTrainer.getGyms();
-  //         list.add(gym);
-  //       }
+      PTRepository.save(pt);
+      userRepository.save(user);
 
-  //       newPersonalTrainer.setGyms(list);
-  //       PTRepository.save(newPersonalTrainer);
-  //       //PTRepository.findOne(newPersonalTrainer.getId()).getGyms().add(gym);
-
-  //       //model.addAttribute("personalTrainer", gym);
-  //       //model.addAttribute("gym", PTRepository.findAll());
-
-  //       return "redirect:/gym/" + gym.getId();
-  // }
+      return "redirect:/personalTrainers";
+    }
 
 }

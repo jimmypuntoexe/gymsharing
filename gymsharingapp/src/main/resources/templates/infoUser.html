@@ -10,86 +10,109 @@
 	<div class="container">
       <div class="page-header" id="banner">
         <div class="row">
-          <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>Info User</h1>
-            
-			<form class="form-horizontal" th:action="@{/user/{id}/}" method="post" enctype="multipart/form-data" >
 
-            	<fieldset>
-            		<div class="form-group">
-	                    <label class="col-lg-2 control-label">Name</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Name}"/>
-	                    </div>
-                    </div>
-                    <div class="form-group">
-	                    <label class="col-lg-2 control-label">Surname</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Surname}"/>
-	                    </div>
-                    </div>
-                    <div class="form-group">
-	                    <label class="col-lg-2 control-label">Age</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Age}"/>
-	                    </div>
-                    </div>
-                    <div class="form-group">
-	                    <label class="col-lg-2 control-label">Birth Date</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.BirthDate}"/>
-	                    </div>
-                    </div>
-            		<div class="form-group">
-	                    <label class="col-lg-2 control-label">Email</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Email}"/>
-	                    </div>
-                    </div>
-                    <div class="form-group">
-	                    <label class="col-lg-2 control-label">Codice Fiscale</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.CF}"/>
-	                    </div>
-                	</div>
-            		<div class="form-group">
-	                    <label class="col-lg-2 control-label">Address</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.Address}"/>
-	                    </div>
-	                </div>
-            		<div class="form-group">
-	                    <label class="col-lg-2 control-label">Civic Number</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.CivicNumber}"/>
-	                    </div>
-	                </div>
-            		<div class="form-group">
-	                    <label class="col-lg-2 control-label">City</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.City}"/>
-	                    </div>
-	                </div>
-            		<div class="form-group">
-	                    <label class="col-lg-2 control-label">Phone Number</label>
-	                    <div class="col-lg-6">
-	                    	<input type="text" class="form-control" disabled="disabled" 
-	                    		th:value="${user.PhoneNumber}"/>
-	                    </div>
-	                </div>
-            	</fieldset>
-			</form>
-          </div>
-        </div>
+			<div class="column" style="flex:50%;">
+				<h1>Info User</h1>
+            
+				<form class="form-horizontal" th:action="@{/user/{id}/}" method="post" enctype="multipart/form-data" >
+	
+					<fieldset>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Name</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.Name}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Surname</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.Surname}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Age</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.Age}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Birth Date</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.BirthDate}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Email</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.Email}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Codice Fiscale</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.CF}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Address</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.Address}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Civic Number</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.CivicNumber}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">City</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.City}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Phone Number</label>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${user.PhoneNumber}"/>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="column" style="flex:50%;">
+				<div>
+					<br />
+					<h1>Personal Trainer</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Surname</th>
+								<!-- <th scope="col">Life subscription</th> -->
+							</tr>
+						</thead>
+						<tr>
+							<td th:text="${user.getPersonalTrainer().getName()}"></td>
+							<td th:text="${user.getPersonalTrainer().getSurname()}"></td>
+							<!-- <td th:text="${sub.getLifeSubscription()} + ' days'"></td> -->
+						</tr>
+					</table>
+					<br />
+                </div>
+			</div>
+
+		</div> 
       </div>
 	</div>
 
