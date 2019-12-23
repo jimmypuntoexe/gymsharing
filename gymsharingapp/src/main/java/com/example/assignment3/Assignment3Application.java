@@ -2,9 +2,7 @@ package com.example.assignment3;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.example.assignment3.Entities.*;
 import com.example.assignment3.Repository.*;
@@ -36,10 +34,12 @@ public class Assignment3Application implements CommandLineRunner{
 		@Override
 		public void run(String... args) throws Exception {
 
-			//create Gym
-			Gym gym = new Gym("MaxiFit",  "Via le mani dal naso", "22", "Vimodrone", "maxifit@gmail.com", "3333333333");
+			//create Gyms
+			Gym gym = new Gym("MaxiFit",  "Via fratelli cairoli", "22", "Vimodrone", "maxifit@gmail.com", "3333333333");
+			Gym gym2 = new Gym("Virgin Active",  "Via santa marcellina", "22", "Vimodrone", "virgin_active@gmail.com", "3333333333");
 
-			//create User
+
+			//create Users
 			DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 			Date d1 = df.parse("18-04-1996");
 			User user = new User("Andrea", "Carubelli", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333");
@@ -49,6 +49,7 @@ public class Assignment3Application implements CommandLineRunner{
 			DateFormat df1 = new SimpleDateFormat("MM-dd-yyyy");
 			Date d2 = df1.parse("28-12-1995");
 			PersonalTrainer pt = new PersonalTrainer("Gianmaria", "Balducci", d2, "23", "BLDGMR95T28F205N", "Fit gimmy", "Esperto", "g.balducci1@campus.unimib.it", "123456789");
+			PersonalTrainer pt2 = new PersonalTrainer("Gianni", "Morandi", d2, "23", "BLDGMR95T28F205N", "Fit gianni", "Magico", "g.balducci1@campus.unimib.it", "123456789");
 
 			//create subscriptions
 			Subscription annualSub = new AnnualSubscription(gym.getId(), "300");
@@ -56,8 +57,10 @@ public class Assignment3Application implements CommandLineRunner{
 			Subscription trialSub = new TrialSubscription(gym.getId(), "0");
 
 			//Save objects
-			ptRepository.save(pt);			
+			ptRepository.save(pt);
+			ptRepository.save(pt2);				
 			gymRepository.save(gym);
+			gymRepository.save(gym2);
 			userRepository.save(user);
 			userRepository.save(user2);
 			subRepository.save(annualSub);
@@ -66,11 +69,18 @@ public class Assignment3Application implements CommandLineRunner{
 			
 			//Set relationship
 			user.setPersonalTrainer(pt);
+			user2.setPersonalTrainer(pt);
+			user.setSubscription(annualSub);
+			user2.setSubscription(monthSub);
 			pt.getUsers().add(user);
 			pt.getUsers().add(user2);
 
 			gym.getPersonalTrainers().add(pt);
+			gym2.getPersonalTrainers().add(pt);
+			gym.getPersonalTrainers().add(pt2);
 			pt.getGyms().add(gym);
+			pt.getGyms().add(gym2);
+			pt2.getGyms().add(gym);
 
 			gym.getSubscriptions().add(annualSub);
 			gym.getSubscriptions().add(monthSub);
@@ -78,9 +88,13 @@ public class Assignment3Application implements CommandLineRunner{
 
 			//Update objects
 
-			//userRepository.save(user);
+			userRepository.save(user);
+			userRepository.save(user2);			
+			// ptRepository.save(pt);	
+			// ptRepository.save(pt2);
 			gymRepository.save(gym);
-			//ptRepository.save(pt);	
+			// gymRepository.save(gym2);
+
 
 		}
 
