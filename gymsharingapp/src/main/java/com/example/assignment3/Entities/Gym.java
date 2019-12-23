@@ -1,5 +1,6 @@
 package com.example.assignment3.Entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,15 +43,18 @@ public class Gym {
 	}
 
 	public Gym(String name, String address, String civicNumber, String city,
-			String email, String phoneNumber, List<Gym> affiliateGym) {
+			String email, String phoneNumber) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.civicNumber = civicNumber;
 		this.city = city;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
+		this.personalTrainers = new ArrayList<PersonalTrainer>();
+		this.subscriptions = new ArrayList<Subscription>();
 	}
+
 
 	
 	public long getId() {
@@ -119,6 +123,10 @@ public class Gym {
 
 	public void setSubscription(Subscription subscription) {
 		this.subscriptions.add(subscription);
+	}
+
+	public void setPersonalTrainers(PersonalTrainer pt) {
+		this.personalTrainers.add(pt);
 	}
 
 	// public List<Gym> getAffialiateGym() {

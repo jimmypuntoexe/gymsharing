@@ -1,7 +1,5 @@
 package com.example.assignment3.Controller;
 
-import java.util.List;
-
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.PersonalTrainer;
 import com.example.assignment3.Repository.GymRepository;
