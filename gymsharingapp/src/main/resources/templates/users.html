@@ -34,7 +34,7 @@
                                         <a th:href="@{/deleteUser/{id}(id=${user.id})}" method="get">remove user</a>
                                     </td>
                                     <td>
-                                        <a th:href="@{/modifyUser/{id}(id=${user.id})}" method="post">modify user</a>
+                                        <a th:href="@{/modifyUser/{id}(id=${user.id})}" method="post">edit user</a>
                                     </td>
                                     <td>
                                         <a th:href="@{/personalTrainersContact/{id}(id=${user.id})}" method="post">contact personal trainer</a>
@@ -44,10 +44,16 @@
                                     </td>
                                 </tr>
                             </tbody>
+            
                         </table>
+
+                        
                     </div>
                 </div>
             </div>
+            <div class="row" style="display: flex; text-align: left;">
+                <a th:href="@{/}">Home</a>
+            </div>	
         </div>
     </body>
 </html>

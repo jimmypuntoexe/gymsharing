@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Developers database</title> 
+    <title>Gyms</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
@@ -21,7 +21,7 @@
                                     <th>Subscription</th>
                                     <th>Add subscription</th>
                                     <th>Remove gym</th>
-                                    <th>Modify gym</th>
+                                    <th>Edit gym</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,7 +45,7 @@
                                         <a th:href="@{/deleteGym/{id}(id=${gym.id})}" method="post">Remove gym</a>
                                     </td>
                                     <td>
-                                        <a th:href="@{/modifyGym/{id}(id=${gym.id})}" method="post">Modify gym</a>
+                                        <a th:href="@{/modifyGym/{id}(id=${gym.id})}" method="post">Edit gym</a>
                                     </td>
 
                         
@@ -54,6 +54,9 @@
                         </table>
                         <div class="row" style="display: flex;">
                             <a th:href="@{/insertGym}">Inserisci palestra</a>
+                        </div>	
+                        <div class="row" style="display: flex; text-align: left;">
+                            <a th:href="@{/}">Home</a>
                         </div>	
                     </div>
                 </div>

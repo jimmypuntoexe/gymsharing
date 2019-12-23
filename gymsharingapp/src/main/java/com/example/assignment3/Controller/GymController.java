@@ -56,10 +56,8 @@ public class GymController {
 	public String deletePersonalTrainer(@PathVariable Long idGym, @PathVariable Long idPtr) {
       Gym gym = Gymrepository.findOne(idGym);
       PersonalTrainer ptr = PTRepository.findOne(idPtr);
-      System.out.println(gym.getPersonalTrainers());
       gym.getPersonalTrainers().remove(ptr);
       Gymrepository.save(gym);
-      System.out.println(gym.getPersonalTrainers());
       return "redirect:/gym/" + gym.getId();
   }
 

@@ -22,7 +22,8 @@ public class UserController {
 
 
   @RequestMapping("/insertUser")
-  public String insertUser() {
+  public String insertUser(Model model) {
+    model.addAttribute("action", "insert");
     return "insertUser";
   }
 
@@ -72,6 +73,7 @@ public class UserController {
   @RequestMapping(value="/modifyUser/{id}", method=RequestMethod.GET)
   public String updateUser( @PathVariable Long id, Model model) {
           User user = repository.findOne(id);
+          model.addAttribute("action", "update");
           model.addAttribute("user", user);
           return "insertUser";
   }
