@@ -2,6 +2,8 @@ package com.example.assignment3.Controller;
 
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.PersonalTrainer;
+import com.example.assignment3.Entities.Subscription;
+import com.example.assignment3.Entities.User;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
@@ -107,12 +109,24 @@ public class GymController {
         model.addAttribute("gyms", Gymrepository.findAll());
         return "gymsForSubscription";
   }
+  @RequestMapping(value="/gym/{idGym}/{idSub}/{idUser}/buySubscription")
+    public String buySubscription(@PathVariable Long idGym, @PathVariable Long idSub, 
+    @PathVariable Long idUser, Model model){
+        model.addAttribute("user", userRepository.findOne(idGym));
+        model.addAttribute("sub", subRepository.findOne(idSub));
+        User user = userRepository.findOne(idUser);
+        Subscription sub = subRepository.findOne(idSub);
+        user.setSubscription(sub);
+        return "infoUser";
+    }
+  
 
-  @RequestMapping(value="/gymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
+  @RequestMapping(value="/infoGymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
 	public String gymListForSubscription(@PathVariable Long idUser, @PathVariable Long idGym, Model model) {
-        model.addAttribute("users", userRepository.findOne(idUser));
-        model.addAttribute("gyms", Gymrepository.findOne(idGym));
-        return "redirect:/infoGymForSubscription/" + idGym + "/" + idUser;
+        model.addAttribute("user", userRepository.findOne(idUser));
+        model.addAttribute("gym", Gymrepository.findOne(idGym));
+        return "infoGymForSubscription";
+        //return "redirect:/infoGymForSubscription/" + idGym + "/" + idUser;
   }
 
   @RequestMapping(value="/insertGym", method=RequestMethod.POST)
