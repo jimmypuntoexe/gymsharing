@@ -1,11 +1,11 @@
 package com.example.assignment3.Controller;
 
-
 import com.example.assignment3.Entities.AnnualSubscription;
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.MonthSubscription;
 import com.example.assignment3.Entities.Subscription;
 import com.example.assignment3.Entities.TrialSubscription;
+import com.example.assignment3.Entities.User;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
 import com.example.assignment3.Repository.UserRepository;
@@ -118,5 +118,17 @@ public class SubscriptionController {
 
         return "redirect:/gym/" + gym.getId();
     }
+
+
+    @RequestMapping(value="/{idUser}/{idSub}/{idGym}/deleteSubScription", method=RequestMethod.GET)
+    public String deletePersonalTrainer(@PathVariable Long idUsr, @PathVariable Long idSub,
+    @PathVariable Long idGym) {
+        Gym gym = gymRepository.findOne(idGym);
+        User user = userRepository.findOne(idUsr);
+        Subscription sub = subRepository.findOne(idSub);
+        user.setSubscription(null);
+        userRepository.save(user);
+        return "redirect:/gym/" + user.getId() + "/" + gym.getId() + "/" + sub.getId() ;
+  }
 
 }
