@@ -77,7 +77,7 @@
 							<td th:text="${sub.getPrice()}"></td>
 							<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
 							<td>
-								<a th:href="@{/gym/{idGym}/{idSub}/deleteSubscription(idGym=${gym.id}, idSub=${sub.id})}" method="post">Remove subscriptions</a>
+								<a th:href="@{/gym/{idGym}/{idSub}/{idUser}/buySubscription(idGym=${gym.id}, idSub=${sub.id}, idUser=${user.id})}" method="post">Buy</a>
 							</td>
 						</tr>
 					</table>

@@ -103,12 +103,35 @@
 							</tr>
 						</thead>
 						<tr>
-							<td th:text="${user.getPersonalTrainer().getName()}"></td>
-							<td th:text="${user.getPersonalTrainer().getSurname()}"></td>
+							<td th:if="${user.getPersonalTrainer() != null}" th:text="${user.getPersonalTrainer().getName()}"></td>
+							<td th:if="${user.getPersonalTrainer() != null}" th:text="${user.getPersonalTrainer().getSurname()}"></td>
 							<!-- <td th:text="${sub.getLifeSubscription()} + ' days'"></td> -->
 						</tr>
 					</table>
 					<br />
+
+					<div class="column" style="flex:50%;">
+						<div>
+							<br />
+							<h1>Subscriptions</h1>
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Type</th>
+										<th scope="col">Price</th>
+										<th scope="col">Life</th>
+										<!-- <th scope="col">Life subscription</th> -->
+									</tr>
+								</thead>
+								<tr th:each="sub : ${user.getSubscriptions()}">
+									<td th:text="${sub.getType()}"></td>
+									<td th:text="${sub.getPrice()}"></td>
+									<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
+								</tr>
+							</table>
+							<br />
+						</div>
+					</div>
                 </div>
 			</div>
 
