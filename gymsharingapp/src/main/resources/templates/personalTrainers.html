@@ -20,6 +20,7 @@
                                     <th>Info</th>
                                     <th>Subscribe to a gym</th>
                                     <th>Edit info</th>
+                                    <th>Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,9 +35,15 @@
                                     <td>
                                         <a th:href="@{/editPersonalTrainer/{id}(id=${personalTrainer.id})}">Edit info</a>
                                     </td>
+                                    <td>
+                                        <a th:href="@{/removePersonalTrainer/{id}(id=${personalTrainer.id})}">Remove</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="row" style="display: flex;">
+                            <a th:href="@{/insertPersonalTrainer}">Inserisci Personal Trainer</a>
+                            </div>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.UserRepository;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,17 @@ public class PersonalController {
   public String insertPersonalTrainer(Model model) {
     model.addAttribute("action", "insert");
     return "insertPersonalTrainer";
+  }
+
+  @RequestMapping(value="/removePersonalTrainer/{id}", method=RequestMethod.GET)
+	public String ptrDelete(@PathVariable Long id) {
+    PersonalTrainer ptr = PTRepository.findOne(id);
+    List<Gym> gyms = ptr.getGyms();
+    for(Gym gym:gyms){
+        gym.getPersonalTrainers().remove(ptr);
+    }
+    PTRepository.delete(id);
+    return "redirect:/personalTrainers/";
   }
 
   @RequestMapping("/editPersonalTrainer/{id}")

@@ -1,7 +1,9 @@
 package com.example.assignment3.Controller;
 
-import com.example.assignment3.Entities.Gym;
+import java.util.List;
 
+import com.example.assignment3.Entities.Gym;
+import com.example.assignment3.Entities.PersonalTrainer;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
@@ -48,6 +50,17 @@ public class GymController {
           Gym gym = Gymrepository.findOne(id);
           model.addAttribute("gym", gym);
           return "insertGym";
+  }
+
+  @RequestMapping(value="/{idGym}/{idPtr}/deletePersonalTrainer", method=RequestMethod.GET)
+	public String deletePersonalTrainer(@PathVariable Long idGym, @PathVariable Long idPtr) {
+      Gym gym = Gymrepository.findOne(idGym);
+      PersonalTrainer ptr = PTRepository.findOne(idPtr);
+      System.out.println(gym.getPersonalTrainers());
+      gym.getPersonalTrainers().remove(ptr);
+      Gymrepository.save(gym);
+      System.out.println(gym.getPersonalTrainers());
+      return "redirect:/gym/" + gym.getId();
   }
 
   @RequestMapping(value="/updateGym/{id}", method=RequestMethod.GET)
