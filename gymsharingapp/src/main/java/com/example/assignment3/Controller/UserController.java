@@ -2,6 +2,7 @@ package com.example.assignment3.Controller;
 
 import com.example.assignment3.Entities.User;
 import com.example.assignment3.Repository.UserRepository;
+import com.example.assignment3.Repository.SubscriptionRepository;
 
 import java.sql.Date;
 
@@ -19,6 +20,9 @@ public class UserController {
 
   @Autowired
   UserRepository repository;
+
+  @Autowired
+  SubscriptionRepository subRepository;
 
 
   @RequestMapping("/insertUser")
@@ -102,5 +106,15 @@ public class UserController {
         model.addAttribute("user", user);
         return "redirect:/users/";
   }
+  @RequestMapping(value="/{idUser}/deleteSubScription", method=RequestMethod.GET)
+	public String subDelete(Model model, @PathVariable Long idUser) {
+        model.addAttribute("user", repository.findOne(idUser));
+        User user = repository.findOne(idUser);
+        user.setSubscription(null);
+        repository.save(user);
+        return "redirect:/user/" + idUser;
+  }
+
+
 
 }

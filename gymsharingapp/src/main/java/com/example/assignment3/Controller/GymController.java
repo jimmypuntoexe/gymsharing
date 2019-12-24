@@ -112,7 +112,8 @@ public class GymController {
   @RequestMapping(value="/gym/{idGym}/{idSub}/{idUser}/buySubscription")
     public String buySubscription(@PathVariable Long idGym, @PathVariable Long idSub, 
     @PathVariable Long idUser, Model model){
-        model.addAttribute("user", userRepository.findOne(idGym));
+        model.addAttribute("gym", Gymrepository.findOne(idGym));
+        model.addAttribute("user", userRepository.findOne(idUser));
         model.addAttribute("sub", subRepository.findOne(idSub));
         User user = userRepository.findOne(idUser);
         Subscription sub = subRepository.findOne(idSub);
@@ -120,7 +121,6 @@ public class GymController {
         return "infoUser";
     }
   
-
   @RequestMapping(value="/infoGymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
 	public String gymListForSubscription(@PathVariable Long idUser, @PathVariable Long idGym, Model model) {
         model.addAttribute("user", userRepository.findOne(idUser));

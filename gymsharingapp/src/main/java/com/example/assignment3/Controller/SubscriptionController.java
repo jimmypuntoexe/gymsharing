@@ -119,16 +119,19 @@ public class SubscriptionController {
         return "redirect:/gym/" + gym.getId();
     }
 
-
-    @RequestMapping(value="/{idUser}/{idSub}/{idGym}/deleteSubScription", method=RequestMethod.GET)
+/*
+    @RequestMapping(value="/{idUsr}/{idSub}/{idGym}/deleteSubScription", method=RequestMethod.GET)
     public String deletePersonalTrainer(@PathVariable Long idUsr, @PathVariable Long idSub,
     @PathVariable Long idGym) {
         Gym gym = gymRepository.findOne(idGym);
         User user = userRepository.findOne(idUsr);
         Subscription sub = subRepository.findOne(idSub);
         user.setSubscription(null);
+        //sub.setPrice(null);
+
         userRepository.save(user);
-        return "redirect:/gym/" + user.getId() + "/" + gym.getId() + "/" + sub.getId() ;
+        return "redirect:/gym/" + user.getId() + "/" + gym.getId() + "/" + sub.getId() + "/buySubscription" ;
   }
+  */
 
 }

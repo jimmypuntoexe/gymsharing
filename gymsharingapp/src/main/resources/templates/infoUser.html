@@ -128,7 +128,7 @@
 									<td th:text="${sub.getPrice()}"></td>
 									<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
 									<td>
-										<a th:href="@{/{idUser}/{idSub}/{idGym}/deleteSubScription(idUser=${user.id}, idSub=${sub.getId()}, idGym=${gym.id})}" method="get">remove</a>
+										<a th:href="@{/{idUser}/deleteSubScription(idUser=${user.id})}" method="get">remove</a>
 									</td>
 								</tr>
 							</table>
