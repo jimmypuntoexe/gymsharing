@@ -87,6 +87,8 @@ public class Assignment3Application implements CommandLineRunner{
 
 			g1.setSubscription(Arrays.asList(annualSub, monthSub, trialSub));
 
+			g1.setAffiliateGyms(Arrays.asList(g2));
+
 			p1.setGyms(Arrays.asList(g1, g2));
 			p2.setGyms(Arrays.asList(g1));
 
@@ -111,41 +113,6 @@ public class Assignment3Application implements CommandLineRunner{
 
 			ptRepository.save(p1);
 			ptRepository.save(p2);
-
-
-			
-			// //Set relationship user-personaltrainer
-			// user.setPersonalTrainer(pt);
-			// user2.setPersonalTrainer(pt);
-			// user3.setPersonalTrainer(pt2);
-			// user.setSubscription(annualSub);
-			// user2.setSubscription(monthSub);
-			// pt.getUsers().add(user);
-			// pt.getUsers().add(user2);
-			// pt2.getUsers().add(user3);
-
-			// //Set relationship personaltrainer-gym
-			// gym.getPersonalTrainers().add(pt);
-			// gym.getPersonalTrainers().add(pt2);
-			// gym2.getPersonalTrainers().add(pt);
-			// pt.getGyms().add(gym);
-			// pt.getGyms().add(gym2);
-			// pt2.getGyms().add(gym);
-
-			// //Set relationship gym-subscriptions
-			// gym.getSubscriptions().add(annualSub);
-			// gym.getSubscriptions().add(monthSub);
-			// gym.getSubscriptions().add(trialSub);
-
-			//Update objects
-
-			// userRepository.save(user);
-			// userRepository.save(user2);	
-			// userRepository.save(user3);		
-			// // ptRepository.save(pt);	
-			// // ptRepository.save(pt2);
-			// gymRepository.save(gym);
-			// gymRepository.save(gym2);
 
 
 		}
