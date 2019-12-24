@@ -148,4 +148,20 @@ public class GymController {
         return "redirect:/gyms/";
   }
 
+  @RequestMapping(value="/gym/{id}/insertAffiliate", method=RequestMethod.GET)
+  public String affiliate(@PathVariable Long id, Model model){
+    model.addAttribute("gyms", Gymrepository.findAll());
+    model.addAttribute("gym2", Gymrepository.findOne(id));
+    return "affiliateGyms";
+  }
+
+  @RequestMapping(value="/addAffiliate/{idGym}/{idGymAffiliate}", method=RequestMethod.GET)
+  public String addAffiliate(@PathVariable Long idGym, @PathVariable Long idGymAffiliate, Model model){
+    Gym gym1 = Gymrepository.findOne(idGym);
+    Gym gym2 = Gymrepository.findOne(idGymAffiliate);
+    gym2.getAffiliateGyms().add(gym1);
+    Gymrepository.save(gym1);
+    return "redirect:/gyms/";
+  }
+
 }

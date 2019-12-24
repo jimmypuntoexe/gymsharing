@@ -25,11 +25,8 @@ public class Gym {
 	private String email;
 	private String phoneNumber;
 
-	// @ManyToOne
-	// //da capire cos'è referencedColumnName
-	// @JoinColumn(referencedColumnName = "id")
-	// @JsonBackReference
-	// private List<Gym> affiliateGym;
+	@ManyToMany
+	private List<Gym> affiliateGyms;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<PersonalTrainer> personalTrainers;
@@ -129,12 +126,12 @@ public class Gym {
 		this.personalTrainers = pt;
 	}
 
-	// public List<Gym> getAffialiateGym() {
-	// 	return affiliateGym;
-	// }
+	public List<Gym> getAffiliateGyms() {
+		return affiliateGyms;
+	}
 
-	// public void setAffialiteGym(List<Gym> affiliateGym) {
-	// 	this.affiliateGym = affiliateGym;
-	// }
+	public void setAffiliateGyms(List<Gym> affiliateGym) {
+		this.affiliateGyms = affiliateGym;
+	}
 
 }
