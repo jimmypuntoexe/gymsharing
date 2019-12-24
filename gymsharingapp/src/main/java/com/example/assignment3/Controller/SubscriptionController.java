@@ -5,7 +5,6 @@ import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.MonthSubscription;
 import com.example.assignment3.Entities.Subscription;
 import com.example.assignment3.Entities.TrialSubscription;
-import com.example.assignment3.Entities.User;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
 import com.example.assignment3.Repository.UserRepository;

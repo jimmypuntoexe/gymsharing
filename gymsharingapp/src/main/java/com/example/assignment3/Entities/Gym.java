@@ -121,12 +121,12 @@ public class Gym {
 		return personalTrainers;
 	}
 
-	public void setSubscription(Subscription subscription) {
-		this.subscriptions.add(subscription);
+	public void setSubscription(List<Subscription> subscription) {
+		this.subscriptions = subscription;
 	}
 
-	public void setPersonalTrainers(PersonalTrainer pt) {
-		this.personalTrainers.add(pt);
+	public void setPersonalTrainers(List<PersonalTrainer> pt) {
+		this.personalTrainers = pt;
 	}
 
 	// public List<Gym> getAffialiateGym() {
