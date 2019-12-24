@@ -61,12 +61,16 @@ public class PersonalController {
 	public String ptrDelete(@PathVariable Long id) {
     PersonalTrainer ptr = PTRepository.findOne(id);
     List<Gym> gyms = ptr.getGyms();
+    List<User> users = ptr.getUsers();
     for(Gym gym:gyms){
         gym.getPersonalTrainers().remove(ptr);
     }
+    for(User user : users){
+      user.setPersonalTrainer(null);
+    }
     PTRepository.delete(id);
     return "redirect:/personalTrainers/";
-  }
+    }
 
   @RequestMapping("/editPersonalTrainer/{id}")
   public String editPersonalTrainer(@PathVariable Long id, Model model) {
