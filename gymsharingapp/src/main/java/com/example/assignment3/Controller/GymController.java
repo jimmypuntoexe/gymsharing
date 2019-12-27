@@ -34,7 +34,8 @@ public class GymController {
   UserRepository userRepository;
 
   @RequestMapping("/insertGym")
-  public String insertGym() {
+  public String insertGym(Model model) {
+    model.addAttribute("action", "insert");
     return "insertGym";
   }
 
@@ -49,6 +50,7 @@ public class GymController {
   public String updateUser( @PathVariable Long id, Model model) {
           Gym gym = Gymrepository.findOne(id);
           model.addAttribute("gym", gym);
+          model.addAttribute("action", "edit");
           return "insertGym";
   }
 

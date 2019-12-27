@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 </head>
 <body>
-<div class="container" th:if="${#httpServletRequest.requestURI == '/insertGym'}">
+<div class="container" th:if="${action == 'insert'}">
     <h1>Inserisci Palestra</h1>
     <form class="form-horizontal" th:action="@{/insertGym}" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -45,7 +45,7 @@
         </span>
     </form>
 </div>
-<div class="container" th:unless="${#httpServletRequest.requestURI == '/insertGym'}">
+<div class="container" th:if="${action == 'edit'}">
     <div class="page-header" id="banner">
       <div class="row" style="display: flex;">
           <div class="column" style="flex:50%;"> 
