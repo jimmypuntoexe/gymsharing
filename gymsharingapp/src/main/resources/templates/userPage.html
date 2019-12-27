@@ -14,10 +14,21 @@
 			<br></br>
 		</div>
 		<a th:href="@{/users}">Mostra Utenti</a>
-        </div>
 		<div>
 			<br></br>
 		</div>
+		<form class="form-horizontal" th:action="@{/searchUser}" method="get" enctype="multipart/form-data">
+			<div class="form-group">
+				<label class="row-lg-2 control-label">Cerca Utenti</label>
+				<div class="col-lg-12">
+					<input type="text" class="form-control" name="name"/>
+				</div>
+			</div>
+			<span>
+				<button type="submit" class="btn btn-primary">Cerca utente</button>
+			</span>
+		</form>
+	</div>
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

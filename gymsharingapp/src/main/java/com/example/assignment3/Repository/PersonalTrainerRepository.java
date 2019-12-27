@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PersonalTrainerRepository extends CrudRepository<PersonalTrainer, Long> {
     public PersonalTrainer findById(Long id);
-
+    public PersonalTrainer findByName(String name);
 }

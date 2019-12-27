@@ -163,4 +163,10 @@ public class PersonalController {
       return "redirect:/personalTrainers";
     }
 
+    @RequestMapping(value="/searchPersonalT", method=RequestMethod.GET)
+    public String userSearch(@RequestParam String name, Model model) {
+          model.addAttribute("personalTrainers", PTRepository.findByName(name));
+          return "personalTrainers";
+    }
+
 }

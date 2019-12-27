@@ -120,6 +120,12 @@ public class GymController {
         user.setSubscription(sub);
         return "infoUser";
     }
+
+    @RequestMapping(value="/searchGym", method=RequestMethod.GET)
+    public String gymSearch(@RequestParam String name, Model model) {
+          model.addAttribute("gyms", Gymrepository.findByName(name));
+          return "gyms";
+    }
   
   @RequestMapping(value="/infoGymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
 	public String gymListForSubscription(@PathVariable Long idUser, @PathVariable Long idGym, Model model) {

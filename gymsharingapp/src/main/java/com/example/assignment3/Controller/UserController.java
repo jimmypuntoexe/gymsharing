@@ -115,6 +115,12 @@ public class UserController {
         return "redirect:/user/" + idUser;
   }
 
+  @RequestMapping(value="/searchUser", method=RequestMethod.GET)
+    public String userSearch(@RequestParam String name, Model model) {
+          model.addAttribute("users", repository.findByName(name));
+          return "users";
+    }
+
 
 
 }
