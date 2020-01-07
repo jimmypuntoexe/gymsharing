@@ -70,7 +70,6 @@
 								<th scope="col">Price</th>
 								<th scope="col">Life subscription</th>
 								<th scope="col">Remove</th>
-								<th scope="col">Edit</th>
 							</tr>
 						</thead>
 						<tr th:each="sub : ${gym.getSubscriptions()}">
@@ -78,10 +77,7 @@
 							<td th:text="${sub.getPrice()}"></td>
 							<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
 							<td>
-								<a th:href="@{/gym/{idGym}/{idSub}/deleteSubscription(idGym=${gym.id}, idSub=${sub.id})}" method="post">Remove subscriptions</a>
-							</td>
-							<td>
-								<a th:href="@{/gym/{idGym}/{idSub}/editSubscriptions(idGym=${gym.id}, idSub=${sub.id})}" method="post">Edit subscriptions</a>
+								<a th:href="@{/gym/{idGym}/{idSub}/{idUser}/buySubscription(idGym=${gym.id}, idSub=${sub.id}, idUser=${user.id})}" method="post">Buy</a>
 							</td>
 						</tr>
 					</table>
@@ -93,17 +89,13 @@
 								<th scope="col">Name</th>
 								<th scope="col">Level</th>
 								<th scope="col">Patent</th>
-								<th scope="col">Remove</th>
-
+								<th scope="col">Contact</th>								
 							</tr>
 						</thead>
 						<tr th:each="personalTrainer : ${gym.getPersonalTrainers()}">
 							<td th:text="${personalTrainer.getName()}"></td>
 							<td th:text="${personalTrainer.getLevel()}"></td>
 							<td th:text="${personalTrainer.getPatent()}"></td>
-							<td>
-								<a th:href="@{/{idGym}/{idPtr}/deletePersonalTrainer(idGym=${gym.id}, idPtr=${personalTrainer.id})}" method="get">remove</a>
-							</td>
 						</tr>
 					</table>
 				</div>	
@@ -111,9 +103,6 @@
 		</div>
 		<div class="row" style="display: flex;">
 			<a th:href="@{/gyms}">Torna alle palestre</a>
-		</div>
-		<div class="row" style="display: flex; text-align: left;">
-			<a th:href="@{/}">Home</a>
 		</div>	
 	  </div>
 	</div>

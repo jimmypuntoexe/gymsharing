@@ -1,13 +1,11 @@
 package com.example.assignment3.Entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -51,6 +49,9 @@ public class User {
         this.city = city;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        // this.subscription = new Subscription();
+        // this.personalTrainer = new PersonalTrainer();
+
 	}
 
 	public long getId() {
@@ -140,6 +141,21 @@ public class User {
 
     public void setAge(String age) {
         this.age = age;
+    }
+    public Subscription getSubscriptions() {
+		return subscription;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+    }
+
+	public PersonalTrainer getPersonalTrainer() {
+		return personalTrainer;
+    }
+    
+    public void setPersonalTrainer(PersonalTrainer personalTrainer) {
+        this.personalTrainer = personalTrainer;
     }
 
 }

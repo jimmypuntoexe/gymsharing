@@ -1,31 +1,32 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>User Page</title>
+	<title>Personal trainer Page</title>
 	<link rel="stylesheet" href="/bootstrap.min.css" media="screen"/>
 </head>
 <body>
-	<h1 style="text-align: center;">User Page</h1>
+	<h1 style="text-align: center;">Personal trainer Page</h1>
 	<div><br></br></div>
 	<div class="d-flex justify-content-center">
 		<div>
-		<a th:href="@{/insertUser}">Inserisci Utente</a>
+		<a th:href="@{/insertPersonalTrainer}">Inserisci Personal trainer</a>
 		<div>
 			<br></br>
 		</div>
-		<a th:href="@{/users}">Mostra Utenti</a>
+		<a th:href="@{/personalTrainers}">Mostra personal trainers</a>
 		<div>
 			<br></br>
 		</div>
-		<form class="form-horizontal" th:action="@{/searchUser}" method="get" enctype="multipart/form-data">
+
+		<form class="form-horizontal" th:action="@{/searchPersonalT}" method="get" enctype="multipart/form-data">
 			<div class="form-group">
-				<label class="row-lg-2 control-label">Cerca Utenti</label>
+				<label class="row-lg-2 control-label">Cerca Personal Trainer</label>
 				<div class="col-lg-12">
 					<input type="text" class="form-control" name="name"/>
 				</div>
 			</div>
 			<span>
-				<button type="submit" class="btn btn-primary">Cerca utente</button>
+				<button type="submit" class="btn btn-primary">Cerca personal trainer</button>
 			</span>
 		</form>
 	</div>

@@ -19,5 +19,10 @@ public class BasicController {
     public String userPage() {
       return "userPage";
     }
+
+    @RequestMapping("/personalTrainerPage")
+    public String personalTrainerPage() {
+      return "personalTrainerPage";
+    }
 }
 

@@ -4,18 +4,18 @@ package com.example.assignment3.Entities;
 import javax.persistence.Entity;
 
 @Entity
-public class MonthSubscription extends Subscription{
-    private static final int lifeSubscription = 30;
-    private static final String type = "Month";
+public class TrialSubscription extends Subscription{
+    private static final int lifeSubscription = 1;
+    private static final String type = "Trial";
     private String price;
 
-    public MonthSubscription(){
+    public TrialSubscription(){
         super();
     }
 
-    public MonthSubscription(long id, String monthPrice) {
+    public TrialSubscription(long id, String trialPrice) {
         super(id);
-        this.price = monthPrice;
+        this.price = trialPrice;
     }
 
     public static int getLifeSubscription() {

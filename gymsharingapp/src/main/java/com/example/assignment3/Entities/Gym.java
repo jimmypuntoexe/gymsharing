@@ -1,18 +1,16 @@
 package com.example.assignment3.Entities;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Gym {
@@ -27,17 +25,14 @@ public class Gym {
 	private String email;
 	private String phoneNumber;
 
-	// @ManyToOne
-	// //da capire cos'è referencedColumnName
-	// @JoinColumn(referencedColumnName = "id")
-	// @JsonBackReference
-	// private List<Gym> affiliateGym;
-
 	@ManyToMany
-	private Set<PersonalTrainer> personalTrainer;
+	private List<Gym> affiliateGyms;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<PersonalTrainer> personalTrainers;
 
 	@OneToMany
-	private Set<Subscription> subscription;
+	private List<Subscription> subscriptions;
 
 	public Gym() {
 		super();
@@ -45,15 +40,18 @@ public class Gym {
 	}
 
 	public Gym(String name, String address, String civicNumber, String city,
-			String email, String phoneNumber, List<Gym> affiliateGym) {
+			String email, String phoneNumber) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.civicNumber = civicNumber;
 		this.city = city;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
+		this.personalTrainers = new ArrayList<PersonalTrainer>();
+		this.subscriptions = new ArrayList<Subscription>();
 	}
+
 
 	
 	public long getId() {
@@ -112,12 +110,28 @@ public class Gym {
 		this.phoneNumber = phoneNumber;
 	}
 
-	// public List<Gym> getAffialiateGym() {
-	// 	return affiliateGym;
-	// }
+	public List<Subscription> getSubscriptions() {
+		return subscriptions;
+	}
 
-	// public void setAffialiteGym(List<Gym> affiliateGym) {
-	// 	this.affiliateGym = affiliateGym;
-	// }
+	public List<PersonalTrainer> getPersonalTrainers() {
+		return personalTrainers;
+	}
+
+	public void setSubscription(List<Subscription> subscription) {
+		this.subscriptions = subscription;
+	}
+
+	public void setPersonalTrainers(List<PersonalTrainer> pt) {
+		this.personalTrainers = pt;
+	}
+
+	public List<Gym> getAffiliateGyms() {
+		return affiliateGyms;
+	}
+
+	public void setAffiliateGyms(List<Gym> affiliateGym) {
+		this.affiliateGyms = affiliateGym;
+	}
 
 }

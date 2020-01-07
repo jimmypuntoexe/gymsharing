@@ -15,8 +15,17 @@
 			<div><br/></div>
 			<a th:href="@{/gyms}">Mostra Palestre</a>
 			<div><br/></div>
-			<a>Inserisci abbonamento</a>
-			<div><br/></div>
+			<form class="form-horizontal" th:action="@{/searchGym}" method="get" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="row-lg-2 control-label">Cerca Palestre</label>
+					<div class="col-lg-12">
+						<input type="text" class="form-control" name="name"/>
+					</div>
+				</div>
+				<span>
+					<button type="submit" class="btn btn-primary">Cerca palestra</button>
+				</span>
+			</form>
 		</div>
 	</div>
 </body>

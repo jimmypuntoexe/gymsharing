@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Gyms</title> 
+    <title>Affiliate Gyms</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
@@ -18,12 +18,7 @@
                                 <tr>
                                     <th>Basic Info</th>
                                     <th>Info</th>
-                                    <th>Subscription</th>
-                                    <th>Add subscription</th>
-                                    <th>Add affiliate gyms</th>
-                                    <th>Affiliate gyms</th>
-                                    <th>Remove gym</th>
-                                    <th>Edit gym</th>
+                                    <th>Affiliate</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,29 +28,8 @@
                                         <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
                                     </td>
                                     <td>
-                                        <select>
-                                            <option th:each="sub : ${gym.subscriptions}" th:text="${sub.getType() + ' ' + sub.getPrice()}"></option>
-                                        </select>
+                                        <a th:href="@{/addAffiliate/{idGym}/{idGymAffiliate}(idGym=${gym.id}, idGymAffiliate=${gym2.id})}">Add this gym to affiliate</a>
                                     </td>
-                                    <td>
-                                        <a th:href="@{/gym/{id}/insertSubscriptions(id=${gym.id})}" method="post">Add subscription</a>
-                                    </td>
-                                    <td>
-                                        <a th:href="@{/gym/{id}/insertAffiliate(id=${gym.id})}" method="post">Add affiliate gym</a>
-                                    </td>
-                                    <td>
-                                        <select>
-                                            <option th:each="aff : ${gym.getAffiliateGyms()}" th:text="${aff.getName()}"></option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <a th:href="@{/deleteGym/{id}(id=${gym.id})}" method="post">Remove gym</a>
-                                    </td>
-                                    <td>
-                                        <a th:href="@{/modifyGym/{id}(id=${gym.id})}" method="post">Edit gym</a>
-                                    </td>
-
-                        
                                 </tr>
                             </tbody>
                         </table>
