@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="container" th:if="${action == 'insert'}">
+    <h1>Inserisci personal trainer</h1>
     <form class="form-horizontal" th:action="@{/insertPersonalTrainer}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="col-lg-2 control-label">Username</label>
@@ -77,6 +78,7 @@
 </div>
 
 <div class="container" th:if="${action == 'edit'}">
+    <h1>Modifica personal trainer</h1>
     <div class="page-header" id="banner">
       <div class="row">
         <div class="col-lg-8 col-md-7 col-sm-6">

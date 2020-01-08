@@ -35,8 +35,9 @@ public class BasicController {
     }
 
     @RequestMapping(value="/gymAccount/{idGym}", method=RequestMethod.GET)
-    public String homeGym(@PathVariable Long idGym) {
-      return "index";
+    public String homeGym(@PathVariable Long idGym, Model model) {
+      model.addAttribute("gym", userRepository.findOne(idGym));
+      return "gymPage";
     }
 
     @RequestMapping(value="/personalTrainerAccount/{idPt}", method=RequestMethod.GET)

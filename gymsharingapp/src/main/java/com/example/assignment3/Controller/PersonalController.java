@@ -76,6 +76,19 @@ public class PersonalController {
     PTRepository.delete(id);
     return "redirect:/";
     }
+  
+  @RequestMapping(value="/removePT/{idUser}/{idPt}", method=RequestMethod.GET)
+  public String ptDeleteFromUser(@PathVariable Long idPt, @PathVariable Long idUser) {
+    PersonalTrainer ptr = PTRepository.findOne(idPt);
+    User user = userRepository.findOne(idUser);
+    user.setPersonalTrainer(null);
+    ptr.getUsers().remove(user);
+
+    userRepository.save(user);
+    PTRepository.save(ptr);
+
+    return "redirect:/userAccount/{idUser}";
+    }
 
   @RequestMapping("/editPersonalTrainer/{id}")
   public String editPersonalTrainer(@PathVariable Long id, Model model) {
@@ -115,9 +128,12 @@ public class PersonalController {
 	public String PersonalTrainerAdd(
             @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
             @RequestParam String CF, @RequestParam String patent, @RequestParam String level, @RequestParam String email, @RequestParam String phoneNumber, 
+            @RequestParam String username,  @RequestParam String password,
             Model model) {
 
         PersonalTrainer newPersonalTrainer = new PersonalTrainer();
+        newPersonalTrainer.setUsername(username);
+        newPersonalTrainer.setPassword(password);
         newPersonalTrainer.setName(name);
         newPersonalTrainer.setSurname(surname);
         newPersonalTrainer.setBirthDate(birthDate);
@@ -130,7 +146,7 @@ public class PersonalController {
         
         PTRepository.save(newPersonalTrainer);
 
-        return "redirect:/personalTrainers/";
+        return "redirect:/";
   }
 
 
