@@ -1,10 +1,10 @@
 package com.example.assignment3.Controller;
 
-import com.example.assignment3.Entities.User;
-import com.example.assignment3.Repository.UserRepository;
-import com.example.assignment3.Repository.SubscriptionRepository;
+import com.example.assignment3.Entities.*;
+import com.example.assignment3.Repository.*;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,15 +31,21 @@ public class UserController {
     return "insertUser";
   }
 
-  @RequestMapping(value="/deleteUser/{id}", method=RequestMethod.GET)
-	public String userDelete(@PathVariable Long id) {
-    repository.delete(id);
-       return "redirect:/users/";
+  @RequestMapping(value="/deleteUser/{idUser}", method=RequestMethod.GET)
+	public String userDelete(@PathVariable Long idUser) {
+
+    User user = repository.findOne(idUser);
+    PersonalTrainer pt = user.getPersonalTrainer();
+
+    pt.getUsers().remove(user);
+
+    repository.delete(idUser);
+       return "redirect:/";
   }
 
-  @RequestMapping("/user/{id}")
- public String user(@PathVariable Long id, Model model) {
-        model.addAttribute("user", repository.findOne(id));
+  @RequestMapping("/userAccount/{idUser}/myProfile")
+ public String user(@PathVariable Long idUser, Model model) {
+        model.addAttribute("user", repository.findOne(idUser));
         return "infoUser";
  }
  
@@ -112,7 +118,7 @@ public class UserController {
         User user = repository.findOne(idUser);
         user.setSubscription(null);
         repository.save(user);
-        return "redirect:/user/" + idUser;
+        return "redirect:/userAccount/{idUser}/myProfile";
   }
 
   @RequestMapping(value="/searchUser", method=RequestMethod.GET)

@@ -1,13 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>prova</title>
+<title>Insert User</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 </head>
 <body>
 <div class="container" th:if="${action == 'insert'}">
     <form class="form-horizontal" th:action="@{/insertUser}" method="post" enctype="multipart/form-data">
         <div class="form-group">
+            <label class="col-lg-2 control-label">Username</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" name="username"/>
+            </div>
             <label class="col-lg-2 control-label">Name</label>
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="name"/>
@@ -15,6 +19,13 @@
             <label class="col-lg-2 control-label">Surname</label>
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="surname"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Password</label>
+            <div class="col-lg-6">
+                <input type="password" class="form-control" name="password"/>
             </div>
         </div>
 
@@ -102,7 +113,7 @@
                       <div class="form-group">
                           <label class="col-lg-2 control-label">Birth Date</label>
                           <div class="col-lg-6">
-                              <input type="text" class="form-control" 
+                              <input type="date" class="form-control" 
                                   th:value="${user.BirthDate}" name="birthDate"/>
                           </div>
                       </div>

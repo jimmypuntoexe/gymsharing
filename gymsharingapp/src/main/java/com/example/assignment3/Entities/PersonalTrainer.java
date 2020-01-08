@@ -27,6 +27,8 @@ public class PersonalTrainer {
     private String CF;
     private String email;
     private String phoneNumber;
+    private String username;
+    private String password;
 
     @OneToMany
     private List<User> users;
@@ -39,7 +41,7 @@ public class PersonalTrainer {
 	}
 
     public PersonalTrainer(String name, String surname, Date birthDate, String age, String CF, 
-            String patent, String level, String email, String phoneNumber) {
+            String patent, String level, String email, String phoneNumber, String username, String password) {
 		super();
         this.name = name;
         this.surname = surname;
@@ -50,6 +52,8 @@ public class PersonalTrainer {
         this.level = level;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.password = password;
         this.gyms = new ArrayList<Gym>();
         this.users = new ArrayList<User>();
 
@@ -157,6 +161,22 @@ public class PersonalTrainer {
     
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

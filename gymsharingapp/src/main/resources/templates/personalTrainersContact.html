@@ -25,7 +25,7 @@
                                 <tr th:each="personalTrainer : ${personalTrainers}">
                                     <td th:text="${personalTrainer.Name}"></td>
                                     <td>
-                                        <a th:href="@{/personalTrainer/{id}(id=${personalTrainer.id})}">Show more info</a>
+                                        <a th:href="@{/personalTrainerAccount/{idPt}/infoPersonalTrainerForUser(idPt=${personalTrainer.id})}">Show more info</a>
                                     </td>
                                     <td>
                                         <a th:href="@{/contactPt/{idUser}/{idPT} (idUser=${user.id} , idPT=${personalTrainer.id})}" method="post">Contact this personal trainer</a>

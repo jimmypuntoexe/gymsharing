@@ -36,24 +36,24 @@ public class Assignment3Application implements CommandLineRunner{
 		public void run(String... args) throws Exception {
 
 			//create Gyms
-			Gym gym = new Gym("MaxiFit",  "Via fratelli cairoli", "22", "Vimodrone", "maxifit@gmail.com", "3333333333");
-			Gym gym2 = new Gym("Virgin Active",  "Via santa marcellina", "22", "Vimodrone", "virgin_active@gmail.com", "3333333333");
+			Gym gym = new Gym("MaxiFit",  "Via fratelli cairoli", "22", "Vimodrone", "maxifit@gmail.com", "3333333333", "maxipsw");
+			Gym gym2 = new Gym("Virgin Active",  "Via santa marcellina", "22", "Vimodrone", "virgin_active@gmail.com", "3333333333", "virginpsw");
 
 
 			//create Users
 			DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 			Date d1 = df.parse("18-04-1996");
 
-			User user = new User("Andrea", "Carubelli", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333");
-			User user2 = new User("Pippo", "Buado", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333");
-			User user3 = new User("Giovanni", "EGiacomo", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333");
+			User user = new User("Andrea", "Carubelli", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333", "andrea", "andreapsw");
+			User user2 = new User("Pippo", "Buado", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333", "pippo", "pippopsw");
+			User user3 = new User("Giovanni", "EGiacomo", d1, "23", "CRBNDR96D18I577C", "Via fratelli Cairoli", "24", "Vimodrone", "a.carubelli@campus.unimib.it", "3333333333", "giovanni", "giovannipsw");
 
 			//create Personal trainer
 			DateFormat df1 = new SimpleDateFormat("MM-dd-yyyy");
 			Date d2 = df1.parse("28-12-1995");
 
-			PersonalTrainer pt = new PersonalTrainer("Gianmaria", "Balducci", d2, "23", "BLDGMR95T28F205N", "Fit gimmy", "Esperto", "g.balducci1@campus.unimib.it", "123456789");
-			PersonalTrainer pt2 = new PersonalTrainer("Gianni", "Morandi", d2, "23", "BLDGMR95T28F205N", "Fit gianni", "Magico", "g.balducci1@campus.unimib.it", "123456789");
+			PersonalTrainer pt = new PersonalTrainer("Gianmaria", "Balducci", d2, "23", "BLDGMR95T28F205N", "Fit gimmy", "Esperto", "g.balducci1@campus.unimib.it", "123456789", "gimmy", "gimmypsw");
+			PersonalTrainer pt2 = new PersonalTrainer("Gianni", "Morandi", d2, "23", "BLDGMR95T28F205N", "Fit gianni", "Magico", "g.balducci1@campus.unimib.it", "123456789", "gianni", "giannipsw");
 
 			//create subscriptions
 			Subscription annualSub = new AnnualSubscription(gym.getId(), "300");

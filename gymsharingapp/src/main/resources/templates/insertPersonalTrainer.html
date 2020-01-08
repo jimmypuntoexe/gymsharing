@@ -8,6 +8,10 @@
 <div class="container" th:if="${action == 'insert'}">
     <form class="form-horizontal" th:action="@{/insertPersonalTrainer}" method="post" enctype="multipart/form-data">
         <div class="form-group">
+            <label class="col-lg-2 control-label">Username</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" name="username"/>
+            </div>
             <label class="col-lg-2 control-label">Name</label>
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="name"/>
@@ -15,6 +19,13 @@
             <label class="col-lg-2 control-label">Surname</label>
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="surname"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Password</label>
+            <div class="col-lg-6">
+                <input type="password" class="form-control" name="password"/>
             </div>
         </div>
 

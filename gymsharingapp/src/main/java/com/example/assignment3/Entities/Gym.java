@@ -24,6 +24,7 @@ public class Gym {
 	private String city;
 	private String email;
 	private String phoneNumber;
+	private String password;
 
 	@ManyToMany
 	private List<Gym> affiliateGyms;
@@ -40,7 +41,7 @@ public class Gym {
 	}
 
 	public Gym(String name, String address, String civicNumber, String city,
-			String email, String phoneNumber) {
+			String email, String phoneNumber, String password) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -48,6 +49,7 @@ public class Gym {
 		this.city = city;
         this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.password = password;
 		this.personalTrainers = new ArrayList<PersonalTrainer>();
 		this.subscriptions = new ArrayList<Subscription>();
 	}
@@ -132,6 +134,14 @@ public class Gym {
 
 	public void setAffiliateGyms(List<Gym> affiliateGym) {
 		this.affiliateGyms = affiliateGym;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

@@ -9,6 +9,30 @@
 	<div><br></br></div>
 	<div class="d-flex justify-content-center">
 		<div>
+
+			<a th:href="@{/personalTrainerAccount/{idPt}/myProfile(idPt=${personalTrainer.id})}">View my profile</a>
+			<div><br/></div>
+			<a th:href="@{/personalTrainerAccount/{idPt}/gymsForSubscriber(idPt=${personalTrainer.id})}">Subscribe to a gym</a>
+			<div><br/></div>
+
+			<form class="form-horizontal" th:action="@{/searchPersonalT}" method="get" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="row-lg-2 control-label">Cerca Personal Trainer</label>
+					<div class="col-lg-12">
+						<input type="text" class="form-control" name="name"/>
+					</div>
+				</div>
+				<span>
+					<button type="submit" class="btn btn-primary">Cerca personal trainer</button>
+				</span>
+			</form>
+
+		</div>
+
+		<!-- <a th:href="@{/userAccount/{idUser}/personalTrainersContact(idUser=${user.id})}">Contact personal trainer</a>
+		<div><br/></div> -->
+
+		<!-- <div>
 		<a th:href="@{/insertPersonalTrainer}">Inserisci Personal trainer</a>
 		<div>
 			<br></br>
@@ -17,19 +41,7 @@
 		<div>
 			<br></br>
 		</div>
-
-		<form class="form-horizontal" th:action="@{/searchPersonalT}" method="get" enctype="multipart/form-data">
-			<div class="form-group">
-				<label class="row-lg-2 control-label">Cerca Personal Trainer</label>
-				<div class="col-lg-12">
-					<input type="text" class="form-control" name="name"/>
-				</div>
-			</div>
-			<span>
-				<button type="submit" class="btn btn-primary">Cerca personal trainer</button>
-			</span>
-		</form>
-	</div>
+		</div> -->
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

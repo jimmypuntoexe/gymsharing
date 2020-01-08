@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface GymRepository extends CrudRepository<Gym, Long> {
     public Gym findById(Long id);
     public Gym findByName(String name);
+    public Gym findByEmail(String email);
 }

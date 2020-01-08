@@ -89,6 +89,7 @@
 						</div>
 					</fieldset>
 				</form>
+			<a th:href="@{/userAccount/{idUser}/(idUser=${user.id})}" method="get">Home</a>
 			</div>
 			<div class="column" style="flex:50%;">
 				<div>
@@ -135,6 +136,11 @@
 							<br />
 						</div>
 					</div>
+					<a th:href="@{/deleteUser/{idUser}(idUser=${user.id})}" method="get">Remove account</a>
+					<!-- <a th:href="@{/{idUser}/deleteSubScription(idUser=${user.id})}" method="get">Remove account</a> -->
+					<div><br/></div>
+					<a th:href="@{/modifyUser/{id}(id=${user.id})}" method="post">Edit account</a>
+					<!-- <a th:href="@{/{idUser}/deleteSubScription(idUser=${user.id})}" method="get"></a> -->
                 </div>
 			</div>
 

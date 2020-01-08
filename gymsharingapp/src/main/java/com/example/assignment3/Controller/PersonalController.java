@@ -37,19 +37,24 @@ public class PersonalController {
         return "personalTrainers";
   }
 
-  @RequestMapping(value="/personalTrainersContact/{id}", method=RequestMethod.GET)
-	public String personalTrainerListForUserContact(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userRepository.findOne(id));
+  @RequestMapping(value="/userAccount/{idUser}/personalTrainersContact", method=RequestMethod.GET)
+	public String personalTrainerListForUserContact(@PathVariable Long idUser, Model model) {
+        model.addAttribute("user", userRepository.findOne(idUser));
         model.addAttribute("personalTrainers", PTRepository.findAll());
         return "personalTrainersContact";
   }
 
-  @RequestMapping("/personalTrainer/{id}")
-  public String user(@PathVariable Long id, Model model) {
-         model.addAttribute("personalTrainer", PTRepository.findOne(id));
+  @RequestMapping("/personalTrainerAccount/{idPt}/myProfile")
+  public String personalTrainerProfile(@PathVariable Long idPt, Model model) {
+         model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
          return "infoPersonalTrainer";
   }
-
+  
+  @RequestMapping("/personalTrainerAccount/{idPt}/infoPersonalTrainerForUser")
+  public String personalTrainerProfileForUser(@PathVariable Long idPt, Model model) {
+         model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
+         return "infoPersonalTrainerForUser";
+  }
 
   @RequestMapping("/insertPersonalTrainer")
   public String insertPersonalTrainer(Model model) {
@@ -69,7 +74,7 @@ public class PersonalController {
       user.setPersonalTrainer(null);
     }
     PTRepository.delete(id);
-    return "redirect:/personalTrainers/";
+    return "redirect:/";
     }
 
   @RequestMapping("/editPersonalTrainer/{id}")
@@ -143,7 +148,7 @@ public class PersonalController {
       PTRepository.save(pt);
       gymRepository.save(gym);
 
-      return "redirect:/personalTrainers";
+      return "redirect:/personalTrainerAccount/{idPT}/myProfile";
     }
 
     @RequestMapping("/contactPt/{idUser}/{idPT}")

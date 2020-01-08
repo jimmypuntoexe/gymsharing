@@ -25,7 +25,7 @@
                                 <tr th:each="gym : ${gyms}">
                                     <td th:text="${gym.Name}"></td>
                                     <td>
-                                        <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
+                                        <a th:href="@{/infoGymForPersonalTrainers/{id}(id=${gym.id})}">Show more info</a>
                                     </td>
                                     <td>
                                         <a th:href="@{/subscribePersonalTrainer/{idGym}/{idPT} (idGym=${gym.id} , idPT=${personalTrainer.id})}" method="post">Subscribe to this gym</a>

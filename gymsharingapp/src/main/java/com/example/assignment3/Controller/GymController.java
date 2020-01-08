@@ -97,20 +97,37 @@ public class GymController {
         return "gyms";
   }
   
-  @RequestMapping(value="/gymsForSubscriber/{id}", method=RequestMethod.GET)
-	public String gymList(@PathVariable Long id, Model model) {
-        model.addAttribute("personalTrainer", PTRepository.findOne(id));
+  @RequestMapping(value="/personalTrainerAccount/{idPt}/gymsForSubscriber", method=RequestMethod.GET)
+	public String gymListForPt(@PathVariable Long idPt, Model model) {
+        model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
         model.addAttribute("gyms", Gymrepository.findAll());
         return "gymsForSubscriber";
   }
 
-  
-  @RequestMapping(value="/gymsForSubscription/{id}", method=RequestMethod.GET)
-	public String gymListForSubscription(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userRepository.findOne(id));
+  @RequestMapping(value="/infoGymForPersonalTrainers/{idGym}", method=RequestMethod.GET)
+	public String infoGymForPersonalTrainer(@PathVariable Long idGym, Model model) {
+        model.addAttribute("gym", Gymrepository.findOne(idGym));
+        model.addAttribute("sub", subRepository.findAll());
+        // model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
+        // model.addAttribute("gyms", Gymrepository.findAll());
+        return "infoGymForPersonalTrainers";
+  }
+
+  @RequestMapping(value="/userAccount/{idUser}/gymsForSubscription", method=RequestMethod.GET)
+	public String gymListForSubscription(@PathVariable Long idUser, Model model) {
+        model.addAttribute("user", userRepository.findOne(idUser));
         model.addAttribute("gyms", Gymrepository.findAll());
         return "gymsForSubscription";
   }
+
+  
+  // @RequestMapping(value="/gymsForSubscription/{id}", method=RequestMethod.GET)
+	// public String gymListForSubscription(@PathVariable Long id, Model model) {
+  //       model.addAttribute("user", userRepository.findOne(id));
+  //       model.addAttribute("gyms", Gymrepository.findAll());
+  //       return "gymsForSubscription";
+  // }
+
   @RequestMapping(value="/gym/{idGym}/{idSub}/{idUser}/buySubscription")
     public String buySubscription(@PathVariable Long idGym, @PathVariable Long idSub, 
     @PathVariable Long idUser, Model model){
