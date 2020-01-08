@@ -165,7 +165,7 @@ public class PersonalController {
       PTRepository.save(pt);
       userRepository.save(user);
 
-      return "redirect:/personalTrainers";
+      return "redirect:/userAccount/{idUser}";
     }
 
     @RequestMapping(value="/searchPersonalT", method=RequestMethod.GET)
