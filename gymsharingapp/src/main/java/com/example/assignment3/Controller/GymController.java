@@ -85,12 +85,20 @@ public class GymController {
 
         //da sistemare qui sotto
         model.addAttribute("gym", gym);
-        return "redirect:/gyms/";
+        return "redirect:/gymAccount/{id}";
   }
 
+  @RequestMapping("/gymAccount/{idGym}/myProfile")
+	public String gymProfile(@PathVariable Long idGym, Model model) {
+        model.addAttribute("action", "my");
+        model.addAttribute("gym", Gymrepository.findOne(idGym));
+        model.addAttribute("sub", subRepository.findAll());
+        return "infoGym";
+	}
   
   @RequestMapping("/gym/{id}")
 	public String gym(@PathVariable Long id, Model model) {
+        model.addAttribute("action", "affiliate");
         model.addAttribute("gym", Gymrepository.findOne(id));
         model.addAttribute("sub", subRepository.findAll());
         return "infoGym";
@@ -178,8 +186,10 @@ public class GymController {
 	public String GymAdd(
             @RequestParam String name, @RequestParam String address, @RequestParam String civicNumber,
             @RequestParam String city, @RequestParam String email, @RequestParam String phoneNumber,
+            @RequestParam String password,
             Model model) {
         Gym newGym = new Gym();
+        newGym.setPassword(password);
         newGym.setName(name);
         newGym.setAddress(address);
         newGym.setCivicNumber(civicNumber);
@@ -190,10 +200,10 @@ public class GymController {
 
         //da sistemare qui sotto
         model.addAttribute("gyms", newGym);
-        return "redirect:/gyms/";
+        return "redirect:/";
   }
 
-  @RequestMapping(value="/gym/{id}/insertAffiliate", method=RequestMethod.GET)
+  @RequestMapping(value="/gymAccount/{id}/insertAffiliate", method=RequestMethod.GET)
   public String affiliate(@PathVariable Long id, Model model){
     model.addAttribute("gyms", Gymrepository.findAll());
     model.addAttribute("gym2", Gymrepository.findOne(id));

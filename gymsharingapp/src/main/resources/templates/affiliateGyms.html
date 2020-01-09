@@ -32,12 +32,9 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
-                        <div class="row" style="display: flex;">
-                            <a th:href="@{/insertGym}">Inserisci palestra</a>
-                        </div>	
+                        </table>	
                         <div class="row" style="display: flex; text-align: left;">
-                            <a th:href="@{/}">Home</a>
+                            <a th:href="@{/gymAccount/{idGym}(idGym=${gym2.id})}" method="get">Home</a>
                         </div>	
                     </div>
                 </div>

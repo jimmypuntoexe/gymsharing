@@ -100,13 +100,15 @@
 							<tr>
 								<th scope="col">Name</th>
 								<th scope="col">Surname</th>
-								<!-- <th scope="col">Life subscription</th> -->
+								<th scope="col">Remove</th>
 							</tr>
 						</thead>
 						<tr>
 							<td th:if="${user.getPersonalTrainer() != null}" th:text="${user.getPersonalTrainer().getName()}"></td>
 							<td th:if="${user.getPersonalTrainer() != null}" th:text="${user.getPersonalTrainer().getSurname()}"></td>
-							<!-- <td th:text="${sub.getLifeSubscription()} + ' days'"></td> -->
+							<td th:if="${user.getPersonalTrainer() != null}">
+								<a th:href="@{/removePT/{idUser}/{idPt}(idUser = ${user.id}, idPt=${user.getPersonalTrainer().getId()})}" method="get">remove</a>
+							</td>
 						</tr>
 					</table>
 					<br />
@@ -121,7 +123,7 @@
 										<th scope="col">Type</th>
 										<th scope="col">Price</th>
 										<th scope="col">Life</th>
-										<!-- <th scope="col">Life subscription</th> -->
+										<th scope="col">Remove</th>
 									</tr>
 								</thead>
 								<tr th:each="sub : ${user.getSubscriptions()}">

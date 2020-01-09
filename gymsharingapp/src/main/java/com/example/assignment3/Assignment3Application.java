@@ -103,6 +103,9 @@ public class Assignment3Application implements CommandLineRunner{
 			u1.setSubscription(annualSub);
 			u2.setSubscription(monthSub);
 
+			annualSub.setUsers(Arrays.asList(u1));
+			monthSub.setUsers(Arrays.asList(u2));
+
 			//save object
 			userRepository.save(u1);
 			userRepository.save(u2);
@@ -114,6 +117,8 @@ public class Assignment3Application implements CommandLineRunner{
 			ptRepository.save(p1);
 			ptRepository.save(p2);
 
+			subRepository.save(annualSub);
+			subRepository.save(monthSub);
 
 		}
 

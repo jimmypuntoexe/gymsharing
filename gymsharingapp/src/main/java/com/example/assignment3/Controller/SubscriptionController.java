@@ -1,10 +1,13 @@
 package com.example.assignment3.Controller;
 
+import java.util.List;
+
 import com.example.assignment3.Entities.AnnualSubscription;
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.MonthSubscription;
 import com.example.assignment3.Entities.Subscription;
 import com.example.assignment3.Entities.TrialSubscription;
+import com.example.assignment3.Entities.User;
 import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.SubscriptionRepository;
 import com.example.assignment3.Repository.UserRepository;
@@ -29,13 +32,19 @@ public class SubscriptionController {
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping("/gym/{id}/insertSubscriptions")
+    @RequestMapping("/gymAccount/{id}/insertSubscriptions")
     public String subscriptionsGym(@PathVariable Long id, Model model) {
         model.addAttribute("action", "insert");
         model.addAttribute("sub", subRepository.findOne(id));
         model.addAttribute("gym", gymRepository.findOne(id));
         return "insertSubscriptions";
     }
+
+    // @RequestMapping(value="/gymAccount/{idGym}/insertSubscriptions", method=RequestMethod.GET)
+    // public String addSub(@PathVariable Long idGym, Model model){
+    //     model.addAttribute("gym", gymRepository.findOne(idGym));
+    //     return "insertSubscriptions";
+    // }
 
 
     @RequestMapping(value="/gym/{id}/insertSubscriptions", method=RequestMethod.POST)
@@ -68,11 +77,20 @@ public class SubscriptionController {
 
     @RequestMapping(value="/gym/{idGym}/{idSub}/deleteSubscription", method=RequestMethod.GET)
 	public String subDelete(@PathVariable Long idGym, @PathVariable Long idSub) {
+
         Gym gym = gymRepository.findOne(idGym);
         Subscription sub = subRepository.findOne(idSub);
+        List<User> users = sub.getUsers();
+
         gym.getSubscriptions().remove(sub);
-        subRepository.delete(sub.getId());
-        return "redirect:/gym/" + gym.getId();
+
+        for(User user : users){
+            user.setSubscription(null);
+            System.out.println(user.getEmail());
+        }
+        subRepository.delete(idSub);
+
+        return "redirect:/gymAccount/{idGym}/myProfile";
     }
 
     @RequestMapping("/gym/{idGym}/{idSub}/editSubscriptions")
@@ -115,7 +133,7 @@ public class SubscriptionController {
         model.addAttribute("gym", gym);
         model.addAttribute("sub", subRepository.findOne(idSub));
 
-        return "redirect:/gym/" + gym.getId();
+        return "redirect:/gymAccount/{idGym}/myProfile";
     }
 
 /*

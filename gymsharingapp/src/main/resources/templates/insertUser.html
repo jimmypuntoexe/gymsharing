@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="container" th:if="${action == 'insert'}">
+    <h1>Inserisci utente</h1>
     <form class="form-horizontal" th:action="@{/insertUser}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="col-lg-2 control-label">Username</label>
@@ -81,6 +82,7 @@
 </div>
 
 <div class="container" th:if="${action == 'update'}">
+    <h1>Modifica utente</h1>
         <div class="page-header" id="banner">
           <div class="row">
             <div class="col-lg-8 col-md-7 col-sm-6">
@@ -167,6 +169,9 @@
             </div>
           </div>
         </div>
+        <div class="row" style="display: flex;">
+			<a th:href="@{/userAccount/{idUser}(idUser=${user.id})}">Home</a>
+		</div>
       </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
