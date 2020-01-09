@@ -8,6 +8,7 @@ import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.UserRepository;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,8 +170,23 @@ public class PersonalController {
     }
 
     @RequestMapping(value="/searchPersonalT", method=RequestMethod.GET)
-    public String userSearch(@RequestParam String name, Model model) {
+    public String ptSearch(@RequestParam String name, Model model) {
+      List<PersonalTrainer> personalTrainers = (List<PersonalTrainer>) PTRepository.findAll();
+      List<PersonalTrainer> findPt = new ArrayList<PersonalTrainer>();
+      for(PersonalTrainer pt : personalTrainers) {
+        if(pt.getName().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getSurname().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getPatent().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getLevel().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getEmail().toLowerCase().contains(name.toLowerCase())){
+          findPt.add(pt);
+        }
+        else {
           model.addAttribute("personalTrainers", PTRepository.findByName(name));
+        }
+        model.addAttribute("personalTrainers", findPt);
+      }
+          
           return "personalTrainers";
     }
 

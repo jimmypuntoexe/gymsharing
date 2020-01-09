@@ -1,5 +1,10 @@
 package com.example.assignment3.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 import com.example.assignment3.Entities.Gym;
 import com.example.assignment3.Entities.PersonalTrainer;
 import com.example.assignment3.Entities.Subscription;
@@ -140,10 +145,25 @@ public class GymController {
         return "infoUser";
     }
 
+    //!!!!NULL DA CATCHARE 
     @RequestMapping(value="/searchGym", method=RequestMethod.GET)
     public String gymSearch(@RequestParam String name, Model model) {
+      List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
+      List<Gym> findGym = new ArrayList<Gym>();
+      for(Gym gym : gyms) {
+        if(gym.getName().toLowerCase().contains(name.toLowerCase()) ||
+            gym.getAddress().toLowerCase().contains(name.toLowerCase()) ||
+            gym.getCity().toLowerCase().contains(name.toLowerCase()) ||
+            gym.getEmail().toLowerCase().contains(name.toLowerCase())){
+          findGym.add(gym);
+        }
+        else {
           model.addAttribute("gyms", Gymrepository.findByName(name));
-          return "gyms";
+        }
+        model.addAttribute("gyms", findGym);
+      }
+      
+      return "gyms";
     }
   
   @RequestMapping(value="/infoGymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
