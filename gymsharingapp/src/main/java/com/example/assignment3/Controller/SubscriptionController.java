@@ -72,23 +72,26 @@ public class SubscriptionController {
         //model.addAttribute("subscriptions", subRepository.findAll());
         //model.addAttribute("gym", subRepository.findAll());
 
-        return "redirect:/gym/" + gym.getId();
+        return "redirect:/gymAccount/{id}/myProfile";
     }
 
     @RequestMapping(value="/gym/{idGym}/{idSub}/deleteSubscription", method=RequestMethod.GET)
-	public String subDelete(@PathVariable Long idGym, @PathVariable Long idSub) {
+	public String subDelete(@PathVariable Long idGym, @PathVariable Long idSub, Model model) {
 
         Gym gym = gymRepository.findOne(idGym);
         Subscription sub = subRepository.findOne(idSub);
         List<User> users = sub.getUsers();
 
         gym.getSubscriptions().remove(sub);
+        gymRepository.save(gym);
 
         for(User user : users){
             user.setSubscription(null);
-            System.out.println(user.getEmail());
+            userRepository.save(user);
         }
+
         subRepository.delete(idSub);
+
 
         return "redirect:/gymAccount/{idGym}/myProfile";
     }

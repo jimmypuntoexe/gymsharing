@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Subscription {
@@ -18,6 +19,9 @@ public class Subscription {
 
     @OneToMany
     private List<User> users;
+
+    @OneToOne
+    private Gym gym;
 
 	public Subscription() {
 		super();
@@ -42,5 +46,13 @@ public class Subscription {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public Gym getGym() {
+        return this.gym;
+    }
+
+    public void setGym(Gym gym) {
+        this.gym = gym;
     }
 }
