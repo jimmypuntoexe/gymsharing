@@ -10,20 +10,20 @@
 	<div class="d-flex justify-content-center">
 		<div>
 
-			<a th:href="@{/personalTrainerAccount/{idPt}/myProfile(idPt=${personalTrainer.id})}">View my profile</a>
+			<a th:href="@{/personalTrainerAccount/{idPt}/myProfile(idPt=${personalTrainer.id})}">My profile</a>
 			<div><br/></div>
 			<a th:href="@{/personalTrainerAccount/{idPt}/gymsForSubscriber(idPt=${personalTrainer.id})}">Subscribe to a gym</a>
 			<div><br/></div>
 
-			<form class="form-horizontal" th:action="@{/searchGym}" method="get" enctype="multipart/form-data">
+			<form class="form-horizontal" th:action="@{/searchGym/{idPt}(idPt=${personalTrainer.id})}" method="get" enctype="multipart/form-data">
 				<div class="form-group">
-					<label class="row-lg-2 control-label">Cerca Palestre</label>
+					<label class="row-lg-2 control-label">Search gym</label>
 					<div class="col-lg-12">
 						<input type="text" class="form-control" name="name"/>
 					</div>
 				</div>
 				<span>
-					<button type="submit" class="btn btn-primary">Cerca palestra</button>
+					<button type="submit" class="btn btn-primary">Search gym</button>
 				</span>
 			</form>
 

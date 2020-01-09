@@ -46,9 +46,43 @@ public class GymController {
 
   @RequestMapping(value="/deleteGym/{id}", method=RequestMethod.GET)
 	public String gymDelete(@PathVariable Long id) {
+      Gym gym = Gymrepository.findOne(id);
+      List<PersonalTrainer> pts = gym.getPersonalTrainers();
+      List<Subscription> subs = gym.getSubscriptions();
+      // List<Gym> affiliateGyms = gym.getAffiliateGyms();
+
+      if (!(pts.isEmpty())){
+        for(PersonalTrainer pt:pts){
+          pt.getGyms().remove(gym);
+          PTRepository.save(pt);
+        }
+      }
+      if (!(subs.isEmpty())){
+        for(Subscription sub : subs){
+          sub.setGym(null);
+          subRepository.save(sub);
+          }
+        for(Subscription sub : subs){
+          List<User> users = sub.getUsers();
+          if (!(users.isEmpty())){
+            for (User user : users){
+              user.setSubscription(null);
+              userRepository.save(user);
+            }
+            sub.setUsers(null);
+          }
+          subRepository.save(sub);
+        }
+      }
+      // if (!(affiliateGyms.isEmpty())){
+      //   for(Gym affiliate : affiliateGyms){
+      //     affiliate.
+      //     }
+      // }
+
       Gymrepository.delete(id);
       
-      return "redirect:/gyms/";
+      return "redirect:/";
   }
 
   @RequestMapping(value="/modifyGym/{id}", method=RequestMethod.GET)
@@ -64,8 +98,10 @@ public class GymController {
       Gym gym = Gymrepository.findOne(idGym);
       PersonalTrainer ptr = PTRepository.findOne(idPtr);
       gym.getPersonalTrainers().remove(ptr);
+      ptr.getGyms().remove(gym);
+      PTRepository.save(ptr);
       Gymrepository.save(gym);
-      return "redirect:/gym/" + gym.getId();
+      return "redirect:/gymAccount/{idGym}/myProfile";
   }
 
   @RequestMapping(value="/updateGym/{id}", method=RequestMethod.GET)
@@ -100,6 +136,15 @@ public class GymController {
 	public String gym(@PathVariable Long id, Model model) {
         model.addAttribute("action", "affiliate");
         model.addAttribute("gym", Gymrepository.findOne(id));
+        model.addAttribute("sub", subRepository.findAll());
+        return "infoGym";
+  }
+  
+  @RequestMapping("/gymAccount/{idGym}/gymAffiliate/{idGymAffiliate}")
+	public String infoGymAffiliate(@PathVariable Long idGym, @PathVariable Long idGymAffiliate, Model model) {
+        model.addAttribute("action", "infoAffiliate");
+        model.addAttribute("gym", Gymrepository.findOne(idGym));
+        model.addAttribute("gymAffiliate", Gymrepository.findOne(idGymAffiliate));
         model.addAttribute("sub", subRepository.findAll());
         return "infoGym";
 	}
@@ -150,12 +195,13 @@ public class GymController {
         User user = userRepository.findOne(idUser);
         Subscription sub = subRepository.findOne(idSub);
         user.setSubscription(sub);
-        return "infoUser";
+        userRepository.save(user);
+        return "redirect:/userAccount/{idUser}/myProfile";
     }
 
     //!!!!NULL DA CATCHARE 
-    @RequestMapping(value="/searchGym", method=RequestMethod.GET)
-    public String gymSearch(@RequestParam String name, Model model) {
+    @RequestMapping(value="/searchGym/{idPt}", method=RequestMethod.GET)
+    public String gymSearchFromPt(@RequestParam String name, @PathVariable Long idPt, Model model) {
       List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
       List<Gym> findGym = new ArrayList<Gym>();
       for(Gym gym : gyms) {
@@ -169,6 +215,30 @@ public class GymController {
           model.addAttribute("gyms", Gymrepository.findByName(name));
         }
         model.addAttribute("gyms", findGym);
+        model.addAttribute("action", "searchGymFromPT");
+        model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
+      }
+      
+      return "gyms";
+    }
+
+    @RequestMapping(value="/searchGymUser/{idUser}", method=RequestMethod.GET)
+    public String gymSearchFromUser(@RequestParam String name, @PathVariable Long idUser, Model model) {
+      List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
+      List<Gym> findGym = new ArrayList<Gym>();
+      for(Gym gym : gyms) {
+        if(gym.getName().toLowerCase().contains(name.toLowerCase()) ||
+            gym.getAddress().toLowerCase().contains(name.toLowerCase()) ||
+            gym.getCity().toLowerCase().contains(name.toLowerCase()) ||
+            gym.getEmail().toLowerCase().contains(name.toLowerCase())){
+          findGym.add(gym);
+        }
+        else {
+          model.addAttribute("gyms", Gymrepository.findByName(name));
+        }
+        model.addAttribute("gyms", findGym);
+        model.addAttribute("action", "searchGymFromUser");
+        model.addAttribute("user", userRepository.findOne(idUser));
       }
       
       return "gyms";
@@ -216,7 +286,7 @@ public class GymController {
     Gym gym2 = Gymrepository.findOne(idGymAffiliate);
     gym2.getAffiliateGyms().add(gym1);
     Gymrepository.save(gym1);
-    return "redirect:/gyms/";
+    return "redirect:/gymAccount/{idGymAffiliate}/myProfile";
   }
 
 }

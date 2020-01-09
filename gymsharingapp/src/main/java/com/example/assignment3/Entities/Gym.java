@@ -29,7 +29,7 @@ public class Gym {
 	@ManyToMany
 	private List<Gym> affiliateGyms;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<PersonalTrainer> personalTrainers;
 
 	@OneToMany
