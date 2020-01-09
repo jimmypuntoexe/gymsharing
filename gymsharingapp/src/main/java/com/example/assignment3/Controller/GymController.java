@@ -153,7 +153,8 @@ public class GymController {
         return "infoUser";
     }
 
-    //!!!!NULL DA CATCHARE 
+    //!!!!NULL DA CATCHARE modificare contains equals per i diversi campi
+
     @RequestMapping(value="/searchGym", method=RequestMethod.GET)
     public String gymSearch(@RequestParam String name, Model model) {
       List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
