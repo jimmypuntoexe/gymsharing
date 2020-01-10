@@ -68,6 +68,8 @@ public class SubscriptionController {
             gym.getSubscriptions().add(newTrialSubscription);
             subRepository.save(newTrialSubscription);
         }
+
+        gymRepository.save(gym);
         
         //model.addAttribute("subscriptions", subRepository.findAll());
         //model.addAttribute("gym", subRepository.findAll());

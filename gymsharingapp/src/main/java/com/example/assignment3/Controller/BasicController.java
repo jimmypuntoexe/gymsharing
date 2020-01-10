@@ -36,13 +36,13 @@ public class BasicController {
 
     @RequestMapping(value="/gymAccount/{idGym}", method=RequestMethod.GET)
     public String homeGym(@PathVariable Long idGym, Model model) {
-      model.addAttribute("gym", userRepository.findOne(idGym));
+      model.addAttribute("gym", gymRepository.findOne(idGym));
       return "gymPage";
     }
 
     @RequestMapping(value="/personalTrainerAccount/{idPt}", method=RequestMethod.GET)
     public String homePt(@PathVariable Long idPt, Model model) {
-      model.addAttribute("personalTrainer", userRepository.findOne(idPt));
+      model.addAttribute("personalTrainer", ptRepository.findOne(idPt));
       return "personalTrainerPage";
     }
 
