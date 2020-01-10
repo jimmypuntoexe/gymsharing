@@ -20,9 +20,6 @@ public class Subscription {
     @OneToMany(mappedBy = "subscription")
     private List<User> users;
 
-    @ManyToOne
-    private Gym gym;
-
 	public Subscription() {
 		super();
     }

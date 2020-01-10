@@ -153,10 +153,9 @@ public class GymController {
         return "infoUser";
     }
 
-    // modificare contains equals per i diversi campi
-
-    @RequestMapping(value="/searchGym/{idPt}", method=RequestMethod.GET)
-    public String gymSearchFromPt(@RequestParam String name, @PathVariable Long idPt, Model model) {
+    //!!!!NULL DA CATCHARE 
+    @RequestMapping(value="/searchGym", method=RequestMethod.GET)
+    public String gymSearch(@RequestParam String name, Model model) {
       List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
       List<Gym> findGym = new ArrayList<Gym>();
       for(Gym gym : gyms) {
@@ -170,31 +169,6 @@ public class GymController {
           model.addAttribute("gyms", Gymrepository.findByName(name));
         }
         model.addAttribute("gyms", findGym);
-        model.addAttribute("action", "searchGymFromPT");
-        model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
-      }
-      
-      return "gymsForSubscriber";
-    }
-
-
-    @RequestMapping(value="/searchGymUser/{idUser}", method=RequestMethod.GET)
-    public String gymSearchFromUser(@RequestParam String name, @PathVariable Long idUser, Model model) {
-      List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
-      List<Gym> findGym = new ArrayList<Gym>();
-      for(Gym gym : gyms) {
-        if(gym.getName().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getAddress().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getCity().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getEmail().toLowerCase().contains(name.toLowerCase())){
-          findGym.add(gym);
-        }
-        else {
-          model.addAttribute("gyms", Gymrepository.findByName(name));
-        }
-        model.addAttribute("gyms", findGym);
-        model.addAttribute("action", "searchGymFromUser");
-        model.addAttribute("user", userRepository.findOne(idUser));
       }
       
       return "gyms";
@@ -245,7 +219,7 @@ public class GymController {
     Gym gym2 = Gymrepository.findOne(idGymAffiliate);
     gym2.getAffiliateGyms().add(gym1);
     Gymrepository.save(gym1);
-    return "redirect:/gymAccount/{idGymAffiliate}/myProfile";
+    return "redirect:/gyms/";
   }
 
 }

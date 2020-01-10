@@ -18,13 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
   @Autowired
-  UserRepository userRepository;
+  UserRepository repository;
 
   @Autowired
   SubscriptionRepository subRepository;
-
-  @Autowired
-  PersonalTrainerRepository ptRepository;
 
 
   @RequestMapping("/insertUser")
@@ -36,38 +33,24 @@ public class UserController {
   @RequestMapping(value="/deleteUser/{idUser}", method=RequestMethod.GET)
 	public String userDelete(@PathVariable Long idUser) {
 
-    User user = userRepository.findOne(idUser);
+    User user = repository.findOne(idUser);
     PersonalTrainer pt = user.getPersonalTrainer();
-    Subscription sub = user.getSubscriptions();
 
+    pt.getUsers().remove(user);
 
-    if (sub != null){
-      sub.getUsers().remove(user);
-      user.setSubscription(null);
-      subRepository.save(sub);
-    }
-
-    if (pt != null){
-      pt.getUsers().remove(user);
-      user.setPersonalTrainer(null);
-      ptRepository.save(pt);
-    }
-
-    //userRepository.save(user);
-    userRepository.delete(idUser);
-
-    return "redirect:/";
+    repository.delete(idUser);
+       return "redirect:/";
   }
 
   @RequestMapping("/userAccount/{idUser}/myProfile")
  public String user(@PathVariable Long idUser, Model model) {
-        model.addAttribute("user", userRepository.findOne(idUser));
+        model.addAttribute("user", repository.findOne(idUser));
         return "infoUser";
  }
  
   @RequestMapping(value="/users", method=RequestMethod.GET)
 	public String userList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", repository.findAll());
         return "users";
   }
 
@@ -91,7 +74,7 @@ public class UserController {
         newUser.setCity(city);
         newUser.setEmail(email);
         newUser.setPhoneNumber(phoneNumber);
-        userRepository.save(newUser);
+        repository.save(newUser);
 
         //da sistemare qui sotto
         model.addAttribute("user", newUser);
@@ -101,7 +84,7 @@ public class UserController {
 
   @RequestMapping(value="/modifyUser/{id}", method=RequestMethod.GET)
   public String updateUser( @PathVariable Long id, Model model) {
-          User user = userRepository.findOne(id);
+          User user = repository.findOne(id);
           model.addAttribute("action", "update");
           model.addAttribute("user", user);
           return "insertUser";
@@ -114,7 +97,7 @@ public class UserController {
             @RequestParam String CF, @RequestParam String address, @RequestParam String civicNumber,
             @RequestParam String city, @RequestParam String email, @RequestParam String phoneNumber, 
             Model model) {
-        User user = userRepository.findOne(id);
+        User user = repository.findOne(id);
         user.setName(name);
         user.setSurname(surname);
         user.setBirthDate(birthDate);
@@ -125,7 +108,7 @@ public class UserController {
         user.setCity(city);
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
-        userRepository.save(user);
+        repository.save(user);
 
         //da sistemare qui sotto
         model.addAttribute("user", user);
@@ -133,16 +116,16 @@ public class UserController {
   }
   @RequestMapping(value="/{idUser}/deleteSubScription", method=RequestMethod.GET)
 	public String subDelete(Model model, @PathVariable Long idUser) {
-        model.addAttribute("user", userRepository.findOne(idUser));
-        User user = userRepository.findOne(idUser);
+        model.addAttribute("user", repository.findOne(idUser));
+        User user = repository.findOne(idUser);
         user.setSubscription(null);
-        userRepository.save(user);
+        repository.save(user);
         return "redirect:/userAccount/{idUser}/myProfile";
   }
 
   @RequestMapping(value="/searchUser", method=RequestMethod.GET)
     public String userSearch(@RequestParam String name, Model model) {
-          model.addAttribute("users", userRepository.findByName(name));
+          model.addAttribute("users", repository.findByName(name));
           return "users";
     }
 
