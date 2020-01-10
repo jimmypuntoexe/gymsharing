@@ -78,10 +78,10 @@
 							<td th:text="${sub.getPrice()}"></td>
 							<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
 							<td>
-								<a th:href="@{/gym/{idGym}/{idSub}/deleteSubscription(idGym=${gym.id}, idSub=${sub.id})}" method="post">Remove subscriptions</a>
+								<a th:href="@{/gym/{idGym}/{idSub}/deleteSubscription(idGym=${gym.id}, idSub=${sub.id})}" method="post">Remove subscription</a>
 							</td>
 							<td>
-								<a th:href="@{/gym/{idGym}/{idSub}/editSubscriptions(idGym=${gym.id}, idSub=${sub.id})}" method="post">Edit subscriptions</a>
+								<a th:href="@{/gym/{idGym}/{idSub}/editSubscriptions(idGym=${gym.id}, idSub=${sub.id})}" method="post">Edit subscription</a>
 							</td>
 						</tr>
 					</table>
@@ -106,6 +106,27 @@
 							</td>
 						</tr>
 					</table>
+					<br/>
+					<h1>Affiliate Gyms</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Address</th>
+								<th scope="col">More info</th>
+							</tr>
+						</thead>
+						<tr th:each="affiliate : ${gym.getAffiliateGyms()}">
+							<td th:text="${affiliate.getName()}"></td>
+							<td th:text="${affiliate.getAddress()}"></td>
+							<td>
+								<a th:href="@{/gymAccount/{idGym}/gymAffiliate/{idGymAffiliate}(idGym=${gym.id}, idGymAffiliate=${affiliate.id})}" method="get">Show more info</a>
+							</td>
+						</tr>
+					</table>
+					<a th:href="@{/deleteGym/{idGym}(idGym=${gym.id})}" method="get">Remove gym</a>
+					<div><br/></div>
+					<a th:href="@{/modifyGym/{idGym}(idGym=${gym.id})}" method="post">Edit gym</a>
 				</div>	
 			</div>
 		</div>
@@ -197,6 +218,102 @@
 							  </tr>
 						  </thead>
 						  <tr th:each="personalTrainer : ${gym.getPersonalTrainers()}">
+							  <td th:text="${personalTrainer.getName()}"></td>
+							  <td th:text="${personalTrainer.getLevel()}"></td>
+							  <td th:text="${personalTrainer.getPatent()}"></td>
+						  </tr>
+					  </table>
+				  </div>	
+			  </div>
+		  </div>
+		  <div class="row" style="display: flex; text-align: left;">
+			  <a th:href="@{/gymAccount/{idGym}(idGym=${gym.id})}" method="get">Home</a>
+		  </div>	
+		</div>
+	  </div>
+
+	  <div class="container" th:if="${action == 'infoAffiliate'}">
+		<div class="page-header" id="banner">
+		  <div class="row" style="display: flex;">
+			  <div class="column" style="flex:50%;"> 
+				  <h1>Info gym</h1>
+				  <form class="form-horizontal" th:action="@{/gym/{id}/}" method="post" enctype="multipart/form-data" >
+					  <!-- <fieldset style="margin:auto;"> -->
+						  <div class="form-group">
+							  <label class="col-lg-2 control-label">Name</label>
+							  <div class="col-lg-10">
+								  <input type="text" class="form-control" disabled="disabled" 
+									  th:value="${gymAffiliate.Name}"/>
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label class="col-lg-2 control-label">Email</label>
+							  <div class="col-lg-10">
+								  <input type="text" class="form-control" disabled="disabled" 
+									  th:value="${gymAffiliate.Email}"/>
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label class="col-lg-2 control-label">Address</label>
+							  <div class="col-lg-10">
+								  <input type="text" class="form-control" disabled="disabled" 
+									  th:value="${gymAffiliate.Address}"/>
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label class="col-lg-2 control-label">Civic Number</label>
+							  <div class="col-lg-10">
+								  <input type="text" class="form-control" disabled="disabled" 
+									  th:value="${gymAffiliate.CivicNumber}"/>
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label class="col-lg-2 control-label">City</label>
+							  <div class="col-lg-10">
+								  <input type="text" class="form-control" disabled="disabled" 
+									  th:value="${gymAffiliate.City}"/>
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label class="col-lg-2 control-label">Phone Number</label>
+							  <div class="col-lg-10">
+								  <input type="text" class="form-control" disabled="disabled" 
+									  th:value="${gymAffiliate.PhoneNumber}"/>
+							  </div>
+						  </div>
+					  <!-- </fieldset> -->
+				  </form>
+			  </div>
+			  <div class="column" style="flex:50%;">
+				  <div>
+					  <br />
+					  <h1>Subscriptions</h1>
+					  <table class="table">
+						  <thead>
+							  <tr>
+								  <th scope="col">Subscription Type</th>
+								  <th scope="col">Price</th>
+								  <th scope="col">Life subscription</th>
+							  </tr>
+						  </thead>
+						  <tr th:each="sub : ${gymAffiliate.getSubscriptions()}">
+							  <td th:text="${sub.getType()}"></td>
+							  <td th:text="${sub.getPrice()}"></td>
+							  <td th:text="${sub.getLifeSubscription()} + ' days'"></td>
+						  </tr>
+					  </table>
+					  <br />
+					  <h1>Personal Trainers</h1>
+					  <table class="table">
+						  <thead>
+							  <tr>
+								  <th scope="col">Name</th>
+								  <th scope="col">Level</th>
+								  <th scope="col">Patent</th>
+  
+							  </tr>
+						  </thead>
+						  <tr th:each="personalTrainer : ${gymAffiliate.getPersonalTrainers()}">
 							  <td th:text="${personalTrainer.getName()}"></td>
 							  <td th:text="${personalTrainer.getLevel()}"></td>
 							  <td th:text="${personalTrainer.getPatent()}"></td>

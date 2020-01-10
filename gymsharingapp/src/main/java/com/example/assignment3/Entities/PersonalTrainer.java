@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +15,7 @@ import javax.persistence.OneToMany;
 public class PersonalTrainer {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private long idGym;
     private String name;
@@ -31,10 +30,10 @@ public class PersonalTrainer {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy = "personalTrainer")
+    @OneToMany
     private List<User> users;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Gym> gyms;
 
 	public PersonalTrainer() {
