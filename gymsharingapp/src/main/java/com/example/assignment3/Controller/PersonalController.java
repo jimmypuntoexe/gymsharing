@@ -70,11 +70,9 @@ public class PersonalController {
     List<User> users = ptr.getUsers();
     for(Gym gym:gyms){
         gym.getPersonalTrainers().remove(ptr);
-        gymRepository.save(gym);
     }
     for(User user : users){
       user.setPersonalTrainer(null);
-      userRepository.save(user);
     }
     PTRepository.delete(id);
     return "redirect:/";
@@ -90,7 +88,7 @@ public class PersonalController {
     userRepository.save(user);
     PTRepository.save(ptr);
 
-    return "redirect:/userAccount/{idUser}/myProfile";
+    return "redirect:/userAccount/{idUser}";
     }
 
   @RequestMapping("/editPersonalTrainer/{id}")
@@ -99,6 +97,7 @@ public class PersonalController {
     model.addAttribute("personal", PTRepository.findOne(id));
     return "insertPersonalTrainer";
   }
+  
   @RequestMapping(value="/updatePersonalTrainer/{id}", method=RequestMethod.GET)
 	public String PersonalTrainerUpdate(@PathVariable Long id,
             @RequestParam (required = false) String name, @RequestParam (required = false) String surname, 
@@ -187,8 +186,8 @@ public class PersonalController {
       return "redirect:/userAccount/{idUser}";
     }
 
-    @RequestMapping(value="/searchPersonalTGym/{idGym}", method=RequestMethod.GET)
-    public String ptSearchFromGym(@RequestParam String name, @PathVariable Long idGym, Model model) {
+    @RequestMapping(value="/searchPersonalT", method=RequestMethod.GET)
+    public String ptSearch(@RequestParam String name, Model model) {
       List<PersonalTrainer> personalTrainers = (List<PersonalTrainer>) PTRepository.findAll();
       List<PersonalTrainer> findPt = new ArrayList<PersonalTrainer>();
       for(PersonalTrainer pt : personalTrainers) {
@@ -203,31 +202,6 @@ public class PersonalController {
           model.addAttribute("personalTrainers", PTRepository.findByName(name));
         }
         model.addAttribute("personalTrainers", findPt);
-        model.addAttribute("action", "searchPtFromGym");
-        model.addAttribute("gym", gymRepository.findOne(idGym));
-      }
-          
-          return "personalTrainers";
-    }
-
-    @RequestMapping(value="/searchPersonalTUser/{idUser}", method=RequestMethod.GET)
-    public String ptSearchFromUser(@RequestParam String name, @PathVariable Long idUser, Model model) {
-      List<PersonalTrainer> personalTrainers = (List<PersonalTrainer>) PTRepository.findAll();
-      List<PersonalTrainer> findPt = new ArrayList<PersonalTrainer>();
-      for(PersonalTrainer pt : personalTrainers) {
-        if(pt.getName().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getSurname().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getPatent().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getLevel().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getEmail().toLowerCase().contains(name.toLowerCase())){
-          findPt.add(pt);
-        }
-        else {
-          model.addAttribute("personalTrainers", PTRepository.findByName(name));
-        }
-        model.addAttribute("personalTrainers", findPt);
-        model.addAttribute("action", "searchPtFromUser");
-        model.addAttribute("user", userRepository.findOne(idUser));
       }
           
           return "personalTrainers";

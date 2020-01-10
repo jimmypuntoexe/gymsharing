@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class Gym {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String name;
 	private String address;
@@ -29,7 +29,7 @@ public class Gym {
 	@ManyToMany
 	private List<Gym> affiliateGyms;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<PersonalTrainer> personalTrainers;
 
 	@OneToMany
