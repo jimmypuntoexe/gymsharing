@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Info gym</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="/bootstrap.min.css" media="screen"/>
+</head>
+<body>
+	<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row" style="display: flex;">
+			<div class="column" style="flex:50%;"> 
+				<h1>Info gym</h1>
+				<form class="form-horizontal" th:action="@{/gym/{id}/}" method="post" enctype="multipart/form-data" >
+					<!-- <fieldset style="margin:auto;"> -->
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Name</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${gym.Name}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Email</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${gym.Email}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Address</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${gym.Address}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Civic Number</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${gym.CivicNumber}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">City</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${gym.City}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Phone Number</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" disabled="disabled" 
+									th:value="${gym.PhoneNumber}"/>
+							</div>
+						</div>
+					<!-- </fieldset> -->
+				</form>
+			</div>
+			<div class="column" style="flex:50%;">
+				<div>
+					<br />
+					<h1>Subscriptions</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Subscription Type</th>
+								<th scope="col">Price</th>
+								<th scope="col">Life subscription</th>
+								<th scope="col">Remove</th>
+							</tr>
+						</thead>
+						<tr th:each="sub : ${gym.getSubscriptions()}">
+							<td th:text="${sub.getType()}"></td>
+							<td th:text="${sub.getPrice()}"></td>
+							<td th:text="${sub.getLifeSubscription()} + ' days'"></td>
+							<td>
+								<a th:href="@{/gym/{idGym}/{idSub}/{idUser}/buySubscription(idGym=${gym.id}, idSub=${sub.id}, idUser=${user.id})}" method="post">Buy</a>
+							</td>
+						</tr>
+					</table>
+					<br />
+					<h1>Personal Trainers</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Level</th>
+								<th scope="col">Patent</th>
+								<!-- <th scope="col">Contact</th>								 -->
+							</tr>
+						</thead>
+						<tr th:each="personalTrainer : ${gym.getPersonalTrainers()}">
+							<td th:text="${personalTrainer.getName()}"></td>
+							<td th:text="${personalTrainer.getLevel()}"></td>
+							<td th:text="${personalTrainer.getPatent()}"></td>
+						</tr>
+					</table>
+				</div>	
+			</div>
+		</div>
+		<div class="row" style="display: flex;">
+			<a th:href="@{/userAccount/{idUser}(idUser=${user.id})}">Home</a>
+		</div>
+	  </div>
+	</div>
+</body>
+</html>

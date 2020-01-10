@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Affiliate Gyms</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+</head>
+<body>
+        <div class="container">
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Gyms</h1>
+
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Basic Info</th>
+                                    <th>Info</th>
+                                    <th>Affiliate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="gym : ${gyms}">
+                                    <td th:text="${gym.Name}"></td>
+                                    <td>
+                                        <a th:href="@{/gym/{id}(id=${gym.id})}">Show more info</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/addAffiliate/{idGym}/{idGymAffiliate}(idGym=${gym.id}, idGymAffiliate=${gym2.id})}">Add this gym to affiliate</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>	
+                        <div class="row" style="display: flex; text-align: left;">
+                            <a th:href="@{/gymAccount/{idGym}(idGym=${gym2.id})}" method="get">Home</a>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

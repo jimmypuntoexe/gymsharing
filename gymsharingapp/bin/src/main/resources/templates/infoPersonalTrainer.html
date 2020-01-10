@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Info Personal trainer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="/bootstrap.min.css" media="screen"/>
+</head>
+<body>
+	<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row" style="display: flex;">
+            <div class="column" style="flex:50%;">
+                <h1>Info Personal trainer</h1>
+                <form class="form-horizontal" th:action="@{/personalTrainer/{id}/}" method="post" enctype="multipart/form-data" >
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Name</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.Name}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Surname</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.Surname}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Age</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.Age}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Birth Date</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.BirthDate}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.Email}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Codice Fiscale</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.CF}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Patent</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.Patent}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Level</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.Level}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Phone Number</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" disabled="disabled" 
+                                    th:value="${personalTrainer.PhoneNumber}"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <a th:href="@{/personalTrainerAccount/{idPt}(idPt=${personalTrainer.id})}" method="get">Home</a>
+
+            </div>
+            <div class="column" style="flex:50%;">
+				<div>
+					<br />
+					<h1>Gyms</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Address</th>
+								<!-- <th scope="col">Life subscription</th> -->
+							</tr>
+						</thead>
+						<tr th:each="gym: ${personalTrainer.getGyms()}">
+							<td th:text="${gym.getName()}"></td>
+							<td th:text="${gym.getAddress()}"></td>
+							<!-- <td th:text="${sub.getLifeSubscription()} + ' days'"></td> -->
+						</tr>
+					</table>
+					<br />
+                </div>
+                <div>
+					<br />
+					<h1>Users</h1>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Address</th>
+								<!-- <th scope="col">Life subscription</th> -->
+							</tr>
+						</thead>
+						<tr th:each="user: ${personalTrainer.getUsers()}">
+							<td th:text="${user.getName()}"></td>
+							<td th:text="${user.getAddress()}"></td>
+							<!-- <td th:text="${sub.getLifeSubscription()} + ' days'"></td> -->
+						</tr>
+					</table>
+					<br />
+                </div>	
+                <a th:href="@{/removePersonalTrainer/{idPt}(idPt=${personalTrainer.id})}" method="get">Remove account</a>
+                <!-- <a th:href="@{/{idUser}/deleteSubScription(idUser=${user.id})}" method="get">Remove account</a> -->
+                <div><br/></div>
+                <a th:href="@{/editPersonalTrainer/{idPt}(idPt=${personalTrainer.id})}" method="post">Edit account</a>
+                <!-- <a th:href="@{/{idUser}/deleteSubScription(idUser=${user.id})}" method="get"></a> -->        
+            </div>
+        </div>
+      </div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Contact personal trainer</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+</head>
+<body>
+        <div class="container">
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Personal Trainers</h1>
+
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Basic Info</th>
+                                    <th>Info</th>
+                                    <th>Subscribe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="personalTrainer : ${personalTrainers}">
+                                    <td th:text="${personalTrainer.Name}"></td>
+                                    <td>
+                                        <a th:href="@{/personalTrainerAccount/{idPt}/infoPersonalTrainerForUser(idPt=${personalTrainer.id})}">Show more info</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/contactPt/{idUser}/{idPT} (idUser=${user.id} , idPT=${personalTrainer.id})}" method="post">Contact this personal trainer</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row" style="display: flex;">
+                            <a th:href="@{/userAccount/{idUser}(idUser=${user.id})}">Home</a>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

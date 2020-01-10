@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Gyms</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+</head>
+<body>
+    <div class="container" th:if="${action == 'searchGymFromPT'}">
+        <div class="page-header" id="banner">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-6">
+                    <h1>Gyms</h1>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Basic Info</th>
+                                <th>Info</th>
+                                <th>Subscribe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="gym : ${gyms}">
+                                <td th:text="${gym.Name}"></td>
+                                <td>
+                                    <a th:href="@{/infoGymForPersonalTrainers/{id}(id=${gym.id})}">Show more info</a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/subscribePersonalTrainer/{idGym}/{idPT} (idGym=${gym.id} , idPT=${personalTrainer.id})}" method="post">Subscribe to this gym</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" th:if="${action == 'searchGymFromUser'}">
+        <div class="page-header" id="banner">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-6">
+                    <h1>Gyms</h1>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Offers</th>
+                                <th>More info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="gym : ${gyms}">
+                                <td th:text="${gym.Name}"></td>
+                                <td>
+                                    <select>
+                                        <option th:each="sub : ${gym.subscriptions}" th:text="${sub.getType() + ' ' + sub.getPrice()}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <a th:href="@{/infoGymForSubscription/{idUser}/{idGym}(idGym=${gym.id}, idUser=${user.id})}">Show more info</a>
+                                </td>                        
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row" style="display: flex;">
+                        <a th:href="@{/userAccount/{idUser}(idUser=${user.id})}">Home</a>
+                    </div>	
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    </body>
+</html>
