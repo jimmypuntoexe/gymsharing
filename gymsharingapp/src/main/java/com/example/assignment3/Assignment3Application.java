@@ -92,17 +92,17 @@ public class Assignment3Application implements CommandLineRunner{
 			p1.setGyms(Arrays.asList(g1, g2));
 			p2.setGyms(Arrays.asList(g1));
 
-			p1.setUsers(Arrays.asList(u1, u2));
-			p2.setUsers(Arrays.asList(u3));
+			p1.setUsers(Arrays.asList(u1, u2, u3));
+			//p2.setUsers(Arrays.asList(u1));
 
 			u1.setPersonalTrainer(p1);
 			u2.setPersonalTrainer(p1);
-			u3.setPersonalTrainer(p2);
+			u3.setPersonalTrainer(p1);
 
 			u1.setSubscription(annualSub);
-			u2.setSubscription(monthSub);
+			u2.setSubscription(annualSub);
 
-			annualSub.setUsers(Arrays.asList(u1));
+			annualSub.setUsers(Arrays.asList(u1, u2));
 			monthSub.setUsers(Arrays.asList(u2));
 
 			//save object
@@ -118,6 +118,7 @@ public class Assignment3Application implements CommandLineRunner{
 
 			subRepository.save(annualSub);
 			subRepository.save(monthSub);
+			subRepository.save(trialSub);
 
 		}
 

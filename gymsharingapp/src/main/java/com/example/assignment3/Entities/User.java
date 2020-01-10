@@ -2,17 +2,18 @@ package com.example.assignment3.Entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private String name;
     private String surname;
@@ -27,10 +28,10 @@ public class User {
     private String username;
     private String password;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Subscription subscription;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private PersonalTrainer personalTrainer;
 
 

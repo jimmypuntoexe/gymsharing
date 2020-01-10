@@ -2,25 +2,26 @@ package com.example.assignment3.Entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Subscription {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private long idGym;
 
-    @OneToMany
+    @OneToMany(mappedBy = "subscription")
     private List<User> users;
 
-    @OneToOne
+    @ManyToOne
     private Gym gym;
 
 	public Subscription() {

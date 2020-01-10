@@ -40,18 +40,21 @@ public class UserController {
     PersonalTrainer pt = user.getPersonalTrainer();
     Subscription sub = user.getSubscriptions();
 
+
+
     if (sub != null){
-      //user.setSubscription(null);
       sub.getUsers().remove(user);
+      user.setSubscription(null);
       subRepository.save(sub);
     }
 
     if (pt != null){
-      //user.setPersonalTrainer(null);
       pt.getUsers().remove(user);
+      user.setPersonalTrainer(null);
       ptRepository.save(pt);
     }
 
+    //userRepository.save(user);
     userRepository.delete(idUser);
 
     return "redirect:/";

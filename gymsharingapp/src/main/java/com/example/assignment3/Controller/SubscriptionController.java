@@ -69,8 +69,7 @@ public class SubscriptionController {
             subRepository.save(newTrialSubscription);
         }
         
-        //model.addAttribute("subscriptions", subRepository.findAll());
-        //model.addAttribute("gym", subRepository.findAll());
+        gymRepository.save(gym);
 
         return "redirect:/gymAccount/{id}/myProfile";
     }

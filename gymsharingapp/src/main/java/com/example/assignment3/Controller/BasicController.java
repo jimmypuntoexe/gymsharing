@@ -90,6 +90,7 @@ public class BasicController {
             if (type.equals("pt")){
               PersonalTrainer pt = ptRepository.findByUsername(username);
               if (pt.getPassword().equals(password)) {
+                model.addAttribute("personalTrainer", pt);
                 return "redirect:/personalTrainerAccount/" + pt.getId();
               }
               else{
