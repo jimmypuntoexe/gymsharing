@@ -28,7 +28,11 @@ public class Gym {
 	@ManyToMany
 	private List<Gym> affiliateGyms;
 
+<<<<<<< HEAD
 	@ManyToMany(mappedBy = "gyms")
+=======
+	@ManyToMany(cascade = CascadeType.ALL)
+>>>>>>> parent of 8b87c99... Update search template and fix delete
 	private List<PersonalTrainer> personalTrainers;
 
 	@OneToMany

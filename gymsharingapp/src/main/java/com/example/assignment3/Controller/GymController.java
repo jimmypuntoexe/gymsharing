@@ -153,10 +153,16 @@ public class GymController {
         return "infoUser";
     }
 
+<<<<<<< HEAD
     // modificare contains equals per i diversi campi
 
     @RequestMapping(value="/searchGym/{idPt}", method=RequestMethod.GET)
     public String gymSearchFromPt(@RequestParam String name, @PathVariable Long idPt, Model model) {
+=======
+    //!!!!NULL DA CATCHARE 
+    @RequestMapping(value="/searchGym", method=RequestMethod.GET)
+    public String gymSearch(@RequestParam String name, Model model) {
+>>>>>>> parent of 8b87c99... Update search template and fix delete
       List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
       List<Gym> findGym = new ArrayList<Gym>();
       for(Gym gym : gyms) {
@@ -170,6 +176,7 @@ public class GymController {
           model.addAttribute("gyms", Gymrepository.findByName(name));
         }
         model.addAttribute("gyms", findGym);
+<<<<<<< HEAD
         model.addAttribute("action", "searchGymFromPT");
         model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
       }
@@ -195,6 +202,8 @@ public class GymController {
         model.addAttribute("gyms", findGym);
         model.addAttribute("action", "searchGymFromUser");
         model.addAttribute("user", userRepository.findOne(idUser));
+=======
+>>>>>>> parent of 8b87c99... Update search template and fix delete
       }
       
       return "gyms";
@@ -245,7 +254,7 @@ public class GymController {
     Gym gym2 = Gymrepository.findOne(idGymAffiliate);
     gym2.getAffiliateGyms().add(gym1);
     Gymrepository.save(gym1);
-    return "redirect:/gymAccount/{idGymAffiliate}/myProfile";
+    return "redirect:/gyms/";
   }
 
 }
