@@ -20,12 +20,9 @@ public class Subscription {
     @OneToMany(mappedBy = "subscription")
     private List<User> users;
 
-<<<<<<< HEAD
     @ManyToOne
     private Gym gym;
 
-=======
->>>>>>> parent of 8b87c99... Update search template and fix delete
 	public Subscription() {
 		super();
     }

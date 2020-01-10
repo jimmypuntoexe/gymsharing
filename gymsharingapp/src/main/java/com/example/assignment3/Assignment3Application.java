@@ -92,14 +92,8 @@ public class Assignment3Application implements CommandLineRunner{
 			p1.setGyms(Arrays.asList(g1, g2));
 			p2.setGyms(Arrays.asList(g1));
 
-<<<<<<< HEAD
 			p1.setUsers(Arrays.asList(u1, u2, u3));
 			//p2.setUsers(Arrays.asList(u1));
-=======
-			p1.setUsers(Arrays.asList(u1,u2));
-			p2.setUsers(Arrays.asList(u3));
->>>>>>> parent of 8b87c99... Update search template and fix delete
-
 
 			u1.setPersonalTrainer(p1);
 			u2.setPersonalTrainer(p1);
