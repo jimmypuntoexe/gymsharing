@@ -40,18 +40,20 @@ public class UserController {
     PersonalTrainer pt = user.getPersonalTrainer();
     Subscription sub = user.getSubscriptions();
 
+
     if (sub != null){
-      //user.setSubscription(null);
       sub.getUsers().remove(user);
+      user.setSubscription(null);
       subRepository.save(sub);
     }
 
     if (pt != null){
-      //user.setPersonalTrainer(null);
       pt.getUsers().remove(user);
+      user.setPersonalTrainer(null);
       ptRepository.save(pt);
     }
 
+    //userRepository.save(user);
     userRepository.delete(idUser);
 
     return "redirect:/";
@@ -127,18 +129,13 @@ public class UserController {
 
         //da sistemare qui sotto
         model.addAttribute("user", user);
-        return "redirect:/userAccount/{id}/myProfile";
+        return "redirect:/users/";
   }
   @RequestMapping(value="/{idUser}/deleteSubScription", method=RequestMethod.GET)
 	public String subDelete(Model model, @PathVariable Long idUser) {
         model.addAttribute("user", userRepository.findOne(idUser));
         User user = userRepository.findOne(idUser);
-        Subscription sub = subRepository.findOne(user.getSubscriptions().getId());
-
-        sub.getUsers().remove(user);
-
         user.setSubscription(null);
-
         userRepository.save(user);
         return "redirect:/userAccount/{idUser}/myProfile";
   }

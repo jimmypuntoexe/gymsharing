@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container" th:if="${action == 'insert'}">
-    <h1>Add gym</h1>
+    <h1>Inserisci Palestra</h1>
     <form class="form-horizontal" th:action="@{/insertGym}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="col-lg-2 control-label">Name</label>
@@ -45,7 +45,7 @@
             </div>
         </div>     
         <span>
-            <button type="submit" class="btn btn-primary">Register gym</button>
+            <button type="submit" class="btn btn-primary">Crea palestra</button>
         </span>
     </form>
 </div>
@@ -53,7 +53,7 @@
     <div class="page-header" id="banner">
       <div class="row" style="display: flex;">
           <div class="column" style="flex:50%;"> 
-              <h1>Edit info gym</h1>
+              <h1>Info gym</h1>
               <form class="form-horizontal" th:action="@{/updateGym/{id}(id=${gym.id})}" method="get" enctype="multipart/form-data" >
                   <!-- <fieldset style="margin:auto;"> -->
                       <div class="form-group">

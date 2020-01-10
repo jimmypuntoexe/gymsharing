@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container" th:if="${action == 'insert'}">
-    <h1>Add personal trainer</h1>
+    <h1>Inserisci personal trainer</h1>
     <form class="form-horizontal" th:action="@{/insertPersonalTrainer}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="col-lg-2 control-label">Username</label>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            <label class="col-lg-2 control-label">CF code</label>
+            <label class="col-lg-2 control-label">Codice Fiscale</label>
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="CF"/>
             </div>
@@ -72,16 +72,17 @@
         </div>       
 
         <span>
-            <button type="submit" class="btn btn-primary">Register personal Trainer</button>
+            <button type="submit" class="btn btn-primary">Inserisci personal Trainer</button>
         </span>
 	</form>
 </div>
 
 <div class="container" th:if="${action == 'edit'}">
+    <h1>Modifica personal trainer</h1>
     <div class="page-header" id="banner">
       <div class="row">
         <div class="col-lg-8 col-md-7 col-sm-6">
-          <h1>Update info personal trainer</h1>
+          <h1>Update Info</h1>
           
           <form class="form-horizontal" th:action="@{/updatePersonalTrainer/{id}(id=${personal.id})}" method="get" enctype="multipart/form-data" >
 
@@ -122,7 +123,7 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <label class="col-lg-2 control-label">CF code</label>
+                      <label class="col-lg-2 control-label">Codice Fiscale</label>
                       <div class="col-lg-6">
                           <input type="text" class="form-control" 
                               th:value="${personal.CF}" name="CF"/>

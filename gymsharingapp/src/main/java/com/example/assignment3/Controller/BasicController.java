@@ -93,7 +93,11 @@ public class BasicController {
               System.out.println(pt.getName());
               System.out.println(pt.getId());
               if (pt.getPassword().equals(password)) {
+<<<<<<< HEAD
             //    model.addAttribute("personalTrainer", ptRepository.findById(pt.getId()));
+=======
+                model.addAttribute("personalTrainer", pt);
+>>>>>>> 93b2878a462e5137a670d7381367aa832bd95699
                 return "redirect:/personalTrainerAccount/" + pt.getId();
               }
               else{

@@ -19,15 +19,15 @@
 			<a th:href="@{/gymAccount/{id}/insertAffiliate(id=${gym.id})}" method="post">Add affiliate gym</a>
 			<div><br/></div>
 			
-			<form class="form-horizontal" th:action="@{/searchPersonalTGym/{idGym}(idGym=${gym.id})}" method="get" enctype="multipart/form-data">
+			<form class="form-horizontal" th:action="@{/searchPersonalT}" method="get" enctype="multipart/form-data">
 				<div class="form-group">
-					<label class="row-lg-2 control-label">Search Personal Trainer</label>
+					<label class="row-lg-2 control-label">Cerca Personal Trainer</label>
 					<div class="col-lg-12">
 						<input type="text" class="form-control" name="name"/>
 					</div>
 				</div>
 				<span>
-					<button type="submit" class="btn btn-primary">Search personal trainer</button>
+					<button type="submit" class="btn btn-primary">Cerca personal trainer</button>
 				</span>
 			</form>
 
