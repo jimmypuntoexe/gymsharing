@@ -48,12 +48,4 @@ public class Subscription {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
-    public Gym getGym() {
-        return this.gym;
-    }
-
-    public void setGym(Gym gym) {
-        this.gym = gym;
-    }
 }
