@@ -36,13 +36,13 @@ public class BasicController {
 
     @RequestMapping(value="/gymAccount/{idGym}", method=RequestMethod.GET)
     public String homeGym(@PathVariable Long idGym, Model model) {
-      model.addAttribute("gym", userRepository.findOne(idGym));
+      model.addAttribute("gym", gymRepository.findOne(idGym));
       return "gymPage";
     }
 
     @RequestMapping(value="/personalTrainerAccount/{idPt}", method=RequestMethod.GET)
     public String homePt(@PathVariable Long idPt, Model model) {
-      model.addAttribute("personalTrainer", userRepository.findOne(idPt));
+      model.addAttribute("personalTrainer", ptRepository.findOne(idPt));
       return "personalTrainerPage";
     }
 
@@ -69,7 +69,7 @@ public class BasicController {
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String Login(@RequestParam String username, @RequestParam String password, 
-    @RequestParam String type, Model model) {
+    @RequestParam String type) {
             if (type.equals("user")){
               User user = userRepository.findByUsername(username);
               if (user.getPassword().equals(password)){
@@ -90,14 +90,7 @@ public class BasicController {
             }
             if (type.equals("pt")){
               PersonalTrainer pt = ptRepository.findByUsername(username);
-              System.out.println(pt.getName());
-              System.out.println(pt.getId());
               if (pt.getPassword().equals(password)) {
-<<<<<<< HEAD
-            //    model.addAttribute("personalTrainer", ptRepository.findById(pt.getId()));
-=======
-                model.addAttribute("personalTrainer", pt);
->>>>>>> 93b2878a462e5137a670d7381367aa832bd95699
                 return "redirect:/personalTrainerAccount/" + pt.getId();
               }
               else{
