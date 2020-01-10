@@ -68,7 +68,8 @@ public class BasicController {
 
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String Login(@RequestParam String username, @RequestParam String password, @RequestParam String type, Model model) {
+    public String Login(@RequestParam String username, @RequestParam String password, 
+    @RequestParam String type, Model model) {
             if (type.equals("user")){
               User user = userRepository.findByUsername(username);
               if (user.getPassword().equals(password)){
@@ -89,7 +90,10 @@ public class BasicController {
             }
             if (type.equals("pt")){
               PersonalTrainer pt = ptRepository.findByUsername(username);
+              System.out.println(pt.getName());
+              System.out.println(pt.getId());
               if (pt.getPassword().equals(password)) {
+            //    model.addAttribute("personalTrainer", ptRepository.findById(pt.getId()));
                 return "redirect:/personalTrainerAccount/" + pt.getId();
               }
               else{

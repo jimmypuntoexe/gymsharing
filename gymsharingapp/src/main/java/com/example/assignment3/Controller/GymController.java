@@ -199,10 +199,10 @@ public class GymController {
         return "redirect:/userAccount/{idUser}/myProfile";
     }
 
-    //!!!!NULL DA CATCHARE modificare contains equals per i diversi campi
+    // modificare contains equals per i diversi campi
 
-    @RequestMapping(value="/searchGym", method=RequestMethod.GET)
-    public String gymSearch(@RequestParam String name, Model model) {
+  @RequestMapping(value="/searchGym/{idPt}", method=RequestMethod.GET)
+    public String gymSearch(@RequestParam String name, @PathVariable Long idPt, Model model) {
       List<Gym> gyms = (List<Gym>) Gymrepository.findAll();
       List<Gym> findGym = new ArrayList<Gym>();
       for(Gym gym : gyms) {

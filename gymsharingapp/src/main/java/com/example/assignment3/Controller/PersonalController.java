@@ -99,6 +99,7 @@ public class PersonalController {
     model.addAttribute("personal", PTRepository.findOne(id));
     return "insertPersonalTrainer";
   }
+  
   @RequestMapping(value="/updatePersonalTrainer/{id}", method=RequestMethod.GET)
 	public String PersonalTrainerUpdate(@PathVariable Long id,
             @RequestParam (required = false) String name, @RequestParam (required = false) String surname, 
