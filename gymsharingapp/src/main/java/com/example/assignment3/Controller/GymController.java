@@ -172,10 +172,7 @@ public class GymController {
       }
       
       return "gyms";
-  }
-
-
-    
+    }
   
   @RequestMapping(value="/infoGymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)
 	public String gymListForSubscription(@PathVariable Long idUser, @PathVariable Long idGym, Model model) {
