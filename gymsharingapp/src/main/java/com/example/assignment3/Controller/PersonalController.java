@@ -7,7 +7,7 @@ import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.UserRepository;
 
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +37,24 @@ public class PersonalController {
         return "personalTrainers";
   }
 
-  @RequestMapping(value="/personalTrainersContact/{id}", method=RequestMethod.GET)
-	public String personalTrainerListForUserContact(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userRepository.findOne(id));
+  @RequestMapping(value="/userAccount/{idUser}/personalTrainersContact", method=RequestMethod.GET)
+	public String personalTrainerListForUserContact(@PathVariable Long idUser, Model model) {
+        model.addAttribute("user", userRepository.findOne(idUser));
         model.addAttribute("personalTrainers", PTRepository.findAll());
         return "personalTrainersContact";
   }
 
-  @RequestMapping("/personalTrainer/{id}")
-  public String user(@PathVariable Long id, Model model) {
-         model.addAttribute("personalTrainer", PTRepository.findOne(id));
+  @RequestMapping("/personalTrainerAccount/{idPt}/myProfile")
+  public String personalTrainerProfile(@PathVariable Long idPt, Model model) {
+         model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
          return "infoPersonalTrainer";
   }
-
+  
+  @RequestMapping("/personalTrainerAccount/{idPt}/infoPersonalTrainerForUser")
+  public String personalTrainerProfileForUser(@PathVariable Long idPt, Model model) {
+         model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
+         return "infoPersonalTrainerForUser";
+  }
 
   @RequestMapping("/insertPersonalTrainer")
   public String insertPersonalTrainer(Model model) {
@@ -64,58 +69,94 @@ public class PersonalController {
     List<User> users = ptr.getUsers();
     for(Gym gym:gyms){
         gym.getPersonalTrainers().remove(ptr);
+        gymRepository.save(gym);
     }
     for(User user : users){
       user.setPersonalTrainer(null);
+      userRepository.save(user);
     }
     PTRepository.delete(id);
-    return "redirect:/personalTrainers/";
+    return "redirect:/";
+    }
+  
+  @RequestMapping(value="/removePT/{idUser}/{idPt}", method=RequestMethod.GET)
+  public String ptDeleteFromUser(@PathVariable Long idPt, @PathVariable Long idUser) {
+    PersonalTrainer ptr = PTRepository.findOne(idPt);
+    User user = userRepository.findOne(idUser);
+    user.setPersonalTrainer(null);
+    ptr.getUsers().remove(user);
+
+    userRepository.save(user);
+    PTRepository.save(ptr);
+
+    return "redirect:/userAccount/{idUser}/myProfile";
     }
 
-  @RequestMapping("/editPersonalTrainer/{id}")
+  @RequestMapping(value="/editPersonalTrainer/{id}", method=RequestMethod.GET)
   public String editPersonalTrainer(@PathVariable Long id, Model model) {
-    model.addAttribute("action", "edit");
-    model.addAttribute("personal", PTRepository.findOne(id));
+
+    PersonalTrainer personalTrainer = PTRepository.findOne(id);
+    model.addAttribute("action", "editPersonalTrainer");
+    model.addAttribute("personalTrainer", personalTrainer);
     return "insertPersonalTrainer";
   }
   @RequestMapping(value="/updatePersonalTrainer/{id}", method=RequestMethod.GET)
 	public String PersonalTrainerUpdate(@PathVariable Long id,
-            @RequestParam (required = false) String name, @RequestParam (required = false) String surname, 
-            @RequestParam (required = false) Date birthDate, @RequestParam (required = false) String age,
-            @RequestParam (required = false) String CF, 
-            @RequestParam (required = false) String patent, @RequestParam (required = false) String level, 
-            @RequestParam (required = false) String email, @RequestParam (required = false) String phoneNumber, 
+            @RequestParam String name, @RequestParam String surname, 
+            @RequestParam String birthDate, @RequestParam String age,
+            @RequestParam String CF, 
+            @RequestParam String Patent, @RequestParam String Level, 
+            @RequestParam String email, @RequestParam String phoneNumber, 
             Model model) {
-
+        String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         PersonalTrainer personalTrainer = PTRepository.findOne(id);
         personalTrainer.setName(name);
         personalTrainer.setSurname(surname);
-        personalTrainer.setBirthDate(birthDate);
+
+        if(birthDate.matches(regex)){
+          personalTrainer.setBirthDate(birthDate);
+        }
+        else {
+          model.addAttribute("errorAction", "dateErrorUpdatePersonalTrainer");
+          model.addAttribute("personalTrainer", personalTrainer);
+          return "error";
+        }
+
         personalTrainer.setAge(age);
         personalTrainer.setCF(CF);
-        personalTrainer.setPatent(patent);
-        personalTrainer.setLevel(level);
+        personalTrainer.setPatent(Patent);
+        personalTrainer.setLevel(Level);
         personalTrainer.setEmail(email);
         personalTrainer.setPhoneNumber(phoneNumber);
         
-        PTRepository.save(personalTrainer);
-        model.addAttribute("personal", personalTrainer);
 
-        return "redirect:/personalTrainers/";
+        PTRepository.save(personalTrainer);
+        model.addAttribute("personalTrainer", personalTrainer);
+        return "redirect:/personalTrainerAccount/{id}/myProfile";
   }
 
 
 
   @RequestMapping(value="/insertPersonalTrainer", method=RequestMethod.POST)
 	public String PersonalTrainerAdd(
-            @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
+            @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate, @RequestParam String age,
             @RequestParam String CF, @RequestParam String patent, @RequestParam String level, @RequestParam String email, @RequestParam String phoneNumber, 
+            @RequestParam String username,  @RequestParam String password,
             Model model) {
 
+        String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         PersonalTrainer newPersonalTrainer = new PersonalTrainer();
+        newPersonalTrainer.setUsername(username);
+        newPersonalTrainer.setPassword(password);
         newPersonalTrainer.setName(name);
         newPersonalTrainer.setSurname(surname);
-        newPersonalTrainer.setBirthDate(birthDate);
+        if(birthDate.matches(regex)){
+          newPersonalTrainer.setBirthDate(birthDate);
+        }
+        else {
+          model.addAttribute("action", "dateErrorInsertPersonalTrainer");
+          return "error";
+        }
         newPersonalTrainer.setAge(age);
         newPersonalTrainer.setCF(CF);
         newPersonalTrainer.setPatent(patent);
@@ -125,7 +166,7 @@ public class PersonalController {
         
         PTRepository.save(newPersonalTrainer);
 
-        return "redirect:/personalTrainers/";
+        return "redirect:/";
   }
 
 
@@ -143,7 +184,7 @@ public class PersonalController {
       PTRepository.save(pt);
       gymRepository.save(gym);
 
-      return "redirect:/personalTrainers";
+      return "redirect:/personalTrainerAccount/{idPT}/myProfile";
     }
 
     @RequestMapping("/contactPt/{idUser}/{idPT}")
@@ -160,12 +201,52 @@ public class PersonalController {
       PTRepository.save(pt);
       userRepository.save(user);
 
-      return "redirect:/personalTrainers";
+      return "redirect:/userAccount/{idUser}";
     }
 
-    @RequestMapping(value="/searchPersonalT", method=RequestMethod.GET)
-    public String userSearch(@RequestParam String name, Model model) {
+    @RequestMapping(value="/searchPersonalTGym/{idGym}", method=RequestMethod.GET)
+    public String ptSearchFromGym(@RequestParam String name, @PathVariable Long idGym, Model model) {
+      List<PersonalTrainer> personalTrainers = (List<PersonalTrainer>) PTRepository.findAll();
+      List<PersonalTrainer> findPt = new ArrayList<PersonalTrainer>();
+      for(PersonalTrainer pt : personalTrainers) {
+        if(pt.getName().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getSurname().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getPatent().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getLevel().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getEmail().toLowerCase().contains(name.toLowerCase())){
+          findPt.add(pt);
+        }
+        else {
           model.addAttribute("personalTrainers", PTRepository.findByName(name));
+        }
+        model.addAttribute("personalTrainers", findPt);
+        model.addAttribute("action", "searchPtFromGym");
+        model.addAttribute("gym", gymRepository.findOne(idGym));
+      }
+          
+          return "personalTrainers";
+    }
+
+    @RequestMapping(value="/searchPersonalTUser/{idUser}", method=RequestMethod.GET)
+    public String ptSearchFromUser(@RequestParam String name, @PathVariable Long idUser, Model model) {
+      List<PersonalTrainer> personalTrainers = (List<PersonalTrainer>) PTRepository.findAll();
+      List<PersonalTrainer> findPt = new ArrayList<PersonalTrainer>();
+      for(PersonalTrainer pt : personalTrainers) {
+        if(pt.getName().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getSurname().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getPatent().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getLevel().toLowerCase().contains(name.toLowerCase()) ||
+            pt.getEmail().toLowerCase().contains(name.toLowerCase())){
+          findPt.add(pt);
+        }
+        else {
+          model.addAttribute("personalTrainers", PTRepository.findByName(name));
+        }
+        model.addAttribute("personalTrainers", findPt);
+        model.addAttribute("action", "searchPtFromUser");
+        model.addAttribute("user", userRepository.findOne(idUser));
+      }
+          
           return "personalTrainers";
     }
 

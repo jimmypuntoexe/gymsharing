@@ -1,7 +1,5 @@
 package com.example.assignment3.Entities;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,13 +18,15 @@ public class PersonalTrainer {
     private long idGym;
     private String name;
     private String surname;
-    private Date birthDate;
+    private String birthDate;
     private String age;
     private String patent;
     private String level;
     private String CF;
     private String email;
     private String phoneNumber;
+    private String username;
+    private String password;
 
     @OneToMany
     private List<User> users;
@@ -38,8 +38,8 @@ public class PersonalTrainer {
 		super();
 	}
 
-    public PersonalTrainer(String name, String surname, Date birthDate, String age, String CF, 
-            String patent, String level, String email, String phoneNumber) {
+    public PersonalTrainer(String name, String surname, String birthDate, String age, String CF, 
+            String patent, String level, String email, String phoneNumber, String username, String password) {
 		super();
         this.name = name;
         this.surname = surname;
@@ -50,8 +50,10 @@ public class PersonalTrainer {
         this.level = level;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.gyms = new ArrayList<Gym>();
-        this.users = new ArrayList<User>();
+        this.username = username;
+        this.password = password;
+        // this.gyms = new ArrayList<Gym>();
+        // this.users = new ArrayList<User>();
 
 	}
 
@@ -79,11 +81,11 @@ public class PersonalTrainer {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -157,6 +159,22 @@ public class PersonalTrainer {
     
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

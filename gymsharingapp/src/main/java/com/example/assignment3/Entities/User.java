@@ -1,12 +1,12 @@
 package com.example.assignment3.Entities;
 
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class User {
@@ -16,7 +16,7 @@ public class User {
     private long id;
     private String name;
     private String surname;
-    private Date birthDate;
+    private String birthDate;
     private String age;
     private String CF;
     private String address;
@@ -24,6 +24,8 @@ public class User {
     private String city;
     private String email;
     private String phoneNumber;
+    private String username;
+    private String password;
 
     @OneToOne
     private Subscription subscription;
@@ -36,8 +38,9 @@ public class User {
 		super();
 	}
 
-    public User(String name, String surname, Date birthDate, String age, String CF, 
-            String address, String civicNumber, String city, String email, String phoneNumber) {
+    public User(String name, String surname, String birthDate, String age, String CF, 
+            String address, String civicNumber, String city, String email, String phoneNumber, String username,
+            String password) {
 		super();
         this.name = name;
         this.surname = surname;
@@ -49,8 +52,8 @@ public class User {
         this.city = city;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        // this.subscription = new Subscription();
-        // this.personalTrainer = new PersonalTrainer();
+        this.username = username;
+        this.password = password;
 
 	}
 
@@ -78,11 +81,11 @@ public class User {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -156,6 +159,23 @@ public class User {
     
     public void setPersonalTrainer(PersonalTrainer personalTrainer) {
         this.personalTrainer = personalTrainer;
+    }
+
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
