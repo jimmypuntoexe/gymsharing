@@ -7,7 +7,6 @@ import com.example.assignment3.Repository.GymRepository;
 import com.example.assignment3.Repository.PersonalTrainerRepository;
 import com.example.assignment3.Repository.UserRepository;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,17 +100,27 @@ public class PersonalController {
   }
   @RequestMapping(value="/updatePersonalTrainer/{id}", method=RequestMethod.GET)
 	public String PersonalTrainerUpdate(@PathVariable Long id,
-            @RequestParam (required = false) String name, @RequestParam (required = false) String surname, 
-            @RequestParam (required = false) Date birthDate, @RequestParam (required = false) String age,
-            @RequestParam (required = false) String CF, 
-            @RequestParam (required = false) String patent, @RequestParam (required = false) String level, 
-            @RequestParam (required = false) String email, @RequestParam (required = false) String phoneNumber, 
+            @RequestParam String name, @RequestParam String surname, 
+            @RequestParam String birthDate, @RequestParam String age,
+            @RequestParam String CF, 
+            @RequestParam String patent, @RequestParam String level, 
+            @RequestParam String email, @RequestParam String phoneNumber, 
             Model model) {
 
+        String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         PersonalTrainer personalTrainer = PTRepository.findOne(id);
         personalTrainer.setName(name);
         personalTrainer.setSurname(surname);
-        personalTrainer.setBirthDate(birthDate);
+
+        if(birthDate.matches(regex)){
+          personalTrainer.setBirthDate(birthDate);
+        }
+        else {
+          model.addAttribute("errorAction", "dateErrorUpdatePersonalTrainer");
+          model.addAttribute("personalTrainer", personalTrainer);
+          return "error";
+        }
+
         personalTrainer.setAge(age);
         personalTrainer.setCF(CF);
         personalTrainer.setPatent(patent);
@@ -120,26 +129,33 @@ public class PersonalController {
         personalTrainer.setPhoneNumber(phoneNumber);
         
         PTRepository.save(personalTrainer);
-        model.addAttribute("personal", personalTrainer);
+        model.addAttribute("personalTrainer", personalTrainer);
 
-        return "redirect:/personalTrainers/";
+        return "redirect:/personalTrainerAccount/{id}/myProfile";
   }
 
 
 
-  @RequestMapping(value="/insertPersonalTrainer", method=RequestMethod.POST)
+  @RequestMapping(value="/insertPersonalTrainer", method=RequestMethod.GET)
 	public String PersonalTrainerAdd(
-            @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
+            @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate, @RequestParam String age,
             @RequestParam String CF, @RequestParam String patent, @RequestParam String level, @RequestParam String email, @RequestParam String phoneNumber, 
             @RequestParam String username,  @RequestParam String password,
             Model model) {
 
+        String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         PersonalTrainer newPersonalTrainer = new PersonalTrainer();
         newPersonalTrainer.setUsername(username);
         newPersonalTrainer.setPassword(password);
         newPersonalTrainer.setName(name);
         newPersonalTrainer.setSurname(surname);
-        newPersonalTrainer.setBirthDate(birthDate);
+        if(birthDate.matches(regex)){
+          newPersonalTrainer.setBirthDate(birthDate);
+        }
+        else {
+          model.addAttribute("action", "dateErrorInsertPersonalTrainer");
+          return "error";
+        }
         newPersonalTrainer.setAge(age);
         newPersonalTrainer.setCF(CF);
         newPersonalTrainer.setPatent(patent);

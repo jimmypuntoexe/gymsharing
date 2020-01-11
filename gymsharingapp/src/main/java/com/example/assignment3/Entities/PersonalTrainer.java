@@ -1,7 +1,6 @@
 package com.example.assignment3.Entities;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,7 +19,7 @@ public class PersonalTrainer {
     private long idGym;
     private String name;
     private String surname;
-    private Date birthDate;
+    private String birthDate;
     private String age;
     private String patent;
     private String level;
@@ -40,7 +39,7 @@ public class PersonalTrainer {
 		super();
 	}
 
-    public PersonalTrainer(String name, String surname, Date birthDate, String age, String CF, 
+    public PersonalTrainer(String name, String surname, String birthDate, String age, String CF, 
             String patent, String level, String email, String phoneNumber, String username, String password) {
 		super();
         this.name = name;
@@ -83,11 +82,11 @@ public class PersonalTrainer {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

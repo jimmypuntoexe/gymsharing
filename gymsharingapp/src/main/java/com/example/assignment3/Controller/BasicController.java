@@ -68,37 +68,42 @@ public class BasicController {
 
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String Login(@RequestParam String username, @RequestParam String password, @RequestParam String type, Model model) {
-            if (type.equals("user")){
-              User user = userRepository.findByUsername(username);
-              if (user.getPassword().equals(password)){
-                return "redirect:/userAccount/" + user.getId();
-              }
-              else{
-                return "redirect:/";
-              }
-            }
-            if (type.equals("gym")){
-              Gym gym = gymRepository.findByName(username);
-              if (gym.getPassword().equals(password)) {
-                return "redirect:/gymAccount/" + gym.getId();
-              }
-              else{
-                return "redirect:/";
-              }
-            }
-            if (type.equals("pt")){
-              PersonalTrainer pt = ptRepository.findByUsername(username);
-              if (pt.getPassword().equals(password)) {
-                return "redirect:/personalTrainerAccount/" + pt.getId();
-              }
-              else{
-                return "redirect:/";
-              }
-            }
-            else{
-              return "redirect:/";
-            }
+    public String Login(@RequestParam String username, @RequestParam String password, @RequestParam String type, Model model) { 
+      try {
+        if (type.equals("user")){
+          User user = userRepository.findByUsername(username);
+          if (user.getPassword().equals(password)){
+            return "redirect:/userAccount/" + user.getId();
+          }
+          else{
+            return "redirect:/";
+          }
+        }
+        if (type.equals("gym")){
+          Gym gym = gymRepository.findByName(username);
+          if (gym.getPassword().equals(password)) {
+            return "redirect:/gymAccount/" + gym.getId();
+          }
+          else{
+            return "redirect:/";
+          }
+        }
+        if (type.equals("pt")){
+          PersonalTrainer pt = ptRepository.findByUsername(username);
+          if (pt.getPassword().equals(password)) {
+            return "redirect:/personalTrainerAccount/" + pt.getId();
+          }
+          else{
+            return "redirect:/";
+          }
+        }      
+        else{
+          return "redirect:/";
+        }
+      } catch (NullPointerException e) {
+        model.addAttribute("action", "loginError");
+		    return "error";
+      }   
     }
 }
 

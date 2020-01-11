@@ -35,9 +35,9 @@
             <div class="col-lg-6">
                 <input type="text" class="form-control" name="age"/>
             </div>
-            <label class="col-lg-2 control-label">Birth Date</label>
+            <label class="col-lg-4 control-label">Birth Date (dd/MM/yyyy)</label>
             <div class="col-lg-6">
-                <input type="date" class="form-control" name="birthDate"/>
+                <input type="text" class="form-control" name="birthDate"/>
             </div>
         </div>
 
@@ -112,10 +112,10 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-lg-2 control-label">Birth Date</label>
+                          <label class="col-lg-4 control-label">Birth Date (dd/MM/yyyy)</label>
                           <div class="col-lg-6">
-                              <input type="date" class="form-control" 
-                                  th:value="${user.BirthDate}" name="birthDate"/>
+                              <input type="text" class="form-control" 
+                                  th:value="${user.birthDate}" name="birthDate"/>
                           </div>
                       </div>
                       <div class="form-group">
@@ -126,7 +126,7 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-lg-2 control-label">CF code</label>
+                          <label class="col-lg-3 control-label">CF code</label>
                           <div class="col-lg-6">
                               <input type="text" class="form-control" 
                                   th:value="${user.CF}" name="CF"/>
@@ -140,7 +140,7 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-lg-2 control-label">Civic Number</label>
+                          <label class="col-lg-3 control-label">Civic Number</label>
                           <div class="col-lg-6">
                               <input type="text" class="form-control" 
                                   th:value="${user.CivicNumber}" name="civicNumber"/>
@@ -154,7 +154,7 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-lg-2 control-label">Phone Number</label>
+                          <label class="col-lg-3 control-label">Phone Number</label>
                           <div class="col-lg-6">
                               <input type="text" class="form-control"  
                                   th:value="${user.PhoneNumber}" name="phoneNumber"/>

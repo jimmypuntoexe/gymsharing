@@ -3,7 +3,6 @@ package com.example.assignment3.Controller;
 import com.example.assignment3.Entities.*;
 import com.example.assignment3.Repository.*;
 
-import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,17 +70,25 @@ public class UserController {
 
   @RequestMapping(value="/insertUser", method=RequestMethod.POST)
 	public String UserAdd(
-            @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
+            @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate, @RequestParam String age,
             @RequestParam String CF, @RequestParam String address, @RequestParam String civicNumber,
             @RequestParam String city, @RequestParam String email, @RequestParam String phoneNumber,
             @RequestParam String username, @RequestParam String password,
             Model model) {
+        String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(password);
         newUser.setName(name);
         newUser.setSurname(surname);
-        newUser.setBirthDate(birthDate);
+        if(birthDate.matches(regex)){
+          newUser.setBirthDate(birthDate);
+        }
+        else {
+          model.addAttribute("action", "dateErrorInsertUser");
+          return "error";
+        }
+        
         newUser.setAge(age);
         newUser.setCF(CF);
         newUser.setAddress(address);
@@ -108,14 +115,21 @@ public class UserController {
 
   @RequestMapping(value="/updateUser/{id}", method=RequestMethod.GET)
 	public String UserUpdate(@PathVariable Long id,
-            @RequestParam String name, @RequestParam String surname, @RequestParam Date birthDate, @RequestParam String age,
+            @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate, @RequestParam String age,
             @RequestParam String CF, @RequestParam String address, @RequestParam String civicNumber,
             @RequestParam String city, @RequestParam String email, @RequestParam String phoneNumber, 
             Model model) {
+        String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         User user = userRepository.findOne(id);
         user.setName(name);
-        user.setSurname(surname);
-        user.setBirthDate(birthDate);
+        if(birthDate.matches(regex)){
+          user.setBirthDate(birthDate);
+        }
+        else {
+          model.addAttribute("errorAction", "dateErrorUpdatetUser");
+          model.addAttribute("user", user);
+          return "error";
+        }
         user.setAge(age);
         user.setCF(CF);
         user.setAddress(address);
