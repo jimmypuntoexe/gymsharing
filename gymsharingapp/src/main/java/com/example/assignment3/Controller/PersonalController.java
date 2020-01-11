@@ -136,7 +136,7 @@ public class PersonalController {
 
 
 
-  @RequestMapping(value="/insertPersonalTrainer", method=RequestMethod.GET)
+  @RequestMapping(value="/insertPersonalTrainer", method=RequestMethod.POST)
 	public String PersonalTrainerAdd(
             @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate, @RequestParam String age,
             @RequestParam String CF, @RequestParam String patent, @RequestParam String level, @RequestParam String email, @RequestParam String phoneNumber, 
