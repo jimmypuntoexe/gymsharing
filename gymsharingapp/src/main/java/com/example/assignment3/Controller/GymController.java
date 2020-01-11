@@ -86,7 +86,7 @@ public class GymController {
   }
 
   @RequestMapping(value="/modifyGym/{id}", method=RequestMethod.GET)
-  public String updateUser( @PathVariable Long id, Model model) {
+  public String updateGym( @PathVariable Long id, Model model) {
           Gym gym = Gymrepository.findOne(id);
           model.addAttribute("gym", gym);
           model.addAttribute("action", "edit");
@@ -121,7 +121,7 @@ public class GymController {
 
         //da sistemare qui sotto
         model.addAttribute("gym", gym);
-        return "redirect:/gymAccount/{id}";
+        return "redirect:/gymAccount/{id}/myProfile";
   }
 
   @RequestMapping("/gymAccount/{idGym}/myProfile")

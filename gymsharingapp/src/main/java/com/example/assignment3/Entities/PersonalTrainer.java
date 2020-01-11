@@ -1,6 +1,5 @@
 package com.example.assignment3.Entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -53,8 +52,8 @@ public class PersonalTrainer {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
-        this.gyms = new ArrayList<Gym>();
-        this.users = new ArrayList<User>();
+        // this.gyms = new ArrayList<Gym>();
+        // this.users = new ArrayList<User>();
 
 	}
 

@@ -92,10 +92,12 @@ public class PersonalController {
     return "redirect:/userAccount/{idUser}/myProfile";
     }
 
-  @RequestMapping("/editPersonalTrainer/{id}")
+  @RequestMapping(value="/editPersonalTrainer/{id}", method=RequestMethod.GET)
   public String editPersonalTrainer(@PathVariable Long id, Model model) {
-    model.addAttribute("action", "edit");
-    model.addAttribute("personal", PTRepository.findOne(id));
+
+    PersonalTrainer personalTrainer = PTRepository.findOne(id);
+    model.addAttribute("action", "editPersonalTrainer");
+    model.addAttribute("personalTrainer", personalTrainer);
     return "insertPersonalTrainer";
   }
   @RequestMapping(value="/updatePersonalTrainer/{id}", method=RequestMethod.GET)
@@ -103,10 +105,9 @@ public class PersonalController {
             @RequestParam String name, @RequestParam String surname, 
             @RequestParam String birthDate, @RequestParam String age,
             @RequestParam String CF, 
-            @RequestParam String patent, @RequestParam String level, 
+            @RequestParam String Patent, @RequestParam String Level, 
             @RequestParam String email, @RequestParam String phoneNumber, 
             Model model) {
-
         String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
         PersonalTrainer personalTrainer = PTRepository.findOne(id);
         personalTrainer.setName(name);
@@ -123,14 +124,14 @@ public class PersonalController {
 
         personalTrainer.setAge(age);
         personalTrainer.setCF(CF);
-        personalTrainer.setPatent(patent);
-        personalTrainer.setLevel(level);
+        personalTrainer.setPatent(Patent);
+        personalTrainer.setLevel(Level);
         personalTrainer.setEmail(email);
         personalTrainer.setPhoneNumber(phoneNumber);
         
+
         PTRepository.save(personalTrainer);
         model.addAttribute("personalTrainer", personalTrainer);
-
         return "redirect:/personalTrainerAccount/{id}/myProfile";
   }
 

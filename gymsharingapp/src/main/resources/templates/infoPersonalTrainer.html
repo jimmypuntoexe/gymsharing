@@ -12,7 +12,7 @@
         <div class="row" style="display: flex;">
             <div class="column" style="flex:50%;">
                 <h1>Info Personal trainer</h1>
-                <form class="form-horizontal" th:action="@{/personalTrainer/{id}/}" method="post" enctype="multipart/form-data" >
+                <form class="form-horizontal" enctype="multipart/form-data" >
                     <fieldset>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Name</label>
@@ -39,7 +39,7 @@
                             <label class="col-lg-3 control-label">Birth Date</label>
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" disabled="disabled" 
-                                    th:value="${personalTrainer.BirthDate}"/>
+                                    th:value="${personalTrainer.birthDate}"/>
                             </div>
                         </div>
                         <div class="form-group">
