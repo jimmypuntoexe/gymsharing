@@ -1,9 +1,11 @@
 @startuml umlDiagram
 class PersonalTrainer {
     - id: long
+    - username: String
+    - password: String
     - name: String
     - surname: String
-    - birthDate: Date
+    - birthDate: String
     - age: String
     - patent: String
     - level: String
@@ -30,9 +32,11 @@ class Gym {
 
 class User {
     - id: long
+    - username: String
+    - password: String
     - name: String
     - surname: String
-    - birthDate: Date
+    - birthDate: String
     - age: String
     - CF: String
 	- address: String
