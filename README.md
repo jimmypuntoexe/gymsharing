@@ -43,13 +43,13 @@
 
 ## Accesso
 + Per loggarsi come utente:
-    + username: andrea
-    + password: andreapsw
+    + `username`: andrea
+    + `password`: andreapsw
 + Per loggarsi come personal trainer:
-    + username: gimmy
-    + password: gimmypsw
+    + `username`: gimmy
+    + `password`: gimmypsw
 + Per loggarsi come palestra:
-    + username: MaxiFit
-    + password: maxipsw
+    + `username`: MaxiFit
+    + `password`: maxipsw
 
 + Per loggarsi con altre utenze, guardare il file `Assignement3Application.java`
