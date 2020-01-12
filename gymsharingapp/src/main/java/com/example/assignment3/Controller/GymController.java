@@ -206,9 +206,9 @@ public class GymController {
       List<Gym> findGym = new ArrayList<Gym>();
       for(Gym gym : gyms) {
         if(gym.getName().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getAddress().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getCity().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getEmail().toLowerCase().contains(name.toLowerCase())){
+            gym.getAddress().toLowerCase().equals(name.toLowerCase()) ||
+            gym.getCity().toLowerCase().equals(name.toLowerCase()) ||
+            gym.getEmail().toLowerCase().equals(name.toLowerCase())){
           findGym.add(gym);
         }
         else {
@@ -219,7 +219,7 @@ public class GymController {
         model.addAttribute("personalTrainer", PTRepository.findOne(idPt));
       }
       
-      return "gyms";
+      return "gymsForSubscriber";
     }
 
     @RequestMapping(value="/searchGymUser/{idUser}", method=RequestMethod.GET)
@@ -228,9 +228,9 @@ public class GymController {
       List<Gym> findGym = new ArrayList<Gym>();
       for(Gym gym : gyms) {
         if(gym.getName().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getAddress().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getCity().toLowerCase().contains(name.toLowerCase()) ||
-            gym.getEmail().toLowerCase().contains(name.toLowerCase())){
+            gym.getAddress().toLowerCase().equals(name.toLowerCase()) ||
+            gym.getCity().toLowerCase().equals(name.toLowerCase()) ||
+            gym.getEmail().toLowerCase().equals(name.toLowerCase())){
           findGym.add(gym);
         }
         else {
@@ -241,7 +241,7 @@ public class GymController {
         model.addAttribute("user", userRepository.findOne(idUser));
       }
       
-      return "gyms";
+      return "gymsForSubscription";
     }
   
   @RequestMapping(value="/infoGymForSubscription/{idUser}/{idGym}", method=RequestMethod.GET)

@@ -15,28 +15,8 @@
 			<div><br/></div>
 			<a th:href="@{/userAccount/{idUser}/personalTrainersContact(idUser=${user.id})}">Contact personal trainer</a>
 			<div><br/></div>
-			<form class="form-horizontal" th:action="@{/searchGymUser/{idUser}(idUser=${user.id})}" method="get" enctype="multipart/form-data">
-				<div class="form-group">
-					<label class="row-lg-2 control-label">Search gym</label>
-					<div class="col-lg-12">
-						<input type="text" class="form-control" name="name"/>
-					</div>
-				</div>
-				<span>
-					<button type="submit" class="btn btn-primary">Search gym</button>
-				</span>
-			</form>
-			<form class="form-horizontal" th:action="@{/searchPersonalTUser/{idUser}(idUser=${user.id})}" method="get" enctype="multipart/form-data">
-				<div class="form-group">
-					<label class="row-lg-2 control-label">Search Personal Trainer</label>
-					<div class="col-lg-12">
-						<input type="text" class="form-control" name="name"/>
-					</div>
-				</div>
-				<span>
-					<button type="submit" class="btn btn-primary">Search personal trainer</button>
-				</span>
-			</form>
+			
+			
 			<!-- <a th:href="@{/insertUser}">Inserisci Utente</a>
 			<div><br></br></div> -->
 			<!-- <a th:href="@{/users}">Mostra Utenti</a>

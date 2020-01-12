@@ -42,6 +42,15 @@
 
     </div>
 
+    <div class="container" th:if="${action == 'contactPtError'}">
+        <h1>Can't contact more Personal Trainer at the time</h1>
+        <span>
+            <a th:href="@{/userAccount/{idUser}/personalTrainersContact(idUser=${user.id})}" method="get">
+            <button class="btn btn-primary">Back</button></a>
+        </span><br/><br/>
+
+    </div>
+
     <div class="container" th:if="${errorAction == 'dateErrorUpdatePersonalTrainer'}">
         <h1>Check if the birth date is correct</h1>
         <span>
