@@ -39,7 +39,7 @@
 + Andare all'indirizzo: `localhost:8080` sul proprio browser
 + Verrai indirizzato alla homepage della webapp
 
-![](.images/homepage)
+![](.images/homepage.png)
 
 ## Accesso
 + Per loggarsi come utente:
