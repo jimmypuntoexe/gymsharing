@@ -194,7 +194,9 @@ public class GymController {
         model.addAttribute("sub", subRepository.findOne(idSub));
         User user = userRepository.findOne(idUser);
         Subscription sub = subRepository.findOne(idSub);
-        user.setSubscription(sub);
+        if (user.getSubscriptions() == null){
+          user.setSubscription(sub);
+        }
         userRepository.save(user);
         return "redirect:/userAccount/{idUser}/myProfile";
     }
