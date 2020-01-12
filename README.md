@@ -42,13 +42,13 @@
 ![](.images/homepage.png)
 
 ## Accesso
-+ Per loggarsi come utente:
++ Per loggarsi come **utente**:
     + `username`: andrea
     + `password`: andreapsw
-+ Per loggarsi come personal trainer:
++ Per loggarsi come **personal trainer**:
     + `username`: gimmy
     + `password`: gimmypsw
-+ Per loggarsi come palestra:
++ Per loggarsi come **palestra**:
     + `username`: MaxiFit
     + `password`: maxipsw
 
