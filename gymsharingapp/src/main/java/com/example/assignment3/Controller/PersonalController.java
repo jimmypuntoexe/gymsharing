@@ -192,16 +192,22 @@ public class PersonalController {
       User user = userRepository.findOne(idUser);
       PersonalTrainer pt = PTRepository.findOne(idPT);
 
-      //a personal trainer can't subscribe to the same gym more than one time
       if(user.getPersonalTrainer() == null ){
         user.setPersonalTrainer(pt);
         pt.getUsers().add(user);
-      };
+      }
+      else{
+        model.addAttribute("user", user);
+        model.addAttribute("action", "contactPtError");
+		    return "error";
+      }
+
+
 
       PTRepository.save(pt);
       userRepository.save(user);
 
-      return "redirect:/userAccount/{idUser}";
+      return "redirect:/userAccount/{idUser}/myProfile";
     }
 
     @RequestMapping(value="/searchPersonalTGym/{idGym}", method=RequestMethod.GET)
@@ -211,9 +217,9 @@ public class PersonalController {
       for(PersonalTrainer pt : personalTrainers) {
         if(pt.getName().toLowerCase().contains(name.toLowerCase()) ||
             pt.getSurname().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getPatent().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getLevel().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getEmail().toLowerCase().contains(name.toLowerCase())){
+            pt.getPatent().toLowerCase().equals(name.toLowerCase()) ||
+            pt.getLevel().toLowerCase().equals(name.toLowerCase()) ||
+            pt.getEmail().toLowerCase().equals(name.toLowerCase())){
           findPt.add(pt);
         }
         else {
@@ -234,9 +240,9 @@ public class PersonalController {
       for(PersonalTrainer pt : personalTrainers) {
         if(pt.getName().toLowerCase().contains(name.toLowerCase()) ||
             pt.getSurname().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getPatent().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getLevel().toLowerCase().contains(name.toLowerCase()) ||
-            pt.getEmail().toLowerCase().contains(name.toLowerCase())){
+            pt.getPatent().toLowerCase().equals(name.toLowerCase()) ||
+            pt.getLevel().toLowerCase().equals(name.toLowerCase()) ||
+            pt.getEmail().toLowerCase().equals(name.toLowerCase())){
           findPt.add(pt);
         }
         else {
@@ -247,7 +253,7 @@ public class PersonalController {
         model.addAttribute("user", userRepository.findOne(idUser));
       }
           
-          return "personalTrainers";
+          return "personalTrainersContact";
     }
 
 }

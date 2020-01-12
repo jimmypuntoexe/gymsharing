@@ -68,7 +68,8 @@ public class BasicController {
 
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String Login(@RequestParam String username, @RequestParam String password, @RequestParam String type, Model model) { 
+    public String Login(@RequestParam String username, @RequestParam String password, 
+    @RequestParam (required = false) String type, Model model) { 
       try {
         if (type.equals("user")){
           User user = userRepository.findByUsername(username);
