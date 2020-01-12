@@ -38,3 +38,18 @@
 + Avviare il comando `mvn spring-boot:run` per avviare l'applicazione
 + Andare all'indirizzo: `localhost:8080` sul proprio browser
 + Verrai indirizzato alla homepage della webapp
+
+![](.images/homepage)
+
+## Accesso
++ Per loggarsi come utente:
+    + username: andrea
+    + password: andreapsw
++ Per loggarsi come personal trainer:
+    + username: gimmy
+    + password: gimmypsw
++ Per loggarsi come palestra:
+    + username: MaxiFit
+    + password: maxipsw
+
++ Per loggarsi con altre utenze, guardare il file `Assignement3Application.java`
