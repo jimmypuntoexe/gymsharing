@@ -52,4 +52,4 @@
     + `username`: MaxiFit
     + `password`: maxipsw
 
-+ Per loggarsi con altre utenze, guardare il file `Assignement3Application.java`
++ Per loggarsi con altre utenze, guardare il file `Assignment3Application.java`
